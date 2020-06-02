@@ -1,5 +1,5 @@
 ####2020/6/1
-##一、前端路由
+##前端路由
 为了构建 SPA（单页面应用），需要引入前端路由系统，这也就是 Vue-Router 存在的意义。前端路由的核心，就在于 —— 改变视图的同时不会向后端发出请求。  
 两种模式：hash和history  
 hash 模式和 history 模式都属于浏览器自身的属性
@@ -22,7 +22,7 @@ https://blog.csdn.net/fifteen718/article/details/82529433
 https://juejin.im/post/5b4ca076f265da0f900e0a7d  
 https://juejin.im/post/5b31a4f76fb9a00e90018cee
 
-##二、post和get的区别
+##post和get的区别
 * GET参数通过URL传递，POST放在Request body中  
 * GET在浏览器回退时是无害的，而POST会再次提交请求  
 * GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息  
@@ -39,7 +39,7 @@ https://www.cnblogs.com/logsharing/p/8448446.html
 * 子组件传值给父组件：通过事件形式,this.$emit
 * $parent / $children与 ref
 #####兄弟组件通信
-event bus：$on,$emit,$off(销毁)  
+event bus：$on,$emit,$off(销毁)
 通过一个空的Vue实例作为中央事件总线（事件中心），用它来触发事件和监听事件,巧妙而轻量地实现了任何组件间的通信，包括父子、兄弟、跨级
 #####$attrs/$listeners
 多级组件嵌套需要传递数据时，通常使用的方法是通过vuex。但如果仅仅是传递数据，而不做中间处理，使用 vuex 处理，未免有点大材小用。为此Vue2.4 版本提供了另一种方法----$attrs/$listeners  
@@ -51,5 +51,85 @@ Vue2.2.0新增API,这对选项需要一起使用，以允许一个祖先组件�
 provide 和 inject 绑定并不是可响应的。这是刻意为之的。然而，如果你传入了一个可监听的对象，那么其对象的属性还是可响应的
 
 #####参考链接
-https://juejin.im/post/5cde0b43f265da03867e78d3
+https://juejin.im/post/5cde0b43f265da03867e78d3  
+
 ####2020/6/2
+##vue中axios封装
+在vue项目中，和后台交互获取数据这块，通常使用的是axios库，它是基于promise的http库，可运行在浏览器端和node.js中  
+优点：拦截请求和响应、取消请求、转换json、客户端防御XSRF等  
+
+* 设置请求超时： timeout  
+* 请求拦截： axios.interceptors.request.use  
+* 响应拦截： axios.interceptors.response.use  
+* 封装get方法和post方法：post需要设置请求头，默认：  
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+#####参考链接
+https://juejin.im/post/5b55c118f265da0f6f1aa354
+##克隆/拷贝
+深拷贝和浅拷贝与原数据并不指向同一对象
+#####浅拷贝
+浅拷贝之所以被称为浅拷贝，是因为对象只会被拷贝最外部的一层,至于更深层的对象,则依然是通过引用指向同一块堆内存  
+浅拷贝只复制一层对象的属性，并不包括对象里面的为引用类型的数据  
+Object.assign(): 一层深克隆，二层浅克隆
+#####深拷贝
+在拷贝引用类型成员变量时，为引用类型的数据成员另辟了一个独立的内存空间，实现真正内容上的拷贝  
+深拷贝是对对象以及对象的所有子对象进行拷贝  
+JSON.parse：可实现深拷贝，缺点  
+
+* 无法复制函数
+* 无法复制正则对象
+* 构造函数指向错误：会抛弃对象的constructor,所有的构造函数会指向Object
+#####参考链接
+https://juejin.im/post/5abb55ee6fb9a028e33b7e0a  
+https://juejin.im/post/59ac1c4ef265da248e75892b#heading-11
+##SPA（单页面应用）和MPA（多页面应用）
+#####SPA
+第一次进入页面时会请求一个html文件，刷新清除一下，切换到其他组件，此时路径也相应变化，但是并没有新的html文件请求，页面内容却变化了  
+
+* 页面跳转： js渲染
+* 优点： 页面切换快：页面每次切换跳转时，不需要处理html文件的请求，节约了HTTP发送时延
+* 缺点： 
+    - 首屏时间稍慢：首屏时需要请求一次html，同时还要发送一次js请求
+    - SEO差：搜索引擎只认识html里的内容，不认识js渲染生成的内容，搜索引擎不识别，也就不会给一个好排名
+使用vue：服务端渲染技术（SSR）可解决缺点
+#####MPA
+每一次页面跳转的时候，后台服务器都会返回一个新的html文档，这种类型的网站也就是多页网站，也叫多页应用  
+
+* 页面跳转： 返回HTML
+* 优点： 
+    - 首屏时间快：访问页面的时候，服务器返回一个html，只经历了一个HTTP请求
+    - SEO效果好：搜索引擎是可以识别html内容的，每个页面所有的内容都放在html中，所以SEO排名效果好
+* 缺点： 切换慢：每次跳转都需要发送一个HTTP请求，如果网络状态不好，在页面间来回跳转时，就会发生明显的卡顿，影响用户体验
+#####参考链接
+https://www.jianshu.com/p/a02eb15d2d70
+##vue三要素
+模板引擎、响应式、渲染  
+Vue 实现流程：  
+
+#####1、把模板解析为 render 函数：  
+- Vue模板：
+    + 本质是字符串；
+    + 有逻辑如 v-if v-for 等，模板转换成 js后（render 函数 ）通过js来实现逻辑；
+    + 与 html 格式很像，但有很大区别，html 是静态的， Vue 的模板是动态的；
+    + 最终 Vue 的模板都要通过 js 转换为 html 来显示  
+- vue中如何解析模板：
+    + 第一步是将模板通过 parse 函数解析成 AST（抽象语法树）
+    + 第二步优化AST（检测出不需要更改的DOM的纯静态子树）
+    + 第三步根据优化后的抽象语法树生成包含渲染函数字符串的对象
+模板中的所有内容都包含在了 render 函数中
+#####2、响应式开始监听：
+- Object.defineProperty(双向数据绑定)：缺点 【为什么Vue3.x 升级使用 Proxy 取代 Object.defineProperty】
+    + Object.defineProperty无法监控到数组下标的变化，导致通过数组下标添加元素，不能实时响应(可用$set添加）；
+     + Object.defineProperty只能劫持对象的属性，从而需要对每个对象，每个属性进行遍历，如果属性值是对象，还需要深度遍历。Proxy可以劫持整个对象，并返回一个新的对象。
+    + Proxy不仅可以代理对象，还可以代理数组。还可以代理动态增加的属性
+- 将data的属性代理到vm上
+#####3、首次渲染，显示页面且绑定依赖
+#####4、data属性变化，触发render
+- 修改属性，被响应式的set监听到
+- set中执行 updataComponent （ 异步 ）
+- updataComponent重新执行 vm.render()
+- 生成的vnode和prev Vnode，通过patch进行比较渲染到html 中
+#####参考链接
+https://blog.csdn.net/weixin_33709364/article/details/88010302  
+https://blog.csdn.net/webFrontEndDev/article/details/102702402  
+https://juejin.im/post/5e7ae687f265da57424bb691#heading-11
