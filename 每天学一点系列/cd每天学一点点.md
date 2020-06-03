@@ -133,3 +133,27 @@ Vue 实现流程：
 https://blog.csdn.net/weixin_33709364/article/details/88010302  
 https://blog.csdn.net/webFrontEndDev/article/details/102702402  
 https://juejin.im/post/5e7ae687f265da57424bb691#heading-11
+#####2020/6/3
+##虚拟DOM（virtual DOM）
+用 JS 模拟 DOM 结构  
+
+* 操作真实DOM代价昂贵，如：在一次操作中，需要更新10个DOM节点，浏览器收到第一个DOM请求后并不知道还有9次更新操作，因此会马上执行流程，最终执行10次。频繁操作还是会出现页面卡顿，影响用户体验
+* 虚拟DOM可提高浏览器性能：若一次操作中有10次更新DOM的动作，虚拟DOM不会立即操作DOM，而是将这10次更新的diff内容保存到本地一个JS对象中，最终将这个JS对象一次性attch到DOM树上，再进行后续操作，避免大量无谓的计算量
+* JS对象模拟DOM节点的好处：页面的更新可以先全部反映在JS对象(虚拟DOM)上，操作内存中的JS对象的速度显然要更快，等更新完成后，再将最终的JS对象映射成真实的DOM，交由浏览器去绘制
+#####虚拟DOM的核心API  
+* h函数（将真实dom映射成虚拟节点）  
+    h(<标签名>，{属性}，[children])//含有子节点的  
+    h(<标签名>，{属性}，'text'])//没有子节点，只有文本，如p标签
+* patch函数（通过对比新旧虚拟节点，找出差异（diff算法），把变化更新到真实dom中）  
+    patch(container, vnode)//初次渲染  
+    patch(oldVnode, newVnode); //re-render
+#####diff算法 
+找出本次DOM必须更新的节点来更新，其它的不更新，这个“找出”的过程，就需要diff算法  
+使用diff算法来比较旧VNode及新的VNode之间的差异然后执行Patch Operation或者叫 Patch函数来高效更新 Dom 节点  
+实现过程：  
+
+ * patch（container，vnode）：核心逻辑createElment
+ * patch（vnode，newVnode）：核心逻辑updataChildren
+#####参考链接  
+https://www.cnblogs.com/charliePU/p/10791165.html  
+https://www.jianshu.com/p/af0b398602bc
