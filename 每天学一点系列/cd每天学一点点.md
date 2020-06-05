@@ -140,7 +140,8 @@ Vue 实现流程：
 https://blog.csdn.net/weixin_33709364/article/details/88010302  
 https://blog.csdn.net/webFrontEndDev/article/details/102702402  
 https://juejin.im/post/5e7ae687f265da57424bb691#heading-11
-#####2020/6/3
+
+####2020/6/3
 ##虚拟DOM（virtual DOM）
 用 JS 模拟 DOM 结构  
 
@@ -167,7 +168,8 @@ https://juejin.im/post/5e7ae687f265da57424bb691#heading-11
 #####参考链接  
 https://www.cnblogs.com/charliePU/p/10791165.html  
 https://www.jianshu.com/p/af0b398602bc
-#####2020/6/4
+
+####2020/6/4
 ##vuex
 Vuex是一个专为Vue.js应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化  
 把组件的共享状态抽取出来，以一个全局单例模式管理，在这种模式下，组件树构成了一个巨大的“视图”，不管在树的哪个位置，任何组件都能获取状态或者触发行为  
@@ -203,10 +205,12 @@ https://juejin.im/post/5e7ae687f265da57424bb691#heading-21
 
 #####路由分类
 * 动态路由:使用 path 属性过程中，使用动态路径参数，以冒号开头,如：  
-`{`  
-`   path: /user/:id     //id为1，路径为 /user/1`   
-`   component: User`  
-`}`
+```
+{
+    path: /user/:id     //id为1，路径为 /user/1  
+    component: User  
+}
+```
 * 嵌套路由:`<router-view>`,需要在 VueRouter 的参数中使用 children 配置
 导航：
 
@@ -261,3 +265,12 @@ https://juejin.im/post/5e7ae687f265da57424bb691#heading-21
 #####参考链接
 https://www.cnblogs.com/axl234/p/5899952.html  
 https://juejin.im/post/5e7ae687f265da57424bb691#heading-24
+
+####2020/6/5
+##Mixin（混入）
+混入 (mixin) 提供了一种非常灵活的方式，来分发Vue组件中的可复用功能。一个混入对象可以包含任意组件选项。当组件使用混入对象时，所有混入对象的选项将被“混合”进入该组件本身的选项  
+#####使用场景
+有两个非常相似的组件，他们的基本功能是一样的，但他们之间又存在着足够的差异性，此时的你就像是来到了一个分岔路口：我是把它拆分成两个不同的组件呢？还是保留为一个组件，然后通过props传值来创造差异性从而进行区分呢？  
+两种解决方案都不够完美：如果拆分成两个组件，你就不得不冒着一旦功能变动就要在两个文件中更新代码的风险，这违背了DRY原则（Don’t Repeat Yourself）。反之，太多的props传值会很快变得混乱不堪，从而迫使维护者在使用组件的时候必须理解一大段的上下文，拖慢写码速度。  
+Mixin允许你封装一块在应用的其他组件中都可以使用的**函数**。如果使用姿势得当，他们不会改变函数作用域外部的任何东西，因此哪怕执行多次，只要是同样的输入你总是能得到一样的值  
+即页面的风格不用，但是执行的方法和需要的数据类似可以使用mixin
