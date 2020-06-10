@@ -274,3 +274,104 @@ https://juejin.im/post/5e7ae687f265da57424bb691#heading-24
 两种解决方案都不够完美：如果拆分成两个组件，你就不得不冒着一旦功能变动就要在两个文件中更新代码的风险，这违背了DRY原则（Don’t Repeat Yourself）。反之，太多的props传值会很快变得混乱不堪，从而迫使维护者在使用组件的时候必须理解一大段的上下文，拖慢写码速度。  
 Mixin允许你封装一块在应用的其他组件中都可以使用的**函数**。如果使用姿势得当，他们不会改变函数作用域外部的任何东西，因此哪怕执行多次，只要是同样的输入你总是能得到一样的值  
 即页面的风格不用，但是执行的方法和需要的数据类似可以使用mixin
+
+####2020/6/10
+##vue自定义指令（项目中实践用到的）
+#####使用方式
+注册局部指令
+```
+// 注册一个全局自定义指令 `v-focus`
+data(){
+},
+directives: {
+  focus: {
+    // 指令的定义,钩子函数等
+    inserted: function (el) {
+      el.focus()
+    }
+  }
+}
+```
+或者
+```
+const focus = {
+    //钩子函数等
+}
+```
+绑定使用
+`<input v-focus>`
+#####指令定义对象的钩子函数
+* bind：只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置。
+* inserted：被绑定元素插入父节点时调用 (仅保证父节点存在，但不一定已被插入文档中
+* update：所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前。指令的值可能发生了改变，也可能没有。但是你可以通过比较更新前后的值来忽略不必要的模板更新 。
+* componentUpdated：指令所在组件的 VNode 及其子 VNode 全部更新后调用。
+* unbind：只调用一次，指令与元素解绑时调用。
+
+#####钩子函数的参数
+* el：指令所绑定的元素，可以用来直接操作 DOM。
+* binding：一个对象，包含以下 property：
+    - name：指令名，不包括 v- 前缀。
+    - value：指令的绑定值，例如：v-my-directive="1 + 1" 中，绑定值为 2。
+    - oldValue：指令绑定的前一个值，仅在 update 和 componentUpdated 钩子中可用。无论值是否改变都可用。
+    - expression：字符串形式的指令表达式。例如 v-my-directive="1 + 1" 中，表达式为 "1 + 1"。
+    - arg：传给指令的参数，可选。例如 v-my-directive:foo 中，参数为 "foo"。
+    - modifiers：一个包含修饰符的对象。例如：v-my-directive.foo.bar 中，修饰符对象为 { foo: true, bar: true }。
+* vnode：Vue 编译生成的虚拟节点。
+* oldVnode：上一个虚拟节点，仅在 update 和 componentUpdated 钩子中可用。
+除了 el之外，其它参数都应该是只读的，切勿进行修改。如果需要在钩子之间共享数据，建议通过元素的 dataset 来进行
+
+#####使用实例代码
+点击除div之外的地方隐藏div的实现
+```
+<template>
+<!-- 绑定具体关闭div方法 -->
+  <div v-clickoutside="handleClose" v-show="show">
+  显示
+  </div>
+</template>
+<script>
+const clickoutside = {
+    // 初始化指令
+    bind(el, binding, vnode) {
+      function documentHandler(e) {
+        // 这里判断点击的元素是否是本身，是本身，则返回
+        if (el.contains(e.target)) {
+          return false;
+        }
+        // 判断指令中是否绑定了函数
+        if (binding.expression) {
+          // 如果绑定了函数 则调用那个函数，此处binding.value就是handleClose方法
+          binding.value(e);
+        }
+      }
+      // 给当前元素绑定个私有变量，方便在unbind中可以解除事件监听
+      el.__vueClickOutside__ = documentHandler;
+      document.addEventListener('click', documentHandler);
+    },
+    update() {},
+    unbind(el, binding) {
+      // 解除事件监听
+      document.removeEventListener('click', el.__vueClickOutside__);
+      delete el.__vueClickOutside__;
+    },
+  };
+  export default {
+    name: 'HelloWorld',
+    data() {
+        return {
+            show: true,
+        };
+    },
+    directives: {clickoutside},
+    methods: {
+        handleClose(e) {
+            this.show = false;
+        },
+    },
+};
+</script>
+```
+#####参考链接
+https://blog.csdn.net/weixin_33877092/article/details/91368472  
+https://cn.vuejs.org/v2/guide/custom-directive.html
+
