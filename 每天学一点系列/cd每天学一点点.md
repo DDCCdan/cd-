@@ -375,3 +375,53 @@ const clickoutside = {
 https://blog.csdn.net/weixin_33877092/article/details/91368472  
 https://cn.vuejs.org/v2/guide/custom-directive.html
 
+####2020/6/11
+##原型、原型链
+JavaScript没有"子类"和"父类"的概念，也没有"类"（class）和"实例"（instance）的区分，全靠一种很奇特的"原型链"（prototype chain）模式，来实现继承
+**在Javascript语言中，new命令后面跟的不是类，而是构造函数**
+```
+function DOG(name){
+    this.name = name;
+}
+var dogA = new DOG('大毛');
+alert(dogA.name); // 大毛
+```
+DOG的构造函数，表示狗对象的原型,对这个构造函数使用new，就会生成一个狗对象的实例
+#####new运算符的缺点
+**用构造函数生成实例对象，那就是无法共享属性和方法**
+每一个实例对象，都有自己的属性和方法的副本。这不仅无法做到数据共享，也是极大的资源浪费
+#####protoType属性
+protoType属性包含一个对象（以下简称"prototype对象"），所有实例对象需要共享的属性和方法，都放在这个对象里面；那些不需要共享的属性和方法，就放在构造函数里面  
+实例对象一旦创建，将自动引用prototype对象的属性和方法。也就是说，实例对象的属性和方法，分成两种，一种是本地的，另一种是引用的  
+由于所有的实例对象共享同一个prototype对象，那么从外界看起来，prototype对象就好像是实例对象的原型，而实例对象则好像"继承"了prototype对象一样
+#####原型链
+js里完全依靠"原型链"(prototype chain)模式来实现继承
+
+* \_\_proto\_\_：事实上就是原型链指针，指向了 **实例对象的原型**，它也是一个对象
+* prototype：上面说到这个是 **指向原型对象** 的
+* constructor：每一个原型对象都包含一个指向 **构造函数** 的指针，就是constructor
+
+构造函数的 prototype 指向调用该构造函数而创建的实例对象的原型  
+```
+function Cat() {
+    this.color = 'orange'
+}
+var cat = new Cat()
+console.log(cat.__proto__ === Cat.prototype)   // true
+```
+构造函数和构造函数的 prototype 可以相互指向  
+```
+function Cat() {
+    this.color = 'orange'
+}
+console.log(Cat.prototype.constructor === Cat)    // true
+```
+Object.prototype 的原型是null  (Object.prototype 没有原型)  
+ `console.log(Object.prototype.__proto__ === null) // true`
+#####继承
+实例.\_\_proto\_\_ === 原型  
+原型.constructor === 构造函数  
+构造函数.prototype === 原型
+#####参考链接
+http://www.ruanyifeng.com/blog/2011/06/designing_ideas_of_inheritance_mechanism_in_javascript.html  
+https://www.yuque.com/fe9/basic/zk5e4f
