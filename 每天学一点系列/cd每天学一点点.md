@@ -278,9 +278,20 @@ Mixin允许你封装一块在应用的其他组件中都可以使用的**函数*
 ####2020/6/10
 ##vue自定义指令（项目中实践用到的）
 #####使用方式
-注册局部指令
+* 注册全局指令--用 __directive__
 ```
 // 注册一个全局自定义指令 `v-focus`
+Vue.directive('focus', {
+  // 当被绑定的元素插入到 DOM 中时……
+  inserted: function (el) {
+    // 聚焦元素
+    el.focus()
+  }
+})
+```
+* 注册局部指令--用 __directives__
+```
+// 注册一个注册局部指令 `v-focus`
 data(){
 },
 directives: {
@@ -321,7 +332,7 @@ const focus = {
 除了 el之外，其它参数都应该是只读的，切勿进行修改。如果需要在钩子之间共享数据，建议通过元素的 dataset 来进行
 
 #####使用实例代码
-点击除div之外的地方隐藏div的实现
+* 实例一 点击除div之外的地方隐藏div的实现（局部）
 ```
 <template>
 <!-- 绑定具体关闭div方法 -->
@@ -371,6 +382,21 @@ const clickoutside = {
 };
 </script>
 ```
+* 实例二 防重复点击(全局)
+```
+Vue.directive('noMoreClick', {
+  inserted (el, binding) {
+    el.addEventListener('click', e => {
+      //el.classList.add('is-loading')  //添加类名
+      el.disabled = true
+      setTimeout(() => {
+        el.disabled = false
+      }, 1000)
+    })
+  }
+})
+```
+
 #####参考链接
 https://blog.csdn.net/weixin_33877092/article/details/91368472  
 https://cn.vuejs.org/v2/guide/custom-directive.html
@@ -425,3 +451,45 @@ Object.prototype 的原型是null  (Object.prototype 没有原型)
 #####参考链接
 http://www.ruanyifeng.com/blog/2011/06/designing_ideas_of_inheritance_mechanism_in_javascript.html  
 https://www.yuque.com/fe9/basic/zk5e4f
+
+####2020/6/18
+##vue 自定义过滤器（filter）
+过滤器可以用在两个地方：**双花括号插值**和 **v-bind表达式**   
+```
+<!-- 在双花括号中 -->
+{{ message | capitalize }}
+
+<!-- 在 `v-bind` 中 -->
+<div v-bind:id="rawId | formatId"></div>
+```
+capitalize 过滤器函数将会收到 message 的值作为第一个参数  
+前者为过滤器参数，后者为过滤器函数
+#####组件过滤器和全局过滤器
+当全局过滤器和局部过滤器重名时，会采用局部过滤器
+
+* 组件过滤器————**filters**
+```
+filters: {
+  capitalize: function (value) {
+    if (!value) return ''
+    value = value.toString()
+    return value.charAt(0).toUpperCase() + value.slice(1)
+  }
+}
+```
+* 全局过滤器————**filter**
+```
+Vue.filter('capitalize', function (value) {
+  if (!value) return ''
+  value = value.toString()
+  return value.charAt(0).toUpperCase() + value.slice(1)
+})
+
+new Vue({
+  // ...
+})
+```
+
+#####参考链接
+https://cn.vuejs.org/v2/guide/filters.html  
+https://www.jianshu.com/p/ad21df1914c5  
