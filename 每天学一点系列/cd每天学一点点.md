@@ -626,3 +626,205 @@ session时有状态的，一般存于服务器内存或硬盘中，当服务器�
 ####参考链接
 https://juejin.im/post/5e055d9ef265da33997a42cc  
 https://segmentfault.com/a/1190000017831088
+
+####2020/6/28
+##前端跨域
+####浏览器同源策略
+**所谓同源是指：域名、协议、端口相同**
+* DOM同源策略：禁止对不同源页面 DOM 进行操作。这里主要场景是 iframe 跨域的情况，不同域名的iframe是限制互相访问的。（如果没有限制，用户可以操作内嵌iframe的DOM节点，可以获取用户账号密码等信息）
+* XMLHttpRequest同源策略：禁止使用XHR对象向不同源的服务器地址发起HTTP请求（如果没有限制，可以进行CSRF（跨站请求伪造）攻击：在访问正常页面时点击了恶意页面，通过执行页面中的恶意AJAX请求代码，此时请求附带了合法的cookie，后台会验证正确返回正确response，造成数据泄露）
+
+####同域、父域子域
+同域规则只有1个，即必须满足三个相同：相同协议，相同域名，相同端口。上述3个点有一个不相同，便是跨域。a.google.com和a.b.google.com理解为是相同一级域名google.com的子域，可以称它们两个为同父域，同一个父域(父级域名)不能混淆为同域，这是两个概念  
+**关于跨域**  
+
+* 如果是协议和端口造成的跨域问题，前端无法解决；
+* 在跨域问题上，域仅仅是通过“URL的首部”来识别而不会去尝试判断相同的ip地址对应着两个域或两个域是否在同一个ip上。所以 **域名和域名对应ip**  `http://www.a.com/a.js
+http://70.32.92.74/b.js` 是跨域的
+
+####跨域解决办法
+#####1.CORS（跨域资源共享）
+CORS（Cross-origin resource sharing，跨域资源共享）是一个W3C标准，定义了在必须访问跨域资源时，浏览器与服务器应该如何沟通。CORS背后的基本思想，就是使用自定义的HTTP头部让浏览器与服务器进行沟通，从而决定请求或响应是应该成功，还是应该失败  
+CORS需要浏览器和服务器同时支持。目前，所有浏览器都支持该功能，IE浏览器不能低于IE10  
+整个 CORS 通信过程，都是浏览器自动完成，不需要用户参与。浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求
+实现 CORS 通信的关键是服务器。只要服务器实现了 CORS 接口，就可以跨源通信  
+CORS请求分类：**简单请求**和 **非简单请求**  
+
+>请求方法是以下三种方法之一：HEAD、POST、GET  
+>HTTP头部信息不超出以下几种字段：Accept、Accept-Language、Content-Language、Last-Event-ID、Content-Type：只限于三个值 application/x-www-form-urlencoded、multipart/form-data、text/plain  
+
+同时满足上述两个条件即为简单请求，否则为非简单请求。浏览器对这两种请求的处理是不一样的
+
+* 简单请求
+    + 在请求中需要附加一个额外的Origin头部，其中包含请求页面的源信息（协议、域名和端口），以便服务器根据这个头部信息来决定是否给予响应。例如：`Origin:http://www.laixiangran.cn`
+    + 如果服务器认为这个请求可以接受，就在Access-Control-Allow-Origin头部中回发相同的源信息（如果是公共资源，可以回发 * ）。例如：`Access-Control-Allow-Origin：http://www.laixiangran.cn`
+    + 没有这个头部或者有这个头部但源信息不匹配，浏览器就会驳回请求。正常情况下，浏览器会处理请求。**注意，请求和响应都不包含 cookie 信息**
+    + **如果需要包含cookie信息**,ajax请求需要设置xhr的属性withCredentials为true，服务器需要设置响应头部 `Access-Control-Allow-Credentials: true`，且Access-Control-Allow-Origin不能设为星号，必须指定明确的、与请求网页一致的域名
+* 非简单请求  
+非简单请求是那种对服务器有特殊要求的请求，比如请求方法是PUT或DELETE，或者Content-Type字段的类型是application/json。  
+浏览器在发送真正的请求之前，会先发送一个Preflight请求（预检请求）给服务器，这种请求使用 OPTIONS 方法，发送下列头部：
+>Origin：与简单的请求相同。  
+>Access-Control-Request-Method: 请求自身使用的方法。  
+>Access-Control-Request-Headers: （可选）自定义的头部信息，多个头部以逗号分隔。  
+
+如：  
+```
+Origin: http://www.laixiangran.cn
+Access-Control-Request-Method: POST
+Access-Control-Request-Headers: NCZ
+```
+发送这个请求后，服务器可以决定是否允许这种类型的请求。服务器通过在响应中发送如下头部与浏览器进行沟通：
+>Access-Control-Allow-Origin：与简单的请求相同。  
+>Access-Control-Allow-Methods: 允许的方法，多个方法以逗号分隔。  
+>Access-Control-Allow-Headers: 允许的头部，多个方法以逗号分隔。  
+>Access-Control-Max-Age: 应该将这个 Preflight 请求缓存多长时间（以秒表示）。  
+
+例如：
+```
+Access-Control-Allow-Origin: http://www.laixiangran.cn
+Access-Control-Allow-Methods: GET, POST
+Access-Control-Allow-Headers: NCZ
+Access-Control-Max-Age: 1728000
+```
+
+一旦服务器通过Preflight请求允许该请求之后，以后每次浏览器正常的CORS请求，就都跟简单请求一样了。
+
+**CORS跨域优点与缺点**  
+
+* 优点
+    + CORS 通信与同源的 AJAX 通信没有差别，代码完全一样，容易维护。
+    + 支持所有类型的 HTTP 请求
+* 缺点
+    + 存在兼容性问题，特别是 IE10 以下的浏览器。
+    + 第一次发送非简单请求时会多一次请求。
+
+#####2.JSONP 跨域
+由于 **script标签不受浏览器同源策略的影响**，允许跨域引用资源。因此可以通过动态创建script标签，然后利用src属性进行跨域，这也就是JSONP跨域的基本原理  
+(**注：form表单提交没有跨域问题** :因为原页面用form提交到另一个域名之后，原页面的脚本无法获取新页面中的内容。所以浏览器认为这是安全的)  
+**JSONP跨域流程**
+例1：
+```
+// 1. 定义一个 回调函数 handleResponse 用来接收返回的数据
+function handleResponse(data) {
+    console.log(data);
+};
+
+// 2. 动态创建一个 script 标签，并且告诉后端回调函数名叫 handleResponse
+var body = document.getElementsByTagName('body')[0];
+var script = document.gerElement('script');
+script.src = 'http://www.laixiangran.cn/json?callback=handleResponse';
+body.appendChild(script);
+
+// 3. 通过 script.src 请求 `http://www.laixiangran.cn/json?callback=handleResponse`，
+// 4. 后端能够识别这样的 URL 格式并处理该请求，然后返回 handleResponse({"name": "laixiangran"}) 给浏览器
+// 5. 浏览器在接收到 handleResponse({"name": "laixiangran"}) 之后立即执行 ，也就是执行 handleResponse 方法，
+//获得后端返回的数据，这样就完成一次跨域请求了。
+```
+例2：
+```
+<script type="text/javascript">
+    function dosomething(jsondata){
+        //处理获得的json数据
+    }
+</script>
+<script src="http://example.com/data.php?callback=dosomething"></script>
+```
+*注：回调函数名前后端需一致*  
+**JSONP跨域优点与缺点**  
+
+* 优点
+    + 使用简便，没有兼容性问题，目前最流行的一种跨域方法
+* 缺点
+    + 只支持 GET 请求。
+    + 由于是从其它域中加载代码执行，因此如果其他域不安全，很可能会在响应中夹带一些恶意代码。
+    + 要确定JSONP请求是否失败并不容易。虽然 HTML5给script标签新增了一个onerror事件处理程序，但是存在兼容性问题
+    
+**JSONP与CORS比较**  
+
+* JSONP只支持GET请求，CORS支持所有类型的HTTP请求
+* JSONP的优势在于支持老式浏览器，以及可以向不支持CORS的网站请求数据
+
+#####图像 Ping 跨域
+由于 img 标签不受浏览器同源策略的影响，允许跨域引用资源。因此可以通过 img 标签的 src 属性进行跨域，这也就是图像 Ping 跨域的基本原理  
+实例：
+```
+var img = new Image();
+
+// 通过 onload 及 onerror 事件可以知道响应是什么时候接收到的，但是不能获取响应文本
+img.onload = img.onerror = function() {
+    console.log("Done!");
+}
+
+// 请求数据通过查询字符串形式发送
+img.src = 'http://www.laixiangran.cn/test?name=laixiangran';
+```
+
+* 优点
+    + 用于实现跟踪用户点击页面或动态广告曝光次数有较大的优势
+* 缺点
+    + 只支持 GET 请求。
+    + 只能浏览器与服务器的单向通信，因为浏览器不能访问服务器的响应文本。
+
+#####服务器代理
+浏览器有跨域限制，但是服务器不存在跨域问题，所以可以由服务器请求所有域的资源再返回给客户端。服务器代理是万能的
+#####document.domain 跨域
+对于主域名相同，而子域名不同的情况，可以使用document.domain来跨域。这种方式非常适用于 iframe跨域的情况.  
+如：`http://www.laixiangran.cn/a.html 和 http://laixiangran.cn/b.html document.domain都设成laixiangran.cn即可通过js访问到iframe页面的各种属性和对象`
+document.domain的设置是有限制的，只能把document.domain设置成自身或更高一级的父域，且主域必须相同
+#####document.name 跨域
+window对象有个name属性，该属性有个特征：即在一个窗口（window）的生命周期内，窗口载入的所有的页面（不管是相同域的页面还是不同域的页面）都是共享一个window.name的，每个页面对 window.name 都有读写的权限。window.name是持久存在一个窗口载入过的所有页面中的，并不会因新页面的载入而进行重置。
+获取：`var data = iframe.contentWindow.name; // 获取 iframe 里的 window.name`  
+赋值：`window.name = "hello world!";`
+#####location.hash 跨域
+因为父窗口可以对iframe进行URL读写，iframe也可以读写父窗口的URL，URL有一部分被称为hash，就是#号及其后面的字符，它一般用于浏览器锚点定位，Server端并不关心这部分，应该说HTTP请求过程中不会携带hash，所以这部分的修改不会产生HTTP请求，但是会产生浏览器历史记录。此方法的原理就是改变URL的hash部分来进行双向通信  
+location.hash 方式跨域，是子框架修改父框架 src 的 hash 值，通过这个属性进行传递数据，且更改 hash 值，页面不会刷新。但是传递的数据的字节数是有限的（iframe跨域）。  
+获取：`var data = window.location.hash;`  
+赋值：`parent.location.hash = "world";`
+#####postMessage 跨域
+window.postMessage(message，targetOrigin) 方法是 HTML5 新引进的特性，可以使用它来向其它的 window 对象发送消息，无论这个 window 对象是属于同源或不同源。  
+`otherWindow.postMessage(message, targetOrigin);`
+
+* otherWindow：目标窗口（你想发送跨域消息的那个窗口），例如： iframe.contentWindow 。是 window.frames 属性的成员或者由 window.open 方法创建的窗口
+* message: 要发送的消息，类型只能为String、Object (IE8、9 不支持)。
+* targetOrigin: 用来限定接收消息的那个 window 对象所在的域，不限定域使用通配符 *
+
+用法：  
+a页面
+```
+<iframe src="http://laixiangran.cn/b.html" id="myIframe" onload="test()" style="display: none;">
+<script>
+    // 1. iframe载入 "http://laixiangran.cn/b.html 页面后会执行该函数
+    function test() {
+        // 2. 获取 http://laixiangran.cn/b.html 页面的 window 对象，
+        // 然后通过 postMessage 向 http://laixiangran.cn/b.html 页面发送消息
+        var iframe = document.getElementById('myIframe');
+        var win = iframe.contentWindow;
+        win.postMessage('我是来自 http://www.laixiangran.cn/a.html 页面的消息', '*');
+    }
+</script>
+```
+b页面
+```
+<script type="text/javascript">
+    // 注册 message 事件用来接收消息
+    window.onmessage = function(e) {
+        e = e || event; // 获取事件对象
+        console.log(e.data); // 通过 data 属性得到发送来的消息
+    }
+</script>
+```
+
+子页面向父页面传递消息：
+`window.parent.postMessage('子页面发送的消息','http://a.index.com')`  
+父页面监听同上  
+
+**注意点**  
+
+* 需要等到iframe中的子页面加载完成后才发送消息，否则子页面接收不到消息
+* 在监听message事件时需要判断一下消息来源origin，避免接收到非法域名的消息导致的xss攻击
+
+####参考链接
+https://juejin.im/post/5ba1d4fe6fb9a05ce873d4ad  
+CORS跨域（阮一峰）： http://www.ruanyifeng.com/blog/2016/04/cors.html  
+https://juejin.im/post/5815f4abbf22ec006893b431  
+postMessage跨域：https://juejin.im/post/5e9045316fb9a03c957ff7ff
