@@ -490,7 +490,6 @@ new Vue({
 })
 ```
 
-
 #### 参考链接
 https://cn.vuejs.org/v2/guide/filters.html  
 https://www.jianshu.com/p/ad21df1914c5  
@@ -581,11 +580,11 @@ token 的认证方式类似于临时的证书签名, 并且是一种服务端无
         - 安全
         - **支持跨程序调用**
     + token 的身份验证流程  
-        1.客户端使用用户名跟密码请求登录  
-        2.服务端收到请求，去验证用户名与密码  
-        3.验证成功后，服务端会签发一个token并把这个token发送给客户端  
-        4.客户端收到token以后，会把它存储起来，比如放在cookie里或者localStorage里  
-        5.客户端每次向服务端请求资源的时候需要带着服务端签发的token服务端收到请求，然后去验证客户端请求里面带着的token，如果验证成功，就向客户端返回请求的数据
+        1. 客户端使用用户名跟密码请求登录  
+        2. 服务端收到请求，去验证用户名与密码  
+        3. 验证成功后，服务端会签发一个token并把这个token发送给客户端  
+        4. 客户端收到token以后，会把它存储起来，比如放在cookie里或者localStorage里  
+        5. 客户端每次向服务端请求资源的时候需要带着服务端签发的token服务端收到请求，然后去验证客户端请求里面带着的token，如果验证成功，就向客户端返回请求的数据
     + 每一次请求都需要携带 token，需要把 token 放到HTTP的Header里
     + 基于 token 的用户认证是一种服务端无状态的认证方式，服务端不用存放token数据。用解析token的计算时间换取session的存储空间，从而减轻服务器的压力，减少频繁的查询数据库
     + token 完全由应用管理，所以它可以避开同源策略
@@ -649,7 +648,7 @@ https://www.cnblogs.com/moyand/p/9047978.html
 http://70.32.92.74/b.js` 是跨域的
 
 #### 跨域解决办法
-##### 1.CORS（跨域资源共享）
+##### CORS（跨域资源共享）
 CORS（Cross-origin resource sharing，跨域资源共享）是一个W3C标准，定义了在必须访问跨域资源时，浏览器与服务器应该如何沟通。CORS背后的基本思想，就是使用自定义的HTTP头部让浏览器与服务器进行沟通，从而决定请求或响应是应该成功，还是应该失败  
 CORS需要浏览器和服务器同时支持。目前，所有浏览器都支持该功能，IE浏览器不能低于IE10  
 整个 CORS 通信过程，都是浏览器自动完成，不需要用户参与。浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求
@@ -666,12 +665,14 @@ CORS请求分类：**简单请求**和 **非简单请求**
     + 如果服务器认为这个请求可以接受，就在Access-Control-Allow-Origin头部中回发相同的源信息（如果是公共资源，可以回发 * ）。例如：`Access-Control-Allow-Origin：http://www.laixiangran.cn`
     + 没有这个头部或者有这个头部但源信息不匹配，浏览器就会驳回请求。正常情况下，浏览器会处理请求。**注意，请求和响应都不包含 cookie 信息**
     + **如果需要包含cookie信息**,ajax请求需要设置xhr的属性withCredentials为true，服务器需要设置响应头部 `Access-Control-Allow-Credentials: true`，且Access-Control-Allow-Origin不能设为星号，必须指定明确的、与请求网页一致的域名
+
 * 非简单请求  
 非简单请求是那种对服务器有特殊要求的请求，比如请求方法是PUT或DELETE，或者Content-Type字段的类型是application/json。  
-浏览器在发送真正的请求之前，会先发送一个Preflight请求（预检请求）给服务器，这种请求使用 OPTIONS 方法，发送下列头部：
->Origin：与简单的请求相同。  
->Access-Control-Request-Method: 请求自身使用的方法。  
->Access-Control-Request-Headers: （可选）自定义的头部信息，多个头部以逗号分隔。  
+浏览器在发送真正的请求之前，会先发送一个Preflight请求（预检请求）给服务器，这种请求使用 OPTIONS 方法，发送下列头部：  
+
+  + Origin：与简单的请求相同。 
+  + Access-Control-Request-Method: 请求自身使用的方法。  
+  + Access-Control-Request-Headers: （可选）自定义的头部信息，多个头部以逗号分隔。  
 
 如：  
 ```JS
@@ -679,11 +680,12 @@ Origin: http://www.laixiangran.cn
 Access-Control-Request-Method: POST
 Access-Control-Request-Headers: NCZ
 ```
-发送这个请求后，服务器可以决定是否允许这种类型的请求。服务器通过在响应中发送如下头部与浏览器进行沟通：
->Access-Control-Allow-Origin：与简单的请求相同。  
->Access-Control-Allow-Methods: 允许的方法，多个方法以逗号分隔。  
->Access-Control-Allow-Headers: 允许的头部，多个方法以逗号分隔。  
->Access-Control-Max-Age: 应该将这个 Preflight 请求缓存多长时间（以秒表示）。  
+发送这个请求后，服务器可以决定是否允许这种类型的请求。服务器通过在响应中发送如下头部与浏览器进行沟通：  
+
+  + Access-Control-Allow-Origin：与简单的请求相同。  
+  + Access-Control-Allow-Methods: 允许的方法，多个方法以逗号分隔。  
+  + Access-Control-Allow-Headers: 允许的头部，多个方法以逗号分隔。  
+  + Access-Control-Max-Age: 应该将这个 Preflight 请求缓存多长时间（以秒表示）。  
 
 例如：
 ```JS
@@ -704,7 +706,7 @@ Access-Control-Max-Age: 1728000
     + 存在兼容性问题，特别是 IE10 以下的浏览器。
     + 第一次发送非简单请求时会多一次请求。
 
-##### 2.JSONP 跨域
+##### JSONP 跨域
 由于 **script标签不受浏览器同源策略的影响**，允许跨域引用资源。因此可以通过动态创建script标签，然后利用src属性进行跨域，这也就是JSONP跨域的基本原理  
 (**注：form表单提交没有跨域问题** :因为原页面用form提交到另一个域名之后，原页面的脚本无法获取新页面中的内容。所以浏览器认为这是安全的)  
 **JSONP跨域流程**
@@ -837,12 +839,157 @@ postMessage跨域：https://juejin.im/post/5e9045316fb9a03c957ff7ff
 
 ## 2020/6/29
 ### HTTP缓存机制
+报文中包含首部header和主体部分body。与缓存相关的规则信息就包含在header中  
 HTTP的缓存属于客户端缓存。我们认为浏览器存在一个缓存数据库，用于储存一些不经常变化的静态文件（图片、css、js等）。  
 缓存分为 **强制缓存** 和 **协商缓存**  
+两类缓存机制可以同时存在，强制缓存的优先级高于协商缓存，当执行强制缓存时，如若缓存命中，则直接使用缓存数据库数据，不在进行缓存协商  
 
-* 强制缓存  
-  当缓存数据库中已有所请求的数据时。客户端直接从缓存数据库中获取数据。当缓存数据库中没有所请求的数据时，客户端的才会从服务端获取数据
-* 协商缓存
+#### 强制缓存  
+  当缓存数据库中已有所请求的数据时。客户端直接从缓存数据库中获取数据。当缓存数据库中没有所请求的数据时，客户端的才会从服务端获取数据  
+  Expires和Cache-Control  
+
+  * Exprires: 值为服务端返回的数据到期时间。当再次请求时的请求时间小于返回的此时间，则直接使用缓存数据。现在大多数使用Cache-Control替代
+  * Cache-Control: 属性值
+    + private：客户端可以缓存
+    + public：客户端和代理服务器都可以缓存
+    + max-age=t：缓存内容将在t秒后失效
+    +  no-cache：需要使用协商缓存来验证缓存数据 
+    +  no-store：所有内容都不会缓存
+
+#### 协商缓存(对比缓存)  
+  客户端会先从缓存数据库中获取到一个缓存数据的标识，得到标识后请求服务端验证是否失效（新鲜），如果没有失效服务端会返回304，此时客户端直接从缓存中获取所请求的数据，如果标识失效，服务端会返回更新后的数据,更新后的缓存数据将存入缓存数据库  
+  两种方案：Last-Modified和Etag  
+
+  * Last-Modified
+    + Last-Modified:服务器在响应请求时，会告诉浏览器资源的最后修改时间
+    + if-Modified-Since:浏览器再次请求服务器的时候，请求头会包含此字段，后面跟着在缓存中获得的最后修改时间。服务端收到此请求头发现有if-Modified-Since，则与被请求资源的最后修改时间进行对比，如果一致则返回304和响应报文头，浏览器只需要从缓存中获取信息即可
+      - 被修改：传输响应一个整体，服务器返回：200 OK
+      - 没有被修改：只传输响应header，服务器返回：304 Not Modified
+    + if-Unmodified-Since:从某个时间点算起, 是否文件没有被修改
+      - 没有被修改:则开始`继续'传送文件: 服务器返回: 200 OK
+      - 被修改:则不传输,服务器返回: 412 Precondition failed (预处理错误)  
+
+如果在服务器上，一个资源被修改了，但其实际内容根本没发生改变，会因为Last-Modified时间匹配不上而返回了整个实体给客户端（即使客户端缓存里有个一模一样的资源）。为了解决这个问题，HTTP1.1推出了Etag
+
+  * Etag
+    + Etag： 服务器响应请求时，通过此字段告诉浏览器当前资源在服务器生成的唯一标识（生成规则由服务器决定）
+    + If-None-Match： 再次请求服务器时，浏览器的请求报文头部会包含此字段，后面的值为在缓存中获取的标识。服务器接收到次报文后发现If-None-Match则与被请求资源的唯一标识进行对比
+     - 不同，说明资源被改动过，则响应整个资源内容，返回状态码200
+     - 相同，说明资源无心修改，则响应header，浏览器直接从缓存中获取数据信息。返回状态码304.  
+
+但是实际应用中由于Etag的计算是使用算法来得出的，而算法会占用服务端计算的资源，所有服务端的资源都是宝贵的，所以就很少使用Etag了
+
+#### 缓存的优点
+* 减少了冗余的数据传递，节省宽带流量
+* 减少了服务器的负担，大大提高了网站性能
+* 加快了客户端加载网页的速度 这也正是HTTP缓存属于客户端缓存的原因
+
+#### 不同刷新键执行缓存
+1. 浏览器地址栏中写入URL，回车：浏览器发现缓存中有这个文件了，不用继续请求了，直接去缓存拿。（最快）  
+2. F5：F5就是告诉浏览器，别偷懒，好歹去服务器看看这个文件是否有过期了。于是浏览器就胆胆襟襟的发送一个请求带上If-Modify-since。  
+3. Ctrl+F5：告诉浏览器，你先把你缓存中的这个文件给我删了，然后再去服务器请求个完整的资源文件下来。于是客户端就完成了强行更新的操作
 
 #### 参考链接
 https://juejin.im/post/5a1d4e546fb9a0450f21af23
+
+## 2020/6/30
+### 函数防抖与节流
+#### 防抖（debounce）
+当持续触发事件时，一定时间段内没有再触发事件，事件处理函数才会执行一次，如果设定的时间到来之前，又一次触发了事件，就重新开始延时。  
+应用场景：当执行用户输入搜索时。设置只有只用当用户停止输入1s后才自动执行搜索事件。否则不执行，在1s内如果用户重新输入，则清空计时，重新等到用户输入停止1s后执行搜索事件。
+```JS
+//代码为监听滚动事件
+function debounce(fn, wait) {
+    var timeout = null;//涉及闭包知识，见节流定时器版代码处说明
+    return function() {
+        if(timeout !== null) 
+                clearTimeout(timeout);
+        timeout = setTimeout(fn, wait);
+    }
+}
+// 处理函数
+function handle() {
+    console.log(Math.random()); 
+}
+// 滚动事件
+window.addEventListener('scroll', debounce(handle, 1000));
+```
+
+#### 节流（throttle）
+当持续触发事件时，保证一定时间段内只调用一次事件处理函数。  
+对于节流，一般有两种方式可以实现，分别是时间戳版和定时器版。  
+```JS
+//时间戳版
+var throttle = function(func, delay) {
+            var prev = Date.now();
+            return function() {
+                var context = this;
+                var args = arguments;
+                var now = Date.now();
+                if (now - prev >= delay) {
+                    func.apply(context, args);
+                    prev = Date.now();
+                }
+            }
+        }
+        function handle() {
+            console.log(Math.random());
+        }
+        window.addEventListener('scroll', throttle(handle, 1000));
+```
+
+```JS
+//定时器版
+var throttle = function(func, delay) {
+            var timer = null;//涉及闭包知识
+            return function() {
+                var context = this;
+                var args = arguments;
+                if (!timer) {
+                    timer = setTimeout(function() {
+                        func.apply(context, args);
+                        timer = null;
+                    }, delay);
+                }
+            }
+        }
+        function handle() {
+            console.log(Math.random());
+        }
+        window.addEventListener('scroll', throttle(handle, 1000));
+        /*注：防抖和节流可结合异步队列。有人有时候会疑惑为什么要把timer定在那个位置，原因要说清楚，因为闭包，可以让所有每一次触发的事件处理函数跟上一次的事件处理函数做到一个类似于人类交流之间的通信，因为有了这个共享的工具，这一次的事件处理函数就可以根据这个共享的工具去知道它的上一次是不是已经有处理逻辑被放到异步队列里头等待执行了。这就是timer的通俗解释，而为什么里头要判断一次timer是否为空，那是因为，这一次的事件处理函数如果不判断它的上一次有没有已经被放到异步队列当中了的话，直接执行下面的延时操作，结果是又有一个同样的处理逻辑被放入异步队列当中，因此触发的时候就要去根据timer判断任务队列中它有没有任务已经在里头等待了，有我们就clear它，让它滚蛋，因为我们要的结果是最后只能执行一次处理逻辑。 */
+```
+
+#### 参考链接
+https://juejin.im/entry/5b1d2d54f265da6e2545bfa4 
+
+### HTTP和HTTPS
+**OSI（开放式系统互联）七层协议模型**： 物理层、数据链路层、网络层、传输层、会话层、表示层、应用层  
+**TCP/IP五层模型**：物理层、数据链路层、网络层、传输层、应用层
+#### 计算机通信原理
+互联网的关键技术就是TCP/IP协议。两台计算机之间的通信是通过TCP/IP协议在因特网上进行的。
+
+* TCP: Transmission Control Protocol 传输控制协议  
+  TCP是应用程序之间的通信。  
+  TCP确保数据包以正确的次序到达，并且尝试确认数据包的内容没有改变。  
+  当应用程序希望通过 TCP 与另一个应用程序通信时，它会发送一个通信请求。这个请求必须被送到一个确切的地址。在双方“握手”之后，TCP 将在两个应用程序之间建立一个全双工 (full-duplex) 的通信，占用两个计算机之间整个的通信线路。  
+  TCP 用于从应用程序到网络的数据传输控制。  
+  TCP 负责在数据传送之前将它们分割为 IP 包，然后在它们到达的时候将它们重组
+* IP: Internet Protocol 网际协议。  
+  IP是计算机之间的通信。  
+  IP协议是计算机用来相互识别的通信的一种机制，每台计算机都有一个IP用来在internet上标识这台计算机。  
+  IP 负责在因特网上发送和接收数据包。  
+  通过 IP，消息（或者其他数据）被分割为小的独立的包，并通过因特网在计算机之间传送。IP 负责将每个包路由至它的目的地。
+
+**TCP/IP协议**  
+TCP/IP 就是TCP 和 IP 两个协议在一起协同工作，有上下层次的关系。  
+IP 负责计算机之间的通信。TCP 负责将数据分割并装入 IP 包，IP 负责将包发送至接受者，传输过程要经IP路由器负责根据通信量、网络中的错误或者其他参数来进行正确地寻址，然后在它们到达的时候重新组合它们。  
+IP协议仅仅是允许计算机相互发消息，但它并不检查消息是否以发送的次序到达而且没有损坏（只检查关键的头数据）。为了提供消息检验功能，直接在IP协议上设计了传输控制协议TCP。
+
+#### HTTP
+HTTP（HyperText Transfer Protocol）超文本传输协议，是一个基于TCP实现的应用层协议。  
+HTTP由请求和响应构成，是一个标准的客户端服务器模型（B/S）。HTTP协议永远都是客户端发起请求，服务器回送响应  
+HTTP是一个无状态的协议。无状态是指客户机（Web浏览器）和服务器之间不需要建立持久的连接，这意味着当一个客户端向服务器端发出请求，然后服务器返回响应(response)，连接就被关闭了，在服务器端不保留连接的有关信息
+
+#### 参考链接
+https://juejin.im/post/5af557a3f265da0b9265a498
