@@ -1358,3 +1358,141 @@ HTTP2.0可以说是SPDY的升级版（其实原本也是基于SPDY设计的）�
 https://juejin.im/post/5d9abde7e51d4578110dc77f  
 https://juejin.im/entry/57b17d107db2a200542da15b  
 https://juejin.im/entry/5981c5df518825359a2b9476  
+
+## 2020/7/6
+### sessionStorage 和 localStorage
+sessionStorage用于本地存储一个会话（session）中的数据，这些数据只有在同一个会话中（同一窗口或标签页）的页面才能访问并且当会话结束后数据也随之销毁。因此sessionStorage不是一种持久化的本地存储，仅仅是会话级别的存储  
+localStorage用于持久化的本地存储，除非主动删除数据，否则数据是永远不会过期的  
+localStorage 和 sessionStorage 属性允许在浏览器中存储 key/value 对的数据  
+localStorage 只支持 string 类型的存储
+```JS
+//localStorage有三种写法
+if(！window.localStorage){
+    alert("浏览器不支持localstorage");
+    return false;
+}else{
+    var storage=window.localStorage;
+    //写入a字段
+    storage["a"]=1;
+    //写入b字段
+    storage.b=1;
+    //写入c字段
+    storage.setItem("c",3);
+    console.log(typeof storage["a"]);//string
+    console.log(typeof storage["b"]);//string
+    console.log(typeof storage["c"]);//string
+    //第一种方法读取
+    var a=storage.a;
+    console.log(a);
+    //第二种方法读取
+    var b=storage["b"];
+    console.log(b);
+    //第三种方法读取
+    var c=storage.getItem("c");
+    console.log(c);
+}
+```
+
+### webpack/Vue-cli 利用proxyTable跨域
+**webpack是前端资源模块化管理和打包的工具**，它可以把松散的资源根据依赖和规则打包成符合生产环境部署的前端资源。还可以将按需加载的模块进行代码分割，等到实际需要的时候再加载。把浏览器不能识别的东西如（less，scss）等转换为浏览器可以识别的语言如（css），因为vue中需要引入大量的各种各样的模块 所以很依赖webpack。在webpack看来 一切皆模块。  
+**vue-cli是脚手架工具**。他可以帮助我们用配置好的模板快速搭建起一个项目工程来。省去了自己再去配置webpack配置文件的基本内容。  
+
+在平时项目的开发环境中，经常会遇到跨域的问题，尤其是使用vue-cli这种脚手架工具开发时，由于项目本身启动本地服务是需要占用一个端口的，所以必然会产生跨域的问题  
+使用webpack做构建工具的项目中使用proxyTable代理实现跨域是一种比较方便的选择  
+使用的插件[http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware)  
+*注：此方法仅限用于开发环境，不适合生产环境，生产环境可以用nginx进行代理*
+```JS
+//根目录下config文件夹下的index.js文件
+//由于在开发环境下使用，所以配置在dev里面
+dev: {
+    assetsRoot: path.resolve(__dirname, "../dist"),
+    assetsSubDirectory: "static",// 静态资源文件夹
+    assetsPublicPath: "/",// 发布路径
+    host: "localhost",// Various Dev Server settings
+    port: 8080,// dev-server监听的端口
+    autoOpenBrowser: true,
+    proxyTable: {
+    '/api': {
+      target: 'http://www.abc.com',  //目标接口域名
+      changeOrigin: true,  //是否跨域，开启代理
+      // secure: false,  // 如果是https接口，需要配置这个参数
+      pathRewrite: {
+        '^/api': '/api'   //重写接口
+      }
+    },
+    cssSourceMap: false //是否使用 cssSourceMap
+}
+```
+上面这段代码的效果就是将本地8080端口的一个请求代理到了 www.abc.com 这个域名下：
+
+`'http://localhost:8080/api' => 'http://www.baidu.com'`
+
+#### 参考链接
+https://www.cnblogs.com/wancheng7/p/8987694.html  
+https://juejin.im/post/5da13dc0e51d45780f060508
+
+### nodejs的require和path.resolve()
+#### node require
+node中采用了两个核心模块来管理模块依赖：
+
+* require模块：全局可见，不需要额外使用require('require')
+* module模块：全局可见，不需要额外使用require('module')
+
+当require()函数传入一个path参数的时候，node会依次执行如下步骤：
+
+1. Resolving : 找到path的绝对路径。
+2. Loading: 确定文件的内容。
+3.  Wrapping：构造私有的作用域。Wrapping可以确保每次require文件的时候，require和exports都是私有的。
+4.  Evaluating：evaluating环节是VM处理已加载文件的最后一个环节。
+5.  Caching：为了避免引用相同的文件情况下，不重复执行上面的步骤
+
+#### Node的path.resolve(__dirname，'./src')
+1. path.resolve( )方法
+`path.resolve([...paths])`  
+传入参数：...paths是传入的字符串参数，是路径序列或者路径片段。  
+返回值：字符串  
+使用方法：
+    1. path.resolve()方法可以将路径或者路径片段解析成绝对路径
+    2. 传入路径从右至左解析，遇到第一个绝对路径是完成解析，例如`path.resolve('/foo', '/bar', 'baz') 将返回 /bar/baz`
+    3. 如果传入的绝对路径不存在，那么当前目录将被使用
+    4. 当传入的参数没有/时，将被传入解析到当前根目录
+    5. 零长度的路径将被忽略
+    6. 如果没有传入参数，将返回当前根目录
+
+具体跳转路径如下图所示：
+![](./image/nodeTest.png)
+
+>../dist:相当于在__dirname父目录下执行 CD  dist  
+./dist:相当于在__dirname目录下执行 CD  dist  
+/dist：和_dirname无关，在根目录执行 cd dist  
+dist:和_dirname无关，直接 CD dist的目录
+
+2. __dirname变量
+在任何模块文件内部，可以使用__dirname变量获取当前模块文件所在目录的完整绝对路径  
+
+```JS
+var path = require('path');
+console.log(__dirname); 
+console.log(path.resolve(__dirname,'./src'))
+// /Users/frank/Desktop/sfs-blog
+// /Users/frank/Desktop/sfs-blog/src
+```
+**使用场景：**
+```JS
+//webpack配置build/webpack.dev.conf.js：
+  resolve:{
+    //解析扩展名
+    extensions: ['.js','vue'],
+    alias: {
+      //快捷访问入口
+      'util':path.resolve(__dirname,'./src/util')
+    }
+  }
+  /*上述代码在引用文件的时候：
+  修改之前：import foo from "../../../util/foo"
+  修改之后：import foo from "util/foo"
+  可以便捷引用文件*/
+```
+#### 参考链接
+https://www.jianshu.com/p/76966243f27f  
+https://blog.csdn.net/CarryBest/article/details/88813745
