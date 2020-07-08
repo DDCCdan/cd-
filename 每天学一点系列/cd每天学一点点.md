@@ -735,9 +735,9 @@ Access-Control-Max-Age: 1728000
     + 第一次发送非简单请求时会多一次请求。
 
 ##### JSONP 跨域
-由于 **script标签不受浏览器同源策略的影响**，允许跨域引用资源。因此可以通过动态创建script标签，然后利用src属性进行跨域，这也就是JSONP跨域的基本原理  
+由于 **script标签不受浏览器同源策略的影响**，允许跨域引用资源。因此可以通过动态创建 script标签，然后利用src属性进行跨域，这也就是JSONP跨域的基本原理  
 (**注：form表单提交没有跨域问题** :因为原页面用form提交到另一个域名之后，原页面的脚本无法获取新页面中的内容。所以浏览器认为这是安全的)  
-**JSONP跨域流程**
+**JSONP跨域流程**  
 例1：
 ```JS
 // 1. 定义一个 回调函数 handleResponse 用来接收返回的数据
@@ -808,7 +808,7 @@ img.src = 'http://www.laixiangran.cn/test?name=laixiangran';
 如：`http://www.laixiangran.cn/a.html 和 http://laixiangran.cn/b.html document.domain都设成laixiangran.cn即可通过js访问到iframe页面的各种属性和对象`
 document.domain的设置是有限制的，只能把document.domain设置成自身或更高一级的父域，且主域必须相同
 ##### document.name 跨域
-window对象有个name属性，该属性有个特征：即在一个窗口（window）的生命周期内，窗口载入的所有的页面（不管是相同域的页面还是不同域的页面）都是共享一个window.name的，每个页面对 window.name 都有读写的权限。window.name是持久存在一个窗口载入过的所有页面中的，并不会因新页面的载入而进行重置。
+window对象有个name属性，该属性有个特征：即在一个窗口（window）的生命周期内，窗口载入的所有的页面（不管是相同域的页面还是不同域的页面）都是共享一个window.name的，每个页面对 window.name 都有读写的权限。window.name是持久存在一个窗口载入过的所有页面中的，并不会因新页面的载入而进行重置。  
 获取：`var data = iframe.contentWindow.name; // 获取 iframe 里的 window.name`  
 赋值：`window.name = "hello world!";`
 ##### location.hash 跨域
@@ -817,7 +817,7 @@ location.hash 方式跨域，是子框架修改父框架 src 的 hash 值，通�
 获取：`var data = window.location.hash;`  
 赋值：`parent.location.hash = "world";`
 ##### postMessage 跨域
-window.postMessage(message，targetOrigin) 方法是 HTML5 新引进的特性，可以使用它来向其它的 window 对象发送消息，无论这个 window 对象是属于同源或不同源。  
+window.postMessage(message，targetOrigin) 方法是 HTML5 新引进的特性(API)，可以使用它来向其它的 window 对象发送消息，无论这个 window 对象是属于同源或不同源。  
 `otherWindow.postMessage(message, targetOrigin);`
 
 * otherWindow：目标窗口（你想发送跨域消息的那个窗口），例如： iframe.contentWindow 。是 window.frames 属性的成员或者由 window.open 方法创建的窗口
@@ -1447,7 +1447,8 @@ node中采用了两个核心模块来管理模块依赖：
 5.  Caching：为了避免引用相同的文件情况下，不重复执行上面的步骤
 
 #### Node的path.resolve(__dirname，'./src')
-1. path.resolve( )方法
+1. path.resolve( )方法  
+只想解析模块但不执行模块,可以使用require.resolve函数  
 `path.resolve([...paths])`  
 传入参数：...paths是传入的字符串参数，是路径序列或者路径片段。  
 返回值：字符串  
@@ -1496,3 +1497,136 @@ console.log(path.resolve(__dirname,'./src'))
 #### 参考链接
 https://www.jianshu.com/p/76966243f27f  
 https://blog.csdn.net/CarryBest/article/details/88813745
+
+## 2020/7/8
+### ajax、jquery ajax、 axios、 fetch 
+#### ajax
+最早出现的发送后端请求技术，隶属于原始js中，核心使用XMLHttpRequest对象。  
+
+![](./image/ajax.png)
+
+```JS
+function reqListener () {
+  console.log(this.responseText);
+}
+
+var oReq = new XMLHttpRequest();
+oReq.onload = reqListener;
+oReq.open("get", "newFile.txt", true);
+oReq.send();
+```
+通过XMLHttpRequest生成的请求可以有两种方式来获取数据，异步模式或同步模式。请求的类型是由这个XMLHttpRequest对象的open()方法的第三个参数async的值决定的。如果该参数的值为 false，则该XMLHttpRequest请求以同步模式进行，否则该过程将以异步模式完成。  
+XMLHttpRequest一般用来发送和接收文本数据，但其实也可以发送和接受二进制内容，处理二进制数据的方法：`XMLHttpRequest.overrideMimeType()` 和 `responseType 属性`
+```JS
+var oReq = new XMLHttpRequest();
+
+oReq.onload = function(e) {
+  var arraybuffer = xhr.response; // not responseText
+}
+oReq.open("GET", url, true);
+oReq.responseType = "arraybuffer";
+oReq.send();
+```
+**XMLHttpRequest提交表单**  
+
+* 使用 AJAX：是最复杂的但也是最灵活和最强大
+* 使用 FormData API ：最简单最快捷的，但是缺点是被收集的数据无法使用 JSON.stringify() 转换为一个 JSON 字符串
+
+#### Jquery Ajax
+```JS
+$.ajax({
+  url: "/api/getWeather",
+  data: {
+    zipcode: 97201
+  },
+  success: function( result ) {
+    $( "#weather-temp" ).html( "<strong>" + result + "</strong> degrees" );
+  }
+});
+```
+Jquery Ajax的出现是对原生XHR的封装，除此以外还增添了对JSONP的支持。  
+不足：  
+
+1. 本身是针对MVC的编程,不符合现在前端MVVM的浪潮
+2. 基于原生的XHR开发，XHR本身的架构不清晰,已经有了fetch的替代方案
+3. JQuery整个项目太大，单纯使用ajax却要引入整个JQuery非常的不合理（采取个性化打包的方案又不能享受CDN服务）
+4. 不符合关注分离（Separation of Concerns）的原则
+5. 配置和调用方式非常混乱，而且基于事件的异步模型不友好
+
+#### axios
+```JS
+//执行多个并发请求
+function getUserAccount() {
+  return axios.get('/user/12345');
+}
+
+function getUserPermissions() {
+  return axios.get('/user/12345/permissions');
+}
+
+axios.all([getUserAccount(), getUserPermissions()])
+  .then(axios.spread(function (acct, perms) {
+    // 两个请求现在都执行完成
+  }));
+```
+Axios本质上也是对原生XHR的封装，只不过它是Promise的实现版本，可以用在浏览器和 node.js 中  
+**特性：**
+
+* 从浏览器中创建 XMLHttpRequests
+* 从 node.js 创建 http 请求
+* 支持 Promise API
+* 拦截请求和响应
+* 转换请求数据和响应数据
+* 取消请求
+* 自动转换 JSON 数据
+* 客户端支持防御 XSRF
+
+axios创建请求时可以用的配置选项。只有 url 是必需的。如果没有指定 method，请求将默认使用 get 方法。
+
+#### fetch
+>Fetch 提供了对 Request 和 Response （以及其他与网络请求有关的）对象的通用定义。
+Fetch 是一个现代的概念, 等同于 XMLHttpRequest。它提供了许多与XMLHttpRequest相同的功能，但被设计成更具可扩展性和高效性。
+
+fetch规范与jQuery.ajax()主要有两种方式的不同:
+
+* 当接收到一个代表错误的 HTTP 状态码时，从 fetch()返回的 Promise 不会被标记为 reject， 即使该 HTTP 响应的状态码是 404 或 500。相反，它会将 Promise 状态标记为 resolve （但是会将 resolve 的返回值的 ok 属性设置为 false ），仅当网络故障时或请求被阻止时，才会标记为 reject。
+* 默认情况下，fetch 不会从服务端发送或接收任何 cookies, 如果站点依赖于用户 session，则会导致未经认证的请求（要发送 cookies，必须设置 credentials 选项）。自从2017年8月25日后，默认的credentials政策变更为same-originFirefox也在61.0b13中改变默认值
+
+```JS
+// Example POST method implementation:
+
+postData('http://example.com/answer', {answer: 42})
+  .then(data => console.log(data)) // JSON from `response.json()` call
+  .catch(error => console.error(error))
+
+function postData(url, data) {
+  // Default options are marked with *
+  return fetch(url, {
+    body: JSON.stringify(data), // must match 'Content-Type' header
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, same-origin, *omit
+    headers: {
+      'user-agent': 'Mozilla/4.0 MDN Example',
+      'content-type': 'application/json'
+    },
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, cors, *same-origin
+    redirect: 'follow', // manual, *follow, error
+    referrer: 'no-referrer', // *client, no-referrer
+  })
+  .then(response => response.json()) // parses response to JSON
+}
+```
+fetch的优点：  
+
+1. 语法简洁，更加语义化
+2. 基于标准 Promise 实现，支持 async/await
+3. 同构方便，使用 isomorphic-fetch
+4. 更加底层，提供的API丰富（request, response）
+5. 脱离了XHR，是ES规范里新的实现方式
+
+**fetch在前端的应用上有一项xhr怎么也比不上的能力：跨域的处理**  
+fetch中可以设置mode为"no-cors"（不跨域）。这样之后我们会得到一个type为“opaque”的返回。需要指出的是，这个请求是真正抵达过后台的，所以我们可以使用这种方法来进行信息上报
+
+#### 参考链接
+https://juejin.im/post/5d5e673ff265da03d2114646
