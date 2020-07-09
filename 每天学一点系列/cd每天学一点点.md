@@ -973,25 +973,41 @@ var throttle = function(func, delay) {
 ```JS
 //定时器版
 var throttle = function(func, delay) {
-            var timer = null;//涉及闭包知识
-            return function() {
-                var context = this;
-                var args = arguments;
-                if (!timer) {
-                    timer = setTimeout(function() {
-                        func.apply(context, args);
-                        timer = null;
-                    }, delay);
-                }
-            }
+    var timer = null;//涉及闭包知识
+    return function() {
+        var context = this;
+        var args = arguments;
+        if (!timer) {
+            timer = setTimeout(function() {
+                func.apply(context, args);
+                timer = null;
+            }, delay);
         }
-        function handle() {
-            console.log(Math.random());
-        }
-        window.addEventListener('scroll', throttle(handle, 1000));
-        /*注：防抖和节流可结合异步队列。有人有时候会疑惑为什么要把timer定在那个位置，原因要说清楚，因为闭包，可以让所有每一次触发的事件处理函数跟上一次的事件处理函数做到一个类似于人类交流之间的通信，因为有了这个共享的工具，这一次的事件处理函数就可以根据这个共享的工具去知道它的上一次是不是已经有处理逻辑被放到异步队列里头等待执行了。这就是timer的通俗解释，而为什么里头要判断一次timer是否为空，那是因为，这一次的事件处理函数如果不判断它的上一次有没有已经被放到异步队列当中了的话，直接执行下面的延时操作，结果是又有一个同样的处理逻辑被放入异步队列当中，因此触发的时候就要去根据timer判断任务队列中它有没有任务已经在里头等待了，有我们就clear它，让它滚蛋，因为我们要的结果是最后只能执行一次处理逻辑。 */
+    }
+}
+function handle() {
+    console.log(Math.random());
+}
+window.addEventListener('scroll', throttle(handle, 1000));
 ```
 
+```JS
+/*注：防抖和节流可结合异步队列。有人有时候会疑惑为什么要把timer定在那个位置，原因要说清楚，因为闭包，可以让所有每一次触发的事件处理函数跟上一次的事件处理函数做到一个类似于人类交流之间的通信，因为有了这个共享的工具，这一次的事件处理函数就可以根据这个共享的工具去知道它的上一次是不是已经有处理逻辑被放到异步队列里头等待执行了。这就是timer的通俗解释，而为什么里头要判断一次timer是否为空，那是因为，这一次的事件处理函数如果不判断它的上一次有没有已经被放到异步队列当中了的话，直接执行下面的延时操作，结果是又有一个同样的处理逻辑被放入异步队列当中，因此触发的时候就要去根据timer判断任务队列中它有没有任务已经在里头等待了，有我们就clear它，让它滚蛋，因为我们要的结果是最后只能执行一次处理逻辑。 */
+//为帮助理解，可执行下列代码，闭包概念见下文  闭包  相关
+function fn2(){
+    var a = 1;
+    console.log("1:" + a)
+    return function fn3(){
+        a += 1;
+        console.log("2:" + a)
+    }
+}
+var fn1 = fn2();
+for(let i = 0; i < 5; i ++){
+    fn1();
+}
+console.log("3:" + a) //a is not defined
+```
 #### 参考链接
 https://juejin.im/entry/5b1d2d54f265da6e2545bfa4 
 
@@ -1630,3 +1646,113 @@ fetch中可以设置mode为"no-cors"（不跨域）。这样之后我们会得�
 
 #### 参考链接
 https://juejin.im/post/5d5e673ff265da03d2114646
+
+## 2020/7/9
+### javaScript闭包
+#### 作用域与词法作用域
+**作用域**就是一套规则，用于确定在何处以及如何查找变量（标识符）的规则，通俗的讲，作用域就是查找变量的地方  
+**作用域链**：在查找某变量的时候，先在函数作用域中查找，没有找到，再去全局作用域中查找，有一个往外层查找的过程。好像是顺着一条链条从下往上查找变量，这条链条，就称之为作用域链  
+**词法作用域**就是作用域是由书写代码时函数声明的位置来决定的  
+一般来说，在编程语言里我们常见的变量作用域就是 **词法作用域**与 **动态作用域** (Dynamic Scope) ，绝大部分的编程语言都是使用的词法作用域。词法作用域注重的是所谓的Write-Time，即 **编程时的上下文**，而动态作用域以及常见的this的用法，都是Run-Time，即 **运行时上下文**。词法作用域关注的是函数在何处被定义，而动态作用域关注的是函数在何处被调用
+
+#### 闭包
+定义：
+
+* 定义一：闭包是指有权访问另一个函数作用域中的变量的函数；
+* 定义二：当函数可以记住并访问所在的词法作用域时，就产生了闭包，即使函数是在当前词法作用域之外执行。  
+
+```JS
+function fn1() {
+    var name = 'iceman';
+    function fn2() {
+        console.log(name);
+    }
+    return fn2;
+}
+var fn3 = fn1();
+fn3();
+```
+fn3就是fn2函数本身。执行fn3能正常输出name，这不就是fn2能记住并访问它所在的词法作用域，而且fn2函数的运行还是在当前词法作用域之外了  
+正常来说，当fn1函数执行完毕之后，其作用域是会被销毁的，然后垃圾回收器会释放那段内存空间。而闭包却很神奇的将fn1的作用域存活了下来，fn2依然持有该作用域的引用，这个引用就是闭包。  
+（*闭包应用可参考上文 **防抖与节流** 处*）  
+典型闭包实例：
+```JS
+for (var i = 1; i <= 10; i++) {
+    setTimeout(function () {
+        console.log(i);
+    }, 1000);
+}
+```
+解决办法：
+```JS
+//方法1
+//让i在每次迭代的时候，都产生一个私有的作用域，在这个私有的作用域中保存当前i的值
+for (var i = 1; i <= 10; i++) {
+    (function () {
+        var j = i;
+        setTimeout(function () {
+            console.log(j);
+        }, 1000);
+    })();
+}
+//方法2
+//将每次迭代的i作为实参传递给自执行函数，自执行函数中用变量去接收
+for (var i = 1; i <= 10; i++) {
+    (function (j) {
+        setTimeout(function () {
+            console.log(j);
+        }, 1000);
+    })(i);
+}
+```
+**自执行函数或是自调用函数** :声明完了，马上进行调用，只能使用一次  
+闭包的缺点：
+
+* 闭包的缺点就是常驻内存会增大内存使用量，并且使用不当很容易造成内存泄露。
+* 如果不是因为某些特殊任务而需要闭包，在没有必要的情况下，在其它函数中创建函数是不明智的，因为闭包对脚本性能具有负面影响，包括处理速度和内存消耗
+
+#### 参考链接
+https://juejin.im/post/5afb0ae56fb9a07aa2138425  
+https://juejin.im/entry/57b97480d342d3005acb5758
+
+### 函数柯里化（curry）
+#### 柯里化
+在数学和计算机科学中，柯里化是一种将使用多个参数的一个函数转换成一系列使用一个参数的函数的技术。  
+柯里化，可以理解为提前接收部分参数，延迟执行，不立即输出结果，而是返回一个接受剩余参数的函数。因为这样的特性，也被称为部分计算函数。柯里化，是一个逐步接收参数的过程。  
+柯里化(Currying)具有：延迟计算（采用 **闭包**的方式）、参数复用、动态生成函数的作用
+实例代码：  
+```JS
+function curry(fn, args) {
+    length = fn.length;
+    args = args || [];
+    return function() {
+        var _args = args.slice(0),
+            arg, i;
+        for (i = 0; i < arguments.length; i++) {
+            arg = arguments[i];
+            _args.push(arg);
+        }
+        if (_args.length < length) {
+            return curry.call(this, fn, _args);
+        }
+        else {
+            return fn.apply(this, _args);
+        }
+    }
+}
+var fn = curry(function(a, b, c) {
+    console.log([a, b, c]);
+});
+fn("a", "b", "c") // ["a", "b", "c"]
+fn("a", "b")("c") // ["a", "b", "c"]
+fn("a")("b")("c") // ["a", "b", "c"]
+fn("a")("b", "c") // ["a", "b", "c"]
+```
+
+#### 反柯里化
+(啊，这个好难懂，先放着吧，以后有时间再学习...)
+
+#### 参考链接
+https://juejin.im/post/598d0b7ff265da3e1727c491  
+https://juejin.im/entry/5884efee128fe1006c3b64d5  
+https://juejin.im/post/5b561426518825195f499772
