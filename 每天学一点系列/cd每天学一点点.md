@@ -1756,3 +1756,99 @@ fn("a")("b", "c") // ["a", "b", "c"]
 https://juejin.im/post/598d0b7ff265da3e1727c491  
 https://juejin.im/entry/5884efee128fe1006c3b64d5  
 https://juejin.im/post/5b561426518825195f499772
+
+## 2020/7/13
+### vue修饰符
+#### 表单修饰符
+
+* .lazy
+* .trim  过滤首尾的空格,中间的不会过滤
+* .number
+
+#### 事件修饰符
+
+* .stop: 阻止单击事件冒泡。由于事件冒泡的机制，我们给元素绑定点击事件的时候，也会触发父级的点击事件。
+```JS
+//只执行  fun2  函数
+<div @click="fun1()">
+  <button @click.stop="fun2()">ok</button>
+</div>
+```
+* .prevent: 用于阻止事件的默认行为,可以使提交事件不再重载页面
+```JS
+<!-- 提交事件不再重载页面 -->
+<form v-on:submit.prevent="onSubmit"></form>
+```
+* .self: 只当事件是从事件绑定的元素本身触发时才触发回调
+级的点击事件。
+```JS
+//只有点击button以外的div部分才会触发 fun1 函数
+<div @click.self="fun1()">
+  <button @click="fun2()">ok</button>
+</div>
+```
+* .once: 绑定事件只能触发一次
+* .capture: 事件的冒泡，其实完整的事件机制是：捕获阶段--目标阶段--冒泡阶段。.capture使事件触发从包含这个元素的顶层开始往下触发。
+```JS
+//执行顺序为： fun1->fun2->fun4->fun3
+//不加capture执行顺序为：fun4->fun3->fun2->fun1
+<div @click.capture="fun1()">
+  obj1
+  <div @click.capture="fun2()">
+    obj2
+    <div @click="fun3()">
+      obj3
+      <div @click="fun4()">
+        obj4
+      </div>
+    </div>
+  </div>
+</div>
+```
+* .passive: 当我们在滚动页面的时候（通常是我们监听touch事件的时候），页面其实会有一个短暂的停顿（大概200ms），浏览器不知道我们是否要preventDefault，所以它需要一个延迟来检测。这就导致了我们的滑动显得比较卡顿。.passive可以阻止preventDefault事件。可用于移动端页面优化
+* .native: 有些组件绑定事件不会生效如：`<My-component @click="fun()"></My-component>`。加上.native可以使之生效，可以理解为该修饰符的作用就是把一个vue组件转化为一个普通的HTML标签，注意：使用.native修饰符来操作普通HTML标签是会令事件失效的。
+
+#### 鼠标按钮修饰符
+
+* .left 左键点击
+* .right 右键点击
+* .middle 中键点击
+
+#### 键盘修饰符
+略
+#### v-bind 修饰符
+
+* .sync: 父子组件数据双向绑定（简化代码）[官方说明](https://cn.vuejs.org/v2/guide/components-custom-events.html#sync-%E4%BF%AE%E9%A5%B0%E7%AC%A6) 
+    - 子组件传递的事件名必须为update:value
+    ```JS
+    //父组件
+    <child
+      :visible='dialogShow'
+      @update:visible="val => dialogShow = val"
+    ></child>
+
+    //子组件
+    <template>
+    ...
+    props: {
+        visible: {
+          type: Boolean
+        }
+    }
+    ...
+    handleClose: function () {
+      this.$emit('update:visible', false)
+    }
+    </template>
+    ```
+    - 带有 .sync 修饰符的 v-bind 不能和表达式一起使用,`v-bind:title.sync=”doc.title + ‘!’”`无效
+    -  v-bind.sync不能用于字面表达式 ，`v-bind.sync=”{ title: doc.title }”` 无效
+* .prop
+* .camel: html不区分大小写,统一转换成小写，某些标签如svg只识别viewBox，无法识别 viewbox，使用.camel修饰符，能将其渲染为驼峰名。另外可以使用模板字符串来解决不区分大小写统一转换成小写的问题。
+
+### vue data函数（为什么）
+Vue组件中 data 为什么是一个函数？  
+因为组件是用来复用的，且 JS 里对象是引用关系，如果组件中 data 是一个对象，那么这样作用域没有隔离，子组件中的 data 属性值会相互影响，如果组件中 data 选项是一个函数，那么每个实例可以维护一份被返回对象的独立的拷贝，组件实例之间的 data 属性值不会互相影响；而 new Vue 的实例，是不会被复用的，因此不存在引用对象的问题。
+
+#### 参考链接
+https://segmentfault.com/a/1190000016786254
