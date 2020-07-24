@@ -18,9 +18,9 @@ hash模式有#，不好看；history模式无#，好看
 回车刷新时：hash模式可以加载到hash值对应页面，history模式可能会出现404情况（history模式的劣势）  
 浏览器支持：hash模式支持低版本浏览器和IE浏览器；history是HTML5新推出的API
 #### 参考链接
-https://blog.csdn.net/fifteen718/article/details/82529433  
-https://juejin.im/post/5b4ca076f265da0f900e0a7d  
-https://juejin.im/post/5b31a4f76fb9a00e90018cee
+<https://blog.csdn.net/fifteen718/article/details/82529433>{:target="_blank"}  
+<https://juejin.im/post/5b4ca076f265da0f900e0a7d>{:target="_blank"}  
+<https://juejin.im/post/5b31a4f76fb9a00e90018cee>{:target="_blank"}
 
 ### post和get的区别
 * GET参数通过URL传递，POST放在Request body中  
@@ -31,7 +31,7 @@ https://juejin.im/post/5b31a4f76fb9a00e90018cee
 * GET产生的URL地址可以被Bookmark，而POST不可以  
 * GET请求会被浏览器主动cache，而POST不会，除非手动设置
 #### 参考链接
-https://www.cnblogs.com/logsharing/p/8448446.html
+<https://www.cnblogs.com/logsharing/p/8448446.html>{:target="_blank"}
 
 ### vue组件通信
 #### 父子组件通信
@@ -51,7 +51,7 @@ Vue2.2.0新增API,这对选项需要一起使用，以允许一个祖先组件�
 provide 和 inject 绑定并不是可响应的。这是刻意为之的。然而，如果你传入了一个可监听的对象，那么其对象的属性还是可响应的  
 
 #### 参考链接
-https://juejin.im/post/5cde0b43f265da03867e78d3  
+<https://juejin.im/post/5cde0b43f265da03867e78d3>{:target="_blank"}  
 
 ## 2020/6/2
 ### vue中axios封装
@@ -65,7 +65,7 @@ https://juejin.im/post/5cde0b43f265da03867e78d3
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
 #### 参考链接
-https://juejin.im/post/5b55c118f265da0f6f1aa354
+<https://juejin.im/post/5b55c118f265da0f6f1aa354>{:target="_blank"}
 ### 克隆/拷贝
 深拷贝和浅拷贝与原数据并不指向同一对象
 #### 浅拷贝
@@ -82,8 +82,8 @@ JSON.parse：可实现深拷贝，缺点
 * 构造函数指向错误：会抛弃对象的constructor,所有的构造函数会指向Object
 
 #### 参考链接
-https://juejin.im/post/5abb55ee6fb9a028e33b7e0a  
-https://juejin.im/post/59ac1c4ef265da248e75892b#heading-11
+<https://juejin.im/post/5abb55ee6fb9a028e33b7e0a>{:target="_blank"}  
+<https://juejin.im/post/59ac1c4ef265da248e75892b#heading-11>{:target="_blank"}
 ### SPA（单页面应用）和MPA（多页面应用）
 #### SPA
 第一次进入页面时会请求一个html文件，刷新清除一下，切换到其他组件，此时路径也相应变化，但是并没有新的html文件请求，页面内容却变化了  
@@ -105,7 +105,7 @@ https://juejin.im/post/59ac1c4ef265da248e75892b#heading-11
 * 缺点： 切换慢：每次跳转都需要发送一个HTTP请求，如果网络状态不好，在页面间来回跳转时，就会发生明显的卡顿，影响用户体验
 
 #### 参考链接
-https://www.jianshu.com/p/a02eb15d2d70
+<https://www.jianshu.com/p/a02eb15d2d70>{:target="_blank"}
 ### vue三要素
 模板引擎、响应式、渲染  
 Vue 实现流程：  
@@ -137,9 +137,9 @@ Vue 实现流程：
 - 生成的vnode和prev Vnode，通过patch进行比较渲染到html 中
 
 #### 参考链接
-https://blog.csdn.net/weixin_33709364/article/details/88010302  
-https://blog.csdn.net/webFrontEndDev/article/details/102702402  
-https://juejin.im/post/5e7ae687f265da57424bb691#heading-11
+<https://blog.csdn.net/weixin_33709364/article/details/88010302>{:target="_blank"}  
+https://blog.csdn.net/webFrontEndDev/article/details/102702402>{:target="_blank"}  
+<https://juejin.im/post/5e7ae687f265da57424bb691#heading-11>{:target="_blank"}
 
 ## 2020/6/3
 ### 虚拟DOM（virtual DOM）
@@ -166,8 +166,8 @@ https://juejin.im/post/5e7ae687f265da57424bb691#heading-11
  * patch（vnode，newVnode）：核心逻辑updataChildren
  
 #### 参考链接  
-https://www.cnblogs.com/charliePU/p/10791165.html  
-https://www.jianshu.com/p/af0b398602bc
+<https://www.cnblogs.com/charliePU/p/10791165.html>{:target="_blank"}  
+<https://www.jianshu.com/p/af0b398602bc>{:target="_blank"}
 
 ## 2020/6/4
 ### vuex
@@ -196,7 +196,7 @@ Vuex和单纯的全局对象的不同：
 * 来自不同视图的行为需要改变同一个状态
 
 #### 参考链接
-https://juejin.im/post/5e7ae687f265da57424bb691#heading-21  
+<https://juejin.im/post/5e7ae687f265da57424bb691#heading-21>{:target="_blank"}  
 ### vue路由（vue-router）
 #### 组件
 * `<router-link>`
@@ -263,8 +263,8 @@ https://juejin.im/post/5e7ae687f265da57424bb691#heading-21
 * active-class是router-link终端属性，用来做选中样式的切换，当router-link标签被点击时将会应用这个样式  
 
 #### 参考链接
-https://www.cnblogs.com/axl234/p/5899952.html  
-https://juejin.im/post/5e7ae687f265da57424bb691#heading-24
+<https://www.cnblogs.com/axl234/p/5899952.html>{:target="_blank"}  
+<https://juejin.im/post/5e7ae687f265da57424bb691#heading-24>{:target="_blank"}
 
 ## 2020/6/5
 ### Mixin（混入）
@@ -426,8 +426,8 @@ Vue.directive('noMoreClick', {
 ```
 
 #### 参考链接
-https://blog.csdn.net/weixin_33877092/article/details/91368472  
-https://cn.vuejs.org/v2/guide/custom-directive.html
+<https://blog.csdn.net/weixin_33877092/article/details/91368472>{:target="_blank"}  
+<https://cn.vuejs.org/v2/guide/custom-directive.html>{:target="_blank"}
 
 ## 2020/6/11
 ### 原型、原型链
@@ -477,8 +477,8 @@ Object.prototype 的原型是null  (Object.prototype 没有原型)
 原型.constructor === 构造函数  
 构造函数.prototype === 原型
 #### 参考链接
-http://www.ruanyifeng.com/blog/2011/06/designing_ideas_of_inheritance_mechanism_in_javascript.html  
-https://www.yuque.com/fe9/basic/zk5e4f
+<http://www.ruanyifeng.com/blog/2011/06/designing_ideas_of_inheritance_mechanism_in_javascript.html>{:target="_blank"}  
+<https://www.yuque.com/fe9/basic/zk5e4f>{:target="_blank"}
 
 ## 2020/6/18
 ### vue 自定义过滤器（filter）
@@ -519,8 +519,8 @@ new Vue({
 ```
 
 #### 参考链接
-https://cn.vuejs.org/v2/guide/filters.html  
-https://www.jianshu.com/p/ad21df1914c5  
+<https://cn.vuejs.org/v2/guide/filters.html>{:target="_blank"}  
+<https://www.jianshu.com/p/ad21df1914c5>{:target="_blank"}  
 
 ## 2020/6/22
 ### CSS布局--dispaly、position、float
@@ -542,8 +542,8 @@ CSS有三种基本的定位机制：**普通流、浮动和绝对定位**
 clear:both可以清除浮动  
 应用值为hidden或auto的overflow属性会有一个副作用：自动清理包含的任何浮动元素
 #### 参考链接
-https://www.cnblogs.com/dolphinX/archive/2012/10/13/2722501.html  
-https://blog.csdn.net/liulanzaijia/article/details/87725232
+<https://www.cnblogs.com/dolphinX/archive/2012/10/13/2722501.html>{:target="_blank"}  
+<https://blog.csdn.net/liulanzaijia/article/details/87725232>{:target="_blank"}
 
 ## 2020/6/23
 ### inline-block和float
@@ -556,7 +556,7 @@ https://blog.csdn.net/liulanzaijia/article/details/87725232
 
 当我们要设置某些元素在一行显示，并且排列方向一致的情况下，我们尽可能去用inline-block。因为inline-block的元素仍然在当前文档流里面，这样就减少了程序对DOM的更改操作，因为DOM的每一次更改，浏览器会重绘DOM树。理论上会增加性能消耗。这样也不用像flaot那样麻烦，需要清除flaot  
 #### 参考链接
-https://www.cnblogs.com/scot/p/5501669.html
+<https://www.cnblogs.com/scot/p/5501669.html>{:target="_blank"}
 
 ### cookie、session、token（令牌）
 #### cookie
@@ -637,7 +637,7 @@ session时有状态的，一般存于服务器内存或硬盘中，当服务器�
 * 是一种认证授权机制。JWT 是为了在网络应用环境间传递声明而执行的一种基于 JSON 的开放标准（RFC 7519）。
 * JWT 的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源。比如用在用户登录上。
 * 可以使用HMAC算法或者是RSA的公/私秘钥对JWT进行签名。因为数字签名的存在，这些传递的信息是可信的。
-* 具体可参考 http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html  
+* 具体可参考 <http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html  
 **JWT组成**
 * Header（头部）：一个JSON对象，描述JWT的元数据，（使用 Base64URL算法将JSON对象转成字符串）
 * Payload（负载）：一个JSON对象，用来存放实际需要传递的数据，**JWT 默认是不加密的，任何人都可以读到，所以不要把秘密信息放在这个部分**（这个 JSON 对象也要使用 Base64URL 算法转成字符串）
@@ -656,9 +656,9 @@ session时有状态的，一般存于服务器内存或硬盘中，当服务器�
 * jwt只是一个跨域认证的方案
 
 #### 参考链接
-https://juejin.im/post/5e055d9ef265da33997a42cc  
-https://segmentfault.com/a/1190000017831088  
-https://www.cnblogs.com/moyand/p/9047978.html
+<https://juejin.im/post/5e055d9ef265da33997a42cc>{:target="_blank"}  
+<https://segmentfault.com/a/1190000017831088>{:target="_blank"}  
+<https://www.cnblogs.com/moyand/p/9047978.html>{:target="_blank"}
 
 ## 2020/6/28
 ### 前端跨域
@@ -860,10 +860,10 @@ b页面
 * 在监听message事件时需要判断一下消息来源origin，避免接收到非法域名的消息导致的xss攻击
 
 #### 参考链接
-https://juejin.im/post/5ba1d4fe6fb9a05ce873d4ad  
-CORS跨域（阮一峰）： http://www.ruanyifeng.com/blog/2016/04/cors.html  
-https://juejin.im/post/5815f4abbf22ec006893b431  
-postMessage跨域：https://juejin.im/post/5e9045316fb9a03c957ff7ff
+<https://juejin.im/post/5ba1d4fe6fb9a05ce873d4ad>{:target="_blank"}  
+CORS跨域（阮一峰）： <http://www.ruanyifeng.com/blog/2016/04/cors.html>{:target="_blank"}  
+<https://juejin.im/post/5815f4abbf22ec006893b431>{:target="_blank"}  
+postMessage跨域：<https://juejin.im/post/5e9045316fb9a03c957ff7ff>{:target="_blank"}
 
 ## 2020/6/29
 ### HTTP缓存机制
@@ -922,7 +922,7 @@ Expires和Cache-Control
 3. Ctrl+F5：告诉浏览器，你先把你缓存中的这个文件给我删了，然后再去服务器请求个完整的资源文件下来。于是客户端就完成了强行更新的操作
 
 #### 参考链接
-https://juejin.im/post/5a1d4e546fb9a0450f21af23
+<https://juejin.im/post/5a1d4e546fb9a0450f21af23>{:target="_blank"}
 
 ## 2020/6/30
 ### 函数防抖与节流
@@ -953,21 +953,21 @@ window.addEventListener('scroll', debounce(handle, 1000));
 ```JS
 //时间戳版
 var throttle = function(func, delay) {
-            var prev = Date.now();
-            return function() {
-                var context = this;
-                var args = arguments;
-                var now = Date.now();
-                if (now - prev >= delay) {
-                    func.apply(context, args);
-                    prev = Date.now();
-                }
-            }
+    var prev = Date.now();
+    return function() {
+        var context = this;
+        var args = arguments;
+        var now = Date.now();
+        if (now - prev >= delay) {
+            func.apply(context, args);
+            prev = Date.now();
         }
-        function handle() {
-            console.log(Math.random());
-        }
-        window.addEventListener('scroll', throttle(handle, 1000));
+    }
+}
+function handle() {
+    console.log(Math.random());
+}
+window.addEventListener('scroll', throttle(handle, 1000));
 ```
 
 ```JS
@@ -1009,7 +1009,7 @@ for(let i = 0; i < 5; i ++){
 console.log("3:" + a) //a is not defined
 ```
 #### 参考链接
-https://juejin.im/entry/5b1d2d54f265da6e2545bfa4 
+<https://juejin.im/entry/5b1d2d54f265da6e2545bfa4>{:target="_blank"} 
 
 ## 2020/7/1
 ### 输入URL之后的过程
@@ -1050,7 +1050,7 @@ TCP报文首部：
 **确认序号Ack与标志位中的ACK 不同。 确认方Ack=发起方Req+1，两端配对。**
 >一个是确认值(Acknowledgement)，为1便是确认连接。  
 >另一个是确认编号(Acknowledgement Number)，即接收到的上一次远端主机传来的seq然后+1，再发送给远端主机。提示远端主机已经成功接收上一次所有数据。  
->参考自：https://blog.csdn.net/baiyan3212/article/details/81302448
+>参考自：<https://blog.csdn.net/baiyan3212/article/details/81302448>{:target="_blank"}
 
 *注：首部其他字段暂不深入*
 
@@ -1095,7 +1095,7 @@ Webkit解析渲染页面的过程。
 
 
 #### 参考链接
-https://juejin.im/post/5cc573c85188252e741ccbb6
+<https://juejin.im/post/5cc573c85188252e741ccbb6>{:target="_blank"}
 
 ### 浏览器的回流与重绘
 1. 浏览器使用流式布局模型 (Flow Based Layout)。
@@ -1147,7 +1147,7 @@ https://juejin.im/post/5cc573c85188252e741ccbb6
     + 避免频繁读取会引发回流/重绘的属性，如果确实需要多次使用，就用一个变量缓存起来。对具有复杂动画的元素使用绝对定位，使它脱离文档流，否则会引起父元素及后续元素频繁回流。
 
 #### 参考链接
-https://juejin.im/post/5a9923e9518825558251c96a
+<https://juejin.im/post/5a9923e9518825558251c96a>{:target="_blank"}
 
 ### TCP三次握手、四次挥手
 #### 三次握手
@@ -1180,7 +1180,7 @@ MSL（Maximum Segment Lifetime），TCP允许不同的实现可以设置不同�
 而关闭连接时，服务器收到对方的FIN报文时，仅仅表示对方不再发送数据了但是还能接收数据，而自己也未必全部数据都发送给对方了，所以己方可以立即关闭，也可以发送一些数据给对方后，再发送FIN报文给对方来表示同意现在关闭连接，因此，己方ACK和FIN一般都会分开发送，从而导致多了一次。
 
 #### 参考链接
-https://juejin.im/entry/5af412eb6fb9a07aa631cc18
+<https://juejin.im/entry/5af412eb6fb9a07aa631cc18>{:target="_blank"}
 
 ## 2020/7/2
 ### HTTP和HTTPS
@@ -1301,9 +1301,9 @@ SSL握手过程：
     - SPDY/HTTP2：SPDY/HTTP2 利用 TLS/SSL 带来的优势，通过修改协议的方法来提升 HTTPS 的性能，提高下载速度等
 
 #### 参考链接
-https://juejin.im/post/5af557a3f265da0b9265a498  
-https://yuqirong.me/2018/03/03/HTTPS%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86/  
-https://juejin.im/post/5dbff8456fb9a02050548815
+<https://juejin.im/post/5af557a3f265da0b9265a498>{:target="_blank"}  
+<https://yuqirong.me/2018/03/03/HTTPS%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86/>{:target="_blank"}  
+<https://juejin.im/post/5dbff8456fb9a02050548815>{:target="_blank"}
 
 ## 2020/7/3
 ### HTTP1.0、HTTP1.1 和 HTTP2.0
@@ -1371,9 +1371,9 @@ HTTP2.0可以说是SPDY的升级版（其实原本也是基于SPDY设计的）�
 * HTTP2.0 消息头的压缩算法采用 HPACK，而非 SPDY 采用的 DEFLATE
 
 #### 参考链接
-https://juejin.im/post/5d9abde7e51d4578110dc77f  
-https://juejin.im/entry/57b17d107db2a200542da15b  
-https://juejin.im/entry/5981c5df518825359a2b9476  
+<https://juejin.im/post/5d9abde7e51d4578110dc77f>{:target="_blank"}  
+<https://juejin.im/entry/57b17d107db2a200542da15b>{:target="_blank"}  
+<https://juejin.im/entry/5981c5df518825359a2b9476>{:target="_blank"}  
 
 ## 2020/7/6
 ### sessionStorage 和 localStorage
@@ -1383,7 +1383,7 @@ localStorage 和 sessionStorage 属性允许在浏览器中存储 key/value 对�
 localStorage 只支持 string 类型的存储
 ```JS
 //localStorage有三种写法
-if(！window.localStorage){
+if(!window.localStorage){
     alert("浏览器不支持localstorage");
     return false;
 }else{
@@ -1415,7 +1415,7 @@ if(！window.localStorage){
 
 在平时项目的开发环境中，经常会遇到跨域的问题，尤其是使用vue-cli这种脚手架工具开发时，由于项目本身启动本地服务是需要占用一个端口的，所以必然会产生跨域的问题  
 使用webpack做构建工具的项目中使用proxyTable代理实现跨域是一种比较方便的选择  
-使用的插件[http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware)  
+使用的插件[http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware){:target="_blank"}  
 *注：此方法仅限用于开发环境，不适合生产环境，生产环境可以用nginx进行代理*
 ```JS
 //根目录下config文件夹下的index.js文件
@@ -1441,11 +1441,11 @@ dev: {
 ```
 上面这段代码的效果就是将本地8080端口的一个请求代理到了 www.abc.com 这个域名下：
 
-`'http://localhost:8080/api' => 'http://www.baidu.com'`
+`'http://localhost:8080/api' => 'http://www.abc.com/api'`
 
 #### 参考链接
-https://www.cnblogs.com/wancheng7/p/8987694.html  
-https://juejin.im/post/5da13dc0e51d45780f060508
+<https://www.cnblogs.com/wancheng7/p/8987694.html>{:target="_blank"}  
+<https://juejin.im/post/5da13dc0e51d45780f060508>{:target="_blank"}
 
 ### nodejs的require和path.resolve()
 #### node require
@@ -1511,8 +1511,8 @@ console.log(path.resolve(__dirname,'./src'))
   可以便捷引用文件*/
 ```
 #### 参考链接
-https://www.jianshu.com/p/76966243f27f  
-https://blog.csdn.net/CarryBest/article/details/88813745
+<https://www.jianshu.com/p/76966243f27f>{:target="_blank"}  
+<https://blog.csdn.net/CarryBest/article/details/88813745>{:target="_blank"}
 
 ## 2020/7/8
 ### ajax、jquery ajax、 axios、 fetch 
@@ -1645,7 +1645,7 @@ fetch的优点：
 fetch中可以设置mode为"no-cors"（不跨域）。这样之后我们会得到一个type为“opaque”的返回。需要指出的是，这个请求是真正抵达过后台的，所以我们可以使用这种方法来进行信息上报
 
 #### 参考链接
-https://juejin.im/post/5d5e673ff265da03d2114646
+<https://juejin.im/post/5d5e673ff265da03d2114646>{:target="_blank"}
 
 ## 2020/7/9
 ### javaScript闭包
@@ -1712,8 +1712,8 @@ for (var i = 1; i <= 10; i++) {
 * 如果不是因为某些特殊任务而需要闭包，在没有必要的情况下，在其它函数中创建函数是不明智的，因为闭包对脚本性能具有负面影响，包括处理速度和内存消耗
 
 #### 参考链接
-https://juejin.im/post/5afb0ae56fb9a07aa2138425  
-https://juejin.im/entry/57b97480d342d3005acb5758
+<https://juejin.im/post/5afb0ae56fb9a07aa2138425>{:target="_blank"}  
+<https://juejin.im/entry/57b97480d342d3005acb5758>{:target="_blank"}
 
 ### 函数柯里化（curry）
 #### 柯里化
@@ -1753,9 +1753,9 @@ fn("a")("b", "c") // ["a", "b", "c"]
 (啊，这个好难懂，先放着吧，以后有时间再学习...)
 
 #### 参考链接
-https://juejin.im/post/598d0b7ff265da3e1727c491  
-https://juejin.im/entry/5884efee128fe1006c3b64d5  
-https://juejin.im/post/5b561426518825195f499772
+<https://juejin.im/post/598d0b7ff265da3e1727c491>{:target="_blank"}  
+<https://juejin.im/entry/5884efee128fe1006c3b64d5>{:target="_blank"}  
+<https://juejin.im/post/5b561426518825195f499772>{:target="_blank"}
 
 ## 2020/7/13
 ### vue修饰符
@@ -1768,7 +1768,7 @@ https://juejin.im/post/5b561426518825195f499772
 #### 事件修饰符
 
 * .stop: 阻止单击事件冒泡。由于事件冒泡的机制，我们给元素绑定点击事件的时候，也会触发父级的点击事件。
-```JS
+```HTML
 //只执行  fun2  函数
 <div @click="fun1()">
   <button @click.stop="fun2()">ok</button>
@@ -1781,7 +1781,7 @@ https://juejin.im/post/5b561426518825195f499772
 ```
 * .self: 只当事件是从事件绑定的元素本身触发时才触发回调
 级的点击事件。
-```JS
+```HTML
 //只有点击button以外的div部分才会触发 fun1 函数
 <div @click.self="fun1()">
   <button @click="fun2()">ok</button>
@@ -1789,7 +1789,7 @@ https://juejin.im/post/5b561426518825195f499772
 ```
 * .once: 绑定事件只能触发一次
 * .capture: 事件的冒泡，其实完整的事件机制是：捕获阶段--目标阶段--冒泡阶段。.capture使事件触发从包含这个元素的顶层开始往下触发。
-```JS
+```HTML
 //执行顺序为： fun1->fun2->fun4->fun3
 //不加capture执行顺序为：fun4->fun3->fun2->fun1
 <div @click.capture="fun1()">
@@ -1818,7 +1818,7 @@ https://juejin.im/post/5b561426518825195f499772
 略
 #### v-bind 修饰符
 
-* .sync: 父子组件数据双向绑定（简化代码）[官方说明](https://cn.vuejs.org/v2/guide/components-custom-events.html#sync-%E4%BF%AE%E9%A5%B0%E7%AC%A6) 
+* .sync: 父子组件数据双向绑定（简化代码）[官方说明](https://cn.vuejs.org/v2/guide/components-custom-events.html#sync-%E4%BF%AE%E9%A5%B0%E7%AC%A6){:target="_blank"} 
     - 子组件传递的事件名必须为update:value
     ```JS
     //父组件
@@ -1846,9 +1846,106 @@ https://juejin.im/post/5b561426518825195f499772
 * .prop
 * .camel: html不区分大小写,统一转换成小写，某些标签如svg只识别viewBox，无法识别 viewbox，使用.camel修饰符，能将其渲染为驼峰名。另外可以使用模板字符串来解决不区分大小写统一转换成小写的问题。
 
+#### 参考链接
+<https://segmentfault.com/a/1190000016786254>{:target="_blank"}
+
 ### vue data函数（为什么）
 Vue组件中 data 为什么是一个函数？  
 因为组件是用来复用的，且 JS 里对象是引用关系，如果组件中 data 是一个对象，那么这样作用域没有隔离，子组件中的 data 属性值会相互影响，如果组件中 data 选项是一个函数，那么每个实例可以维护一份被返回对象的独立的拷贝，组件实例之间的 data 属性值不会互相影响；而 new Vue 的实例，是不会被复用的，因此不存在引用对象的问题。
 
+## 2020/7/23
+### js中的attribute和property
+Attribute就是dom节点自带的属性，例如html中常用的id、class、title、align等  
+Property是这个DOM元素作为对象，其附加的内容，例如childNodes、firstChild等  
+**attributes是属于property的一个子集**  
+常用的Attribute，例如id、class、title等，已经被作为Property附加到DOM对象上，可以和Property一样取值和赋值。但是自定义的Attribute，不是property 
+
+* attribute取值、赋值：getAttribute()可以取得任何特性，不管是标准的还是自定义的。但是这个方法的浏览器兼容性有问题，有些浏览器可能会获取属性Property的值。因此jQuery要做一个测试，看getAttribute()是否是绝对获取特性Attribute的值
+```JS
+div1.className = 'a';
+var judge = div1.getAttribute("className") === 'a';
+```
+赋值：` div1.setAttribute('class', 'a')`; 取值：`var id = div1.getAttribute("id");`
+* property取值、赋值：取值：`var id = div1.id;` 赋值：`div1.className = 'a';`
+
+**对属性Property可以赋任何类型的值，而对特性Attribute只能赋值字符串**  
+**当更改Property或Attribute的其中一个的值时**  
+
+* property能够从attribute中得到同步；
+* attribute不会同步property上的值；
+* attribute和property之间的数据绑定是单向的，attribute->property；
+* 更改property和attribute上的任意值，都会将更新反映到HTML页面中
+
 #### 参考链接
-https://segmentfault.com/a/1190000016786254
+<https://www.cnblogs.com/lmjZone/p/8760232.html>{:target="_blank"}
+
+### CSS选择器
+
+* 元素选择器：又称为类型选择器（type selector），匹配文档语言元素类型的名称，如`p、h1、span`等
+* 选择器分组：用“,”连接，如`h1, h2, h3, h4, h5, h6 {color:blue;}`
+* 类选择器
+* ID选择器：ID 选择器仅使用一次
+* 属性选择器：如：`a[href][title] {color:red;}`。 可为 XML 文档使用属性选择器。可选择特定属性值的元素，如：`a[href="http://www.w3school.com.cn/about_us.asp"] {color: red;}`
+* 后代选择器： 如：`h1 em {color:red;}` 会匹配所有后代元素
+* 子元素选择器：如：`h1 > strong {color:red;}` 仅匹配子元素，孙子元素等后代元素不匹配
+* 相邻兄弟选择器：选择紧接在另一元素后的元素，且二者有相同父元素，如：`h1 + p {margin-top:50px;}`
+
+#### CSS伪类
+写法： `:` 如：
+```HTML
+a.red : visited {color: #FF0000}
+<a class="red" href="css_syntax.asp">CSS Syntax</a>
+```
+
+* :first-child 伪类:选择元素的第一个子元素,如`p:first-child {font-weight: bold;}`会匹配第一个出现的p元素
+* :lang 伪类：向带有指定 lang 属性的元素添加样式。如
+```HTML
+q:lang(no) {
+   quotes: "~" "~"
+}
+<p>文字<q lang="no">段落中的引用的文字</q>文字</p>
+//文字~段落中的引用的文字~文字
+```
+* :active 伪类：向被激活的元素添加样式。
+* :focus 伪类：向拥有键盘输入焦点的元素添加样式。
+* :hover 伪类：当鼠标悬浮在元素上方时，向元素添加样式。
+* :link 伪类：向未被访问的链接添加样式。
+* :visited 伪类：向已被访问的链接添加样式。
+
+#### CSS伪元素
+
+* :first-line 伪元素：用文本的首行(**第一行文本**)设置特殊样式
+```CSS
+p:first-line {
+    color:#ff0000;
+    font-variant:small-caps;
+}
+```
+* :first-letter 伪元素：向文本的首字母设置特殊样式
+```CSS
+p:first-letter {
+    color:#ff0000;
+    font-size:xx-large;
+}
+```
+"first-letter" 伪元素只能用于块级元素
+* CSS2-:before 伪元素：在元素的内容前面插入新内容  
+如：在每个 <h1> 元素前面插入一幅图片
+```CSS
+h1:before {
+    content:url(logo.gif);
+}
+```
+* CSS2 - :after 伪元素：在元素的内容之后插入新内容。使用通before
+
+伪元素可以与 CSS 类配合使用:  
+```CSS
+p.article:first-letter
+  {
+  color: #FF0000;
+  }
+<p class="article">This is a paragraph in an article。</p>
+```
+
+#### 参考链接
+<https://www.w3school.com.cn/css/css_selector_type.asp>{:target="_blank"}
