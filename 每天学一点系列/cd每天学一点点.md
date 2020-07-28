@@ -1,3 +1,6 @@
+>修改目录为左边框方法<https://blog.csdn.net/zjiang1994/article/details/52250363>{:target="_blank"}
+
+[TOC]
 ## 2020/6/1
 ### 前端路由
 为了构建 SPA（单页面应用），需要引入前端路由系统，这也就是 Vue-Router 存在的意义。前端路由的核心，就在于 —— 改变视图的同时不会向后端发出请求。  
@@ -30,6 +33,8 @@ hash模式有#，不好看；history模式无#，好看
 * GET请求只能进行url编码，而POST支持多种编码方式
 * GET产生的URL地址可以被Bookmark，而POST不可以  
 * GET请求会被浏览器主动cache，而POST不会，除非手动设置
+* 对参数的数据类型，GET只接受ASCII字符，而POST没有限制
+
 #### 参考链接
 <https://www.cnblogs.com/logsharing/p/8448446.html>{:target="_blank"}
 
@@ -92,7 +97,7 @@ JSON.parse：可实现深拷贝，缺点
 * 优点： 页面切换快：页面每次切换跳转时，不需要处理html文件的请求，节约了HTTP发送时延
 * 缺点： 
     - 首屏时间稍慢：首屏时需要请求一次html，同时还要发送一次js请求
-    - SEO差：搜索引擎只认识html里的内容，不认识js渲染生成的内容，搜索引擎不识别，也就不会给一个好排名
+    - SEO差：搜索引擎只认识html里的内容，不认识js渲染生成的内容，搜索引擎不识别，也就不会给一个好排名  
 使用vue：服务端渲染技术（SSR）可解决缺点
 
 #### MPA
@@ -119,7 +124,8 @@ Vue 实现流程：
 - vue中如何解析模板：
     + 第一步是将模板通过 parse 函数解析成 AST（抽象语法树）
     + 第二步优化AST（检测出不需要更改的DOM的纯静态子树）
-    + 第三步根据优化后的抽象语法树生成包含渲染函数字符串的对象
+    + 第三步根据优化后的抽象语法树生成包含渲染函数字符串的对象  
+    
 模板中的所有内容都包含在了 render 函数中
 
 #### 2、响应式开始监听：
@@ -138,7 +144,7 @@ Vue 实现流程：
 
 #### 参考链接
 <https://blog.csdn.net/weixin_33709364/article/details/88010302>{:target="_blank"}  
-https://blog.csdn.net/webFrontEndDev/article/details/102702402>{:target="_blank"}  
+<https://blog.csdn.net/webFrontEndDev/article/details/102702402>{:target="_blank"}  
 <https://juejin.im/post/5e7ae687f265da57424bb691#heading-11>{:target="_blank"}
 
 ## 2020/6/3
@@ -162,7 +168,7 @@ https://blog.csdn.net/webFrontEndDev/article/details/102702402>{:target="_blank"
 使用diff算法来比较旧VNode及新的VNode之间的差异然后执行Patch Operation或者叫 Patch函数来高效更新 Dom 节点  
 实现过程：  
 
- * patch（container，vnode）：核心逻辑createElment
+ * patch（container，vnode）：核心逻辑createElement
  * patch（vnode，newVnode）：核心逻辑updataChildren
  
 #### 参考链接  
@@ -182,7 +188,7 @@ Vuex和单纯的全局对象的不同：
 * state：使用 state来存储应用中需要共享的状态。为了能让 Vue 组件在 state更改后也随着更改，需要基于state创建计算属性（mapGetters，mapState）
 * getters
 * mutations（同步）：改变store中的状态
-* actions（异步）：异步地更改状态，action并不直接改变state，而是发起mutation
+* actions（异步）：异步地更改状态，action并不直接改变state，而是发起mutation(也需要通过mutation才能更改state)
 * Module: 模块化store。由于使用单一状态树，应用的所有状态会集中到一个比较大的对象。当应用变得非常复杂时，store对象就有可能变得相当臃肿。Vuex 允许我们将 store分割成模块（module）。每个模块拥有自己的 state、mutation、action、getter、甚至是嵌套子模块
 
 #### 工作流程
@@ -212,6 +218,7 @@ Vuex和单纯的全局对象的不同：
 }
 ```
 * 嵌套路由:`<router-view>`,需要在 VueRouter 的参数中使用 children 配置
+
 导航：
 
 * 声明式 `<router-link :to="...`
@@ -256,7 +263,7 @@ Vuex和单纯的全局对象的不同：
 
 2、vue-router实现路由懒加载（动态加载路由）  
 
-* 把不同路由对应的组件分割成不同的代码块，然后当路由被访问时才加载对应的组件即为路由的懒加载，可以加快项目的加载速度，提高效率  
+* 当打包构建应用时，JavaScript 包会变得非常大，影响页面加载。把不同路由对应的组件分割成不同的代码块，然后当路由被访问时才加载对应的组件即为路由的懒加载，可以加快项目的加载速度，提高效率  
 
 3、active-class 是哪个组件的属性？  
 
@@ -431,7 +438,7 @@ Vue.directive('noMoreClick', {
 
 ## 2020/6/11
 ### 原型、原型链
-JavaScript没有"子类"和"父类"的概念，也没有"类"（class）和"实例"（instance）的区分，全靠一种很奇特的"原型链"（prototype chain）模式，来实现继承
+JavaScript没有"子类"和"父类"的概念，也没有"类"（class）和"实例"（instance）的区分，全靠一种很奇特的"原型链"（prototype chain）模式，来实现继承  
 **在Javascript语言中，new命令后面跟的不是类，而是构造函数**
 ```JS
 function DOG(name){
@@ -442,7 +449,7 @@ alert(dogA.name); // 大毛
 ```
 DOG的构造函数，表示狗对象的原型,对这个构造函数使用new，就会生成一个狗对象的实例
 #### new运算符的缺点
-**用构造函数生成实例对象，那就是无法共享属性和方法**
+**用构造函数生成实例对象，无法共享属性和方法**  
 每一个实例对象，都有自己的属性和方法的副本。这不仅无法做到数据共享，也是极大的资源浪费
 #### protoType属性
 protoType属性包含一个对象（以下简称"prototype对象"），所有实例对象需要共享的属性和方法，都放在这个对象里面；那些不需要共享的属性和方法，就放在构造函数里面  
@@ -547,12 +554,12 @@ clear:both可以清除浮动
 
 ## 2020/6/23
 ### inline-block和float
-* **inline-block**： inline-block的元素就是宽高可设置，相邻的元素会在一行显示，直到本行排满，也就是让元素的容器属性为block，内容为inline
+* **inline-block**： inline-block的元素就是宽高可设置，相邻的元素会在一行显示，直到本行排满，也就是让元素的容器属性为block，内容为inline.不会脱离文档流
 * **float**： 设置元素的浮动为左或者右浮动，当设置元素浮动时，相邻元素会根据自身大小，排满一行，如果父容器宽度不够则会换行。当我们设置了元素的浮动时，这个元素就脱离了文档流，相邻元素会呈环绕装排列
 
 #### 区别
 * inline-block: 水平排列一行，即使元素高度不一，也会以高度最大的元素高度为行高，即使高度小的元素周围留空，也不回有第二行元素上浮补位。可以设置默认的垂直对齐基线
-* 让元素脱离当前文档流，呈环绕装排列，如遇上行有空白，而当前元素大小可以挤进去，这个元素会在上行补位排列。默认是顶部对齐
+* float：让元素脱离当前文档流，呈环绕装排列，如遇上行有空白，而当前元素大小可以挤进去，这个元素会在上行补位排列。默认是顶部对齐
 
 当我们要设置某些元素在一行显示，并且排列方向一致的情况下，我们尽可能去用inline-block。因为inline-block的元素仍然在当前文档流里面，这样就减少了程序对DOM的更改操作，因为DOM的每一次更改，浏览器会重绘DOM树。理论上会增加性能消耗。这样也不用像flaot那样麻烦，需要清除flaot  
 #### 参考链接
@@ -584,6 +591,7 @@ clear:both可以清除浮动
     + 请求返回时将此 Session 的唯一标识信息 SessionID 返回给浏览器
     + 浏览器接收到服务器返回的 SessionID 信息后，会将此信息存入到 Cookie 中，同时 Cookie 记录此 SessionID 属于哪个域名
     + 当用户第二次访问服务器的时候，请求会自动判断此域名下是否存在 Cookie 信息，如果存在自动将 Cookie 信息也发送给服务端，服务端会从 Cookie 中获取 SessionID，再根据 SessionID 查找对应的 Session 信息，如果没有找到说明用户没有登录或者登录失效，如果找到 Session 证明用户已经登录可执行后面操作
+
 **SessionID 是连接 Cookie 和 Session 的一道桥梁，大部分系统也是根据此原理来验证用户登录状态**
 
 #### cookie与session的区别
@@ -624,7 +632,7 @@ token 的认证方式类似于临时的证书签名, 并且是一种服务端无
 **token可以抵抗CSRF（跨站请求伪造）攻击，cookie+session不行，因为请求中发送的是token而不是cookie，cookie只用来存储token而不用于认证**
 
 #### 分布式情况下的session和token
-session时有状态的，一般存于服务器内存或硬盘中，当服务器采用分布式或集群时，session就会面对负载均衡问题  
+session是有状态的，一般存于服务器内存或硬盘中，当服务器采用分布式或集群时，session就会面对负载均衡问题  
 
 * 负载均衡多服务器的情况，不好确认当前用户是否登录，因为多服务器不共享session。这个问题也可以将session存在一个服务器中来解决，但是就不能完全达到负载均衡的效果。
 
@@ -637,17 +645,22 @@ session时有状态的，一般存于服务器内存或硬盘中，当服务器�
 * 是一种认证授权机制。JWT 是为了在网络应用环境间传递声明而执行的一种基于 JSON 的开放标准（RFC 7519）。
 * JWT 的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源。比如用在用户登录上。
 * 可以使用HMAC算法或者是RSA的公/私秘钥对JWT进行签名。因为数字签名的存在，这些传递的信息是可信的。
-* 具体可参考 <http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html  
+* 具体可参考 <http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html>{:target="_blank"}  
 **JWT组成**
 * Header（头部）：一个JSON对象，描述JWT的元数据，（使用 Base64URL算法将JSON对象转成字符串）
 * Payload（负载）：一个JSON对象，用来存放实际需要传递的数据，**JWT 默认是不加密的，任何人都可以读到，所以不要把秘密信息放在这个部分**（这个 JSON 对象也要使用 Base64URL 算法转成字符串）
 * Signature（签名）：是对前两部分的签名，防止数据篡改
-用.分隔，即Header.Payload.Signature
+
+用`.`分隔，即Header.Payload.Signature  
 **JWT使用方式**  
 客户端收到服务器返回的 JWT，可以储存在 Cookie 里面，也可以储存在 localStorage。此后，客户端每次与服务器通信，都要带上这个 JWT。
+
 * 可以把它放在 Cookie 里面自动发送，但是这样不能跨域，所以更好的做法是放在 HTTP 请求的头信息Authorization字段里面`Authorization: Bearer <token>`
 * 跨域的时候，JWT就放在POST请求的数据体里面
 * 通过 URL 传输 如`http://www.example.com/user?token=xxx`
+
+**token与JWT的区别**  
+服务端验证客户端发来的token信息要进行数据的查询操作(服务端查询数据库存储的token信息)；JWT验证客户端发来的token信息就不用，在服务端使用密钥校验就可以，不用数据库的查询。
 
 #### 总结
 * session存储于服务器，可以理解为一个状态列表，拥有一个唯一识别符号sessionId，通常存放于cookie中。服务器收到cookie后解析出sessionId，再去session列表中查找，才能找到相应session。依赖cookie
@@ -663,7 +676,8 @@ session时有状态的，一般存于服务器内存或硬盘中，当服务器�
 ## 2020/6/28
 ### 前端跨域
 #### 浏览器同源策略
-**所谓同源是指：域名、协议、端口相同**
+**所谓同源是指：域名、协议、端口相同**  
+
 * DOM同源策略：禁止对不同源页面 DOM 进行操作。这里主要场景是 iframe 跨域的情况，不同域名的iframe是限制互相访问的。（如果没有限制，用户可以操作内嵌iframe的DOM节点，可以获取用户账号密码等信息）
 * XMLHttpRequest同源策略：禁止使用XHR对象向不同源的服务器地址发起HTTP请求（如果没有限制，可以进行CSRF（跨站请求伪造）攻击：在访问正常页面时点击了恶意页面，通过执行页面中的恶意AJAX请求代码，此时请求附带了合法的cookie，后台会验证正确返回正确response，造成数据泄露）
 
@@ -679,12 +693,15 @@ http://70.32.92.74/b.js` 是跨域的
 ##### CORS（跨域资源共享）
 CORS（Cross-origin resource sharing，跨域资源共享）是一个W3C标准，定义了在必须访问跨域资源时，浏览器与服务器应该如何沟通。CORS背后的基本思想，就是使用自定义的HTTP头部让浏览器与服务器进行沟通，从而决定请求或响应是应该成功，还是应该失败  
 CORS需要浏览器和服务器同时支持。目前，所有浏览器都支持该功能，IE浏览器不能低于IE10  
-整个 CORS 通信过程，都是浏览器自动完成，不需要用户参与。浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求
-实现 CORS 通信的关键是服务器。只要服务器实现了 CORS 接口，就可以跨源通信  
+整个 CORS 通信过程，都是浏览器自动完成，不需要用户参与。浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求  
+**实现 CORS 通信的关键是服务器。只要服务器实现了 CORS 接口，就可以跨源通信**  
 CORS请求分类：**简单请求**和 **非简单请求**  
 
->请求方法是以下三种方法之一：HEAD、POST、GET  
->HTTP头部信息不超出以下几种字段：Accept、Accept-Language、Content-Language、Last-Event-ID、Content-Type：只限于三个值 application/x-www-form-urlencoded、multipart/form-data、text/plain  
+```
+1、请求方法是以下三种方法之一：HEAD、POST、GET  
+2、HTTP头部信息不超出以下几种字段：Accept、Accept-Language、Content-Language、Last-Event-ID、
+Content-Type：只限于三个值 application/x-www-form-urlencoded、multipart/form-data、text/plain 
+``` 
 
 同时满足上述两个条件即为简单请求，否则为非简单请求。浏览器对这两种请求的处理是不一样的
 
@@ -805,7 +822,7 @@ img.src = 'http://www.laixiangran.cn/test?name=laixiangran';
 浏览器有跨域限制，但是服务器不存在跨域问题，所以可以由服务器请求所有域的资源再返回给客户端。服务器代理是万能的
 ##### document.domain 跨域
 对于主域名相同，而子域名不同的情况，可以使用document.domain来跨域。这种方式非常适用于 iframe跨域的情况.  
-如：`http://www.laixiangran.cn/a.html 和 http://laixiangran.cn/b.html document.domain都设成laixiangran.cn即可通过js访问到iframe页面的各种属性和对象`
+如：`http://www.laixiangran.cn/a.html 和 http://laixiangran.cn/b.html document.domain都设成laixiangran.cn即可通过js访问到iframe页面的各种属性和对象`  
 document.domain的设置是有限制的，只能把document.domain设置成自身或更高一级的父域，且主域必须相同
 ##### document.name 跨域
 window对象有个name属性，该属性有个特征：即在一个窗口（window）的生命周期内，窗口载入的所有的页面（不管是相同域的页面还是不同域的页面）都是共享一个window.name的，每个页面对 window.name 都有读写的权限。window.name是持久存在一个窗口载入过的所有页面中的，并不会因新页面的载入而进行重置。  
@@ -857,7 +874,7 @@ b页面
 **注意点**  
 
 * 需要等到iframe中的子页面加载完成后才发送消息，否则子页面接收不到消息
-* 在监听message事件时需要判断一下消息来源origin，避免接收到非法域名的消息导致的xss攻击
+* 在监听message事件时需要判断一下消息来源origin，避免接收到非法域名的消息导致的xss攻击（2020/7/27 复习存疑，这里应该是CSRF攻击吧）
 
 #### 参考链接
 <https://juejin.im/post/5ba1d4fe6fb9a05ce873d4ad>{:target="_blank"}  
@@ -891,13 +908,13 @@ Expires和Cache-Control
   两种方案：Last-Modified和Etag  
 
 * Last-Modified
-  + Last-Modified:服务器在响应请求时，会告诉浏览器资源的最后修改时间
-  + if-Modified-Since:浏览器再次请求服务器的时候，请求头会包含此字段，后面跟着在缓存中获得的最后修改时间。服务端收到此请求头发现有if-Modified-Since，则与被请求资源的最后修改时间进行对比，如果一致则返回304和响应报文头，浏览器只需要从缓存中获取信息即可
-    - 被修改：传输响应一个整体，服务器返回：200 OK
-    - 没有被修改：只传输响应header，服务器返回：304 Not Modified
-  + if-Unmodified-Since:从某个时间点算起, 是否文件没有被修改
-    - 没有被修改:则开始`继续'传送文件: 服务器返回: 200 OK
-    - 被修改:则不传输,服务器返回: 412 Precondition failed (预处理错误)  
+    + Last-Modified:服务器在响应请求时，会告诉浏览器资源的最后修改时间
+    + if-Modified-Since:浏览器再次请求服务器的时候，请求头会包含此字段，后面跟着在缓存中获得的最后修改时间。服务端收到此请求头发现有if-Modified-Since，则与被请求资源的最后修改时间进行对比，如果一致则返回304和响应报文头，浏览器只需要从缓存中获取信息即可
+        + 被修改：传输响应一个整体，服务器返回：200 OK
+        + 没有被修改：只传输响应header，服务器返回：304 Not Modified
+    + if-Unmodified-Since:从某个时间点算起, 是否文件没有被修改
+        + 没有被修改:则开始`继续'传送文件: 服务器返回: 200 OK
+        + 被修改:则不传输,服务器返回: 412 Precondition failed (预处理错误)  
 
 如果在服务器上，一个资源被修改了，但其实际内容根本没发生改变，会因为Last-Modified时间匹配不上而返回了整个实体给客户端（即使客户端缓存里有个一模一样的资源）。为了解决这个问题，HTTP1.1推出了Etag
 
@@ -905,8 +922,7 @@ Expires和Cache-Control
     + Etag： 服务器响应请求时，通过此字段告诉浏览器当前资源在服务器生成的唯一标识（生成规则由服务器决定）
     + If-None-Match： 再次请求服务器时，浏览器的请求报文头部会包含此字段，后面的值为在缓存中获取的标识。服务器接收到次报文后发现If-None-Match则与被请求资源的唯一标识进行对比
         - 不同，说明资源被改动过，则响应整个资源内容，返回状态码200
-        - 相同，说明资源无心修改，则响应header，浏览器直接从缓存中获取数据信息。返回状态码304.  
-
+        - 相同，说明资源无修改，则响应header，浏览器直接从缓存中获取数据信息。返回状态码304.  
 
 但是实际应用中由于Etag的计算是使用算法来得出的，而算法会占用服务端计算的资源，所有服务端的资源都是宝贵的，所以就很少使用Etag了
 
@@ -991,8 +1007,9 @@ function handle() {
 window.addEventListener('scroll', throttle(handle, 1000));
 ```
 
+>注：防抖和节流可结合异步队列。有人有时候会疑惑为什么要把timer定在那个位置，原因要说清楚，因为闭包，可以让所有每一次触发的事件处理函数跟上一次的事件处理函数做到一个类似于人类交流之间的通信，因为有了这个共享的工具，这一次的事件处理函数就可以根据这个共享的工具去知道它的上一次是不是已经有处理逻辑被放到异步队列里头等待执行了。这就是timer的通俗解释，而为什么里头要判断一次timer是否为空，那是因为，这一次的事件处理函数如果不判断它的上一次有没有已经被放到异步队列当中了的话，直接执行下面的延时操作，结果是又有一个同样的处理逻辑被放入异步队列当中，因此触发的时候就要去根据timer判断任务队列中它有没有任务已经在里头等待了，有我们就clear它，让它滚蛋，因为我们要的结果是最后只能执行一次处理逻辑。 
+
 ```JS
-/*注：防抖和节流可结合异步队列。有人有时候会疑惑为什么要把timer定在那个位置，原因要说清楚，因为闭包，可以让所有每一次触发的事件处理函数跟上一次的事件处理函数做到一个类似于人类交流之间的通信，因为有了这个共享的工具，这一次的事件处理函数就可以根据这个共享的工具去知道它的上一次是不是已经有处理逻辑被放到异步队列里头等待执行了。这就是timer的通俗解释，而为什么里头要判断一次timer是否为空，那是因为，这一次的事件处理函数如果不判断它的上一次有没有已经被放到异步队列当中了的话，直接执行下面的延时操作，结果是又有一个同样的处理逻辑被放入异步队列当中，因此触发的时候就要去根据timer判断任务队列中它有没有任务已经在里头等待了，有我们就clear它，让它滚蛋，因为我们要的结果是最后只能执行一次处理逻辑。 */
 //为帮助理解，可执行下列代码，闭包概念见下文  闭包  相关
 function fn2(){
     var a = 1;
@@ -1007,6 +1024,14 @@ for(let i = 0; i < 5; i ++){
     fn1();
 }
 console.log("3:" + a) //a is not defined
+//输出
+//1:1
+//2:2
+//2:3
+//2:4
+//2:5
+//2:6
+//Uncaught ReferenceError: a is not defined
 ```
 #### 参考链接
 <https://juejin.im/entry/5b1d2d54f265da6e2545bfa4>{:target="_blank"} 
@@ -1014,7 +1039,7 @@ console.log("3:" + a) //a is not defined
 ## 2020/7/1
 ### 输入URL之后的过程
 1. 浏览器中输入网址
-2. 域名解析（DNS），找到IP服务器
+2. 域名解析（DNS），找到服务器IP地址
 3. 发起TCP连接，HTTP三次握手
 4. 发送请求（Request）
 5. 服务器处理请求并返回HTTP报文
@@ -1179,6 +1204,10 @@ MSL（Maximum Segment Lifetime），TCP允许不同的实现可以设置不同�
 建立连接的时候， 服务器在LISTEN状态下，收到建立连接请求的SYN报文后，把ACK和SYN放在一个报文里发送给客户端。  
 而关闭连接时，服务器收到对方的FIN报文时，仅仅表示对方不再发送数据了但是还能接收数据，而自己也未必全部数据都发送给对方了，所以己方可以立即关闭，也可以发送一些数据给对方后，再发送FIN报文给对方来表示同意现在关闭连接，因此，己方ACK和FIN一般都会分开发送，从而导致多了一次。
 
+**3. 为什么会采用三次握手，而不是两次或四次？**  
+(假设主机A为客户端，主机B为服务器端。)采用两次握手不行。采用三次握手是为了防止失效的连接请求报文段突然又传送到主机B，因而产生错误。失效的连接请求报文段是指：主机A发出的连接请求没有收到主机B的确认，于是经过一段时间后，主机A又重新向主机B发送连接请求，且建立成功，顺序完成数据传输。考虑这样一种特殊情况，主机A第一次发送的连接请求并没有丢失，而是因为网络节点导致延迟达到主机B，主机B以为是主机A又发起的新连接，于是主机B同意连接，并向主机A发回确认，但是此时主机A根本不会理会，主机B就一直在等待主机A发送数据，导致主机B的资源浪费。  
+通信不可能100%可靠，而上面的三次握手已经做好了通信的准备工作，再增加握手，并不能显著提高可靠性，而且也没有必要。
+
 #### 参考链接
 <https://juejin.im/entry/5af412eb6fb9a07aa631cc18>{:target="_blank"}
 
@@ -1251,7 +1280,7 @@ HTTPS协议的主要功能基本都依赖于TLS/SSL协议，TLS/SSL的功能实�
 ![](./image/TLS&SSL.png)
 
 * 散列函数Hash:常见的有 MD5、SHA1、SHA256，该类函数特点是函数单向不可逆、对输入非常敏感、输出长度固定，针对数据的任何修改都会改变散列函数的结果，用于防止信息篡改并验证数据的完整性。在信息传输过程中，散列函数不能单独实现信息防篡改，因为明文传输，中间人可以修改信息之后重新计算信息摘要，因此需要对传输的信息以及信息摘要进行加密。  
-  - 信息摘要：将公钥和信息用一个 Hash 算法生成的
+    - 信息摘要：将公钥和信息用一个 Hash 算法生成的
 * 对称加密:常见的有AES-CBC、DES、3DES、AES-GCM等，相同的密钥可以用于信息的加密和解密，掌握密钥才能获取信息，能够防止信息窃听，通信方式是 **1对1**。  
     - 优点：运算速度快
     - 缺点：密钥容易被获取
@@ -1264,7 +1293,7 @@ HTTPS协议的主要功能基本都依赖于TLS/SSL协议，TLS/SSL的功能实�
 SSL握手过程：  
 
 1. 客户端和服务端建立 SSL 握手，客户端通过 CA 证书来确认服务端的身份；  
-2. 互相传递三个随机数，之后通过这随机数来生成一个密钥；  
+2. 互相传递三个随机数，之后通过这三个随机数来生成一个密钥；  
 3. 互相确认密钥，然后握手结束；  
 4. 数据通讯开始，都使用同一个对话密钥来加解密；  
 
@@ -1674,7 +1703,7 @@ fn3();
 ```
 fn3就是fn2函数本身。执行fn3能正常输出name，这不就是fn2能记住并访问它所在的词法作用域，而且fn2函数的运行还是在当前词法作用域之外了  
 正常来说，当fn1函数执行完毕之后，其作用域是会被销毁的，然后垃圾回收器会释放那段内存空间。而闭包却很神奇的将fn1的作用域存活了下来，fn2依然持有该作用域的引用，这个引用就是闭包。  
-（*闭包应用可参考上文 **防抖与节流** 处*）  
+（_闭包应用可参考上文  **防抖与节流** 处_）  
 典型闭包实例：
 ```JS
 for (var i = 1; i <= 10; i++) {
@@ -1705,6 +1734,7 @@ for (var i = 1; i <= 10; i++) {
     })(i);
 }
 ```
+
 **自执行函数或是自调用函数** :声明完了，马上进行调用，只能使用一次  
 闭包的缺点：
 
@@ -1841,6 +1871,13 @@ fn("a")("b", "c") // ["a", "b", "c"]
     }
     </template>
     ```
+    或
+```HTML
+//父组件
+<comp :myMessage.sync="bar"></comp> 
+//子组件
+this.$emit('update:myMessage',params);
+```
     - 带有 .sync 修饰符的 v-bind 不能和表达式一起使用,`v-bind:title.sync=”doc.title + ‘!’”`无效
     -  v-bind.sync不能用于字面表达式 ，`v-bind.sync=”{ title: doc.title }”` 无效
 * .prop
@@ -1893,7 +1930,7 @@ var judge = div1.getAttribute("className") === 'a';
 #### CSS伪类
 写法： `:` 如：
 ```HTML
-a.red : visited {color: #FF0000}
+a.red:visited {color: #FF0000}
 <a class="red" href="css_syntax.asp">CSS Syntax</a>
 ```
 
@@ -1930,13 +1967,13 @@ p:first-letter {
 ```
 "first-letter" 伪元素只能用于块级元素
 * CSS2-:before 伪元素：在元素的内容前面插入新内容  
-如：在每个 <h1> 元素前面插入一幅图片
+如：在每个 `<h1>` 元素前面插入一幅图片
 ```CSS
 h1:before {
     content:url(logo.gif);
 }
 ```
-* CSS2 - :after 伪元素：在元素的内容之后插入新内容。使用通before
+* CSS2 - :after 伪元素：在元素的内容之后插入新内容。使用同before
 
 伪元素可以与 CSS 类配合使用:  
 ```CSS
@@ -1949,3 +1986,48 @@ p.article:first-letter
 
 #### 参考链接
 <https://www.w3school.com.cn/css/css_selector_type.asp>{:target="_blank"}
+
+## 2020/7/27
+### es6 Symbol
+ES5中包含5种原始类型：字符串、数字、布尔值、null和undefined。ES6引入了第6种原始类型——Symbol  
+ES5的对象属性名都是字符串，很容易造成属性名冲突。比如，使用了一个他人提供的对象，想为这个对象添加新的方法，新方法的名字就有可能与现有方法产生冲突。如果有一种机制，保证每个属性的名字都是独一无二的，这样就从根本上 **防止了对象属性名冲突**。 这就是ES6引入Symbol的原因  
+*注：Symbol函数前不能使用new命令，否则会报错。因为生成的 Symbol 是一个原始类型的值，不是对象*
+```JS
+let firstName = Symbol("first name");
+let person = {};
+person[firstName] = "huochai";
+console.log("first name" in person); // false
+console.log(person[firstName]); // "huochai"
+console.log(firstName); // "Symbol(first name)"
+```
+*注：Symbol 值作为对象属性名时，不能用点运算符*
+
+#### 共享Symbol
+ES6提供了一个可以随时访问的全局Symbol注册表：Symbol.for()
+```JS
+let uid = Symbol.for("uid");
+let object = {
+    [uid]: "12345"
+};
+console.log(object[uid]); // "12345"
+console.log(uid); // "Symbol(uid)"
+let uid2 = Symbol.for("uid");
+console.log(uid === uid2); // true
+console.log(object[uid2]); // "12345"
+console.log(uid2); // "Symbol(uid)
+
+console.log(Symbol.keyFor(uid)); // "uid"
+console.log(Symbol.keyFor(uid2)); // "uid"
+let uid3 = Symbol("uid");
+console.log(Symbol.keyFor(uid3)); // undefined
+```
+Symbol.for()方法首先在全局Symbol注册表中搜索键为"uid"的Symbol是否存在。如果存在，直接返回已有的Symbol，否则，创建一个新的Symbol，并使用这个键在Symbol全局注册表中注册，随即返回新创建的Symbol  
+可以使用Symbol.keyFor()方法在Symbol全局注册表中检索与Symbol有关的键
+
+#### 属性检索
+Symbol作为属性名，该属性不会出现在for...in、for...of循环中，也不会被Object.getOwnPropertyNames()、Object.keys()、JSON.stringify()返回。于是，在ES6中添加了一个Object.getOwnpropertySymbols()方法来检索对象中的Symbol属性  
+Reflect.ownKeys()方法可以返回所有类型的键名，包括常规键名和 Symbol 键名  
+由于以 Symbol 值作为名称的属性，不会被常规方法遍历得到。可以利用这个特性，为对象定义一些非私有的、但又希望只用于内部的方法
+
+#### 参考链接
+<https://www.cnblogs.com/xiaohuochai/p/7245510.html>{:target="_blank"}
