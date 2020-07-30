@@ -2031,3 +2031,219 @@ Reflect.ownKeys()方法可以返回所有类型的键名，包括常规键名和
 
 #### 参考链接
 <https://www.cnblogs.com/xiaohuochai/p/7245510.html>{:target="_blank"}
+
+## 2020/7/29
+### vue数据双向绑定：Object.defineProperty和Proxy
+**虽然Vue运用了数据劫持，但是依然离不开发布订阅的模式**  
+Object.defineProperty：es5 、 vue2.0 在用  
+Proxy： vue3.0, es6新特性  
+>严格来讲Proxy应该被称为『代理』而非『劫持』
+
+实现一个完整的双向绑定需要以下几个要点: 
+
+1. 利用Proxy或Object.defineProperty生成的Observer（监听者）针对对象/对象的属性进行"劫持",在属性发生变化后通知订阅者
+2. Compile(解析器)解析模板中的Directive(指令)， 收集指令所依赖的方法和数据, 等待数据变化然后进行渲染
+3. Watcher（订阅者）属于Observer和Compile桥梁,它将接收到的Observer产生的数据变化,并根据 Compile提供的指令进行视图渲染,使得数据变化促使视图变化
+
+#### Object.defineProperty实现双向绑定
+>Object.defineProperty()方法会直接在对象上定义一个新属性，或者修改一个对象的现有属性，并返回这个对象
+
+Object.defineProperty的作用就是劫持一个对象的属性,通常对属性的getter和setter方法进行劫持,在对象的属性发生变化时进行特定的操作  
+发布订阅模式实现双向绑定：
+
+1. 先实现一个订阅发布中心，即消息管理员（Dep）,它负责储存订阅者和消息的分发,不管是订阅者还是发布者都需要依赖于它
+2. 实现监听者(Observer),用于监听属性值的变化
+3. 实现一个订阅者(Watcher)
+
+简陋版实现双向绑定（升级版还看不懂，是我太菜。。。）
+```HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>对象的数据双向绑定</title>
+</head>
+<body>
+  <input id='input' type="" name="" value="">
+  <script>
+    let el = document.getElementById('input') // 1. 获取输入框的dom节点
+    let obj = { // 2. 创建一个对象
+      name: ""
+    }
+    function oberseve(obj) { // 3. 对对象进行观察
+      if (typeof obj !== 'object') return // 3.1 判断参数是否为对象
+      for (let key in obj) { // 3.2 对对象进行遍历，目的是为了把每个属性都设置get/set
+        defineReactive(obj, key, obj[key])
+        oberseve(obj[key]) // 3.3 obj[key] 有可能还是一个函数，需要递归，给obj[key]里的属性进行设置get/set
+      }
+    }
+    function defineReactive(target, property, value) { 
+    // 4. 使用Object.defineProperty
+      Object.defineProperty(target, property, {
+        get() {
+          el.value = value // 4.1 当读取时，把值赋值给input框
+          return value
+        },
+        set(newVal) {
+          el.value = newVal // 4.1 当设置时，把赋值给input框
+          value = newVal
+        }
+      })
+    }
+    oberseve(obj) // 5.执行该函数，对obj对象里的属性进行设置get/set
+    el.addEventListener('input', function () { // 6.给输入框绑定input事件
+      obj.name = this.value // 7.当输入框输入内容时，我们会把输入框的
+                            //   内容赋值给obj.name，触发obj.name的set方法
+    })
+  </script>
+</body>
+</html>
+```
+缺点：
+
+* 无法监听数组变化。（数组下标直接赋值的方式无法监听变化）
+* 只能劫持对象的属性：必须遍历对象的每个属性；必须深层遍历嵌套的对象
+
+#### Proxy实现双向绑定
+Proxy可以直接监听对象而非属性;可以直接监听数组的变化
+```HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>对象的数据双向绑定</title>
+</head>
+<body>
+  <input id='input' type="" name="" value="">
+  <script>
+    const input = document.getElementById('input');
+    const p = document.getElementById('p');
+    const obj = {};
+
+    const newObj = new Proxy(obj, {
+      get: function(target, key, receiver) {
+        console.log(`getting ${key}!`);
+        return Reflect.get(target, key, receiver);
+      },
+      set: function(target, key, value, receiver) {
+        console.log(target, key, value, receiver);
+        if (key === 'text') {
+          input.value = value;
+          p.innerHTML = value;
+        }
+        return Reflect.set(target, key, value, receiver);
+      },
+    });
+
+    input.addEventListener('keyup', function(e) {
+      newObj.text = e.target.value;
+    });
+  </script>
+</body>
+</html>
+```
+作为构造函数，Proxy接受两个参数。第一个参数是所要代理的目标对象，；第二个参数是一个配置对象，对于每一个被代理的操作，需要提供一个对应的处理函数，该函数将拦截对应的操作  
+要使得Proxy起作用，必须针对Proxy实例进行操作，而不是针对目标对象进行操作  
+如果handler没有设置任何拦截，那就等同于直接通向原对象  
+
+##### reflect
+Reflect对象的设计目的:
+
+* 将Object对象的一些明显属于语言内部的方法（比如Object.defineProperty），放到Reflect对象上
+* 修改某些Object方法的返回结果，让其变得更合理
+* 让Object操作都变成函数行为
+* Reflect对象的方法与Proxy对象的方法一一对应，只要是Proxy对象的方法，就能在Reflect对象上找到对应的方法。这就让Proxy对象可以方便地调用对应的Reflect方法，完成默认行为，作为修改行为的基础。也就是说，不管Proxy怎么修改默认行为，你总可以在Reflect上获取默认行为
+
+#### Proxy 与 Object.defineProperty 比较
+
+* Proxy有多达13种拦截方法,不限于apply、ownKeys、deleteProperty、has等等是Object.defineProperty不具备的
+* Proxy返回的是一个新对象,我们可以只操作新的对象达到目的,而Object.defineProperty只能遍历对象属性直接修改
+* Proxy的劣势就是兼容性问题，因此Vue的作者才声明需要等到3.0版本才能用Proxy重写
+
+#### 参考链接
+<https://blog.csdn.net/weixin_38641550/article/details/107484643>{:target="_blank"}  
+<https://juejin.im/post/5acd0c8a6fb9a028da7cdfaf>{:target="_blank"}  
+<http://caibaojian.com/es6/proxy.html>{:target="_blank"}
+
+## 2020/7/30
+### 浏览器的兼容性问题
+
+1.  ie9 以下浏览器对 html5 新增标签不识别。  
+解决：html5shiv.js
+```HTML
+<!--[if lt IE 9]>
+  <script type="text/javascript" src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<![endif]-->
+```
+2.  IE9 以下浏览器不能使用 opacity（透明度） 
+```CSS
+div
+{
+background-color:red;
+opacity:0.5;
+filter:Alpha(opacity=50); /* IE8 以及更早的浏览器 */
+}
+```
+3.  不同浏览器的标签默认的外补丁和内补丁不同（margin 和padding差异较大）  
+解决：CSS文件开头`*{margin:0;padding:0;}`  使用通配符*来设置各个标签的内外补丁是0
+4.  字体大小定义不同。对字体大小small定义不同，Firefox为13px，而IE为16px，差别比较大  
+解决：使用指定的字体大小如14px或者使用em
+5.  
+
+#### 参考链接
+<https://juejin.im/post/59a3f2fe6fb9a0249471cbb4>{:target="_blank"}
+
+### css hack
+不同浏览器对CSS的解析和认识不完全一样，因此会导致生成的页面效果不一样。需要针对不同的浏览器，去写不同CSS，让它能够同时兼容不同的浏览器，能在不同的浏览器中，也能得到想要的页面效果  
+CSS Hack的目的，就是使CSS代码兼容不同的浏览器。当然，也可以反过来利用CSS Hack为不同版本的浏览器定制编写不同的CSS效果  
+CSS Hack 大致有3种表现形式  
+
+* 属性前缀法（CSS类内部 Hack）
+    - 比如IE6能识别下划线"_"和星号"*" ，IE7能识别星号"*"，但不能识别下划线,IE6-IE10都认识"\9",而Firefox这三个都不能认识。
+    - 对于书写顺序的关系，一般是将识别能力强的浏览器的CSS写在后边
+```CSS
+div{  
+    background:green;/*forfirefox*/  
+    *background:red;/*forIE6 IE7*/  
+}  
+```
+* 选择器前缀法（选择器 Hack）
+    - IE6能识别*html .class{} , IE7能识别 +html .class{}或:first-child+html .class{},IE9能识别：root .class{}
+```CSS
+<!-- 针对ie9的hack -->
+:root .test
+{
+    background-color:green;
+}
+```
+* IE条件注释法（HTML 头部引用 Hack), 针对所有IE（注：IE10+已经不再支持条件注释）
+    - HTML头部引用就比较特殊了，类似于程序语句，只能使用在HTML文件里，而不能在CSS文件中使用，并且 **只有在IE浏览器下才能执行**，在其他浏览器下面会被当做注释视而不见  
+示例代码默认先调用css.css样式表
+```HTML
+<link rel="stylesheet" type="text/css" href="css.css" />
+<!–[if IE 7]>
+<!– 如果IE浏览器版是7,调用ie7.css样式表 –>
+<link rel="stylesheet" type="text/css" href="ie7.css" />
+<![endif]–>
+<!–[if lte IE 6]>
+<!– 如果IE浏览器版本小于等于6,调用ie.css样式表 –>
+<link rel="stylesheet" type="text/css" href="ie.css" />
+<![endif]–>
+```
+注：
+lte：就是Less than or equal to的简写，也就是小于或等于的意思。
+lt ：就是Less than的简写，也就是小于的意思。
+gte：就是Greater than or equal to的简写，也就是大于或等于的意思。
+gt ：就是Greater than的简写，也就是大于的意思。
+! ：就是不等于的意思，跟javascript里的不等于判断符相同。
+
+下图显示各浏览器hack写法：  
+属性值后面添加“!important”的写法只有IE6不能识别
+![](./image/hack.png)
+
+#### 参考链接
+<https://www.jianshu.com/p/aeae0c575fe0>{:target="_blank"}
