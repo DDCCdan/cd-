@@ -2203,7 +2203,7 @@ CSS Hack的目的，就是使CSS代码兼容不同的浏览器。当然，也可
 CSS Hack 大致有3种表现形式  
 
 * 属性前缀法（CSS类内部 Hack）
-    - 比如IE6能识别下划线"_"和星号"*" ，IE7能识别星号"*"，但不能识别下划线,IE6-IE10都认识"\9",而Firefox这三个都不能认识。
+    - 比如IE6能识别下划线"_"和星号"*" ，IE7能识别星号"*"，但不能识别下划线,IE6-IE10都认识"\9"（`color:red\9`）,而Firefox这三个都不能认识。
     - 对于书写顺序的关系，一般是将识别能力强的浏览器的CSS写在后边
 ```CSS
 div{  
@@ -2247,3 +2247,82 @@ gt ：就是Greater than的简写，也就是大于的意思。
 
 #### 参考链接
 <https://www.jianshu.com/p/aeae0c575fe0>{:target="_blank"}
+
+## 2020/7/31
+### HTML5
+<!doctype> 声明必须位于 HTML5 文档中的第一行(*通过<!doctype>标签，浏览器能够了解文档正在使用的HTML规范*)  
+完全支持 CSS3
+#### 新特性
+
+* 用于绘画的 canvas 元素
+```JS
+var c=document.getElementById("myCanvas");//找到 <canvas> 元素:
+var ctx=c.getContext("2d");//创建 context 对象
+```
+getContext("2d") 对象是内建的 HTML5 对象，拥有多种绘制路径、矩形、圆形、字符以及添加图像的方法。
+* 用于媒介回放的 video 和 audio 元素
+    - video
+```HTML
+<video width="320" height="240" controls>
+  <source src="movie.mp4" type="video/mp4">
+  <source src="movie.ogg" type="video/ogg">
+您的浏览器不支持Video标签。
+</video>
+```
+    - audio
+```HTML
+<!-- control 属性供添加播放、暂停和音量控件 -->
+<audio controls>
+<!-- 使用第一个支持的source -->
+  <source src="horse.ogg" type="audio/ogg">
+  <source src="horse.mp3" type="audio/mpeg">
+您的浏览器不支持 audio 元素。
+</audio>
+```
+* 对本地离线存储的更好的支持
+* 新的特殊内容元素，比如 article、footer、header、nav、section
+    - 新语义元素： ` <section>, <article>, <nav>, <header>, <footer>, <aside> 和 <hgroup>`  来创建更好的页面结构
+
+    |  标签   | 描述  |
+    |  ----  | ----  |
+    | `<article>`  | 定义页面独立的内容区域。 |
+    | `<aside>`  | 定义页面的侧边栏内容 |
+    | `<details>`  | 用于描述文档或文档某个部分的细节 |
+    | `<footer>`  | 定义 section 或 document 的页脚  |
+    | `<header>`  | 定义了文档的头部区域  |
+    | `<nav>`  | 定义导航链接的部分  |
+    | `<section>`  | 定义文档中的节（section、区段)  |
+    | `<wbr>`  | 规定在文本中的何处适合添加换行符  |
+
+    - 已移除元素：`<font>,<frame>,<center>`
+    - 新表单元素：
+
+    |  标签   | 描述  |
+    |  ----  | ----  |
+    | `<datalist>`  | 定义选项列表。与 input 元素配合使用该元素，来定义 input 可能的值 |
+    | `<output>`  | 定义不同类型的输出，比如脚本的输出 |
+
+```HTML
+//detalist 使用实例
+<input list="browsers" name="browser">
+<datalist id="browsers">
+  <option value="Internet Explorer">
+  <option value="Firefox">
+  <option value="Chrome">
+  <option value="Opera">
+  <option value="Safari">
+</datalist>
+
+//output使用实例
+<input type="range" id="a" value="50">100
++<input type="number" id="b" value="50">
+=<output name="x" for="a b"></output>
+```
+
+* 新的表单控件，比如 calendar、date、time、email、url、search
+
+#### 元素变动
+
+#### 参考链接
+<https://www.w3cschool.cn/html5/html5-new-element.html>{:target="_blank"}  
+<https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/HTML5>{:target="_blank"}
