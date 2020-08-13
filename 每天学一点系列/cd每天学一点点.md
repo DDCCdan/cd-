@@ -113,6 +113,11 @@ JSON.parse：可实现深拷贝，缺点
 <https://www.jianshu.com/p/a02eb15d2d70>{:target="_blank"}
 ### vue三要素
 模板引擎、响应式、渲染  
+
+* 响应式：vue如何监听到data中每个属性的变化？
+* 模板引擎：vue的模板如何被解析，指令如何处理？
+* 渲染：vue的模板如何被渲染成html，以及渲染过程？
+
 Vue 实现流程：  
 
 #### 1、把模板解析为 render 函数：  
@@ -136,11 +141,13 @@ Vue 实现流程：
 - 将data的属性代理到vm上
 
 #### 3、首次渲染，显示页面且绑定依赖
+虚拟dom中的patch函数(第一种用法) patch(el, vnode)  
+
 #### 4、data属性变化，触发render
 - 修改属性，被响应式的set监听到
 - set中执行 updataComponent （ 异步 ）
 - updataComponent重新执行 vm.render()
-- 生成的vnode和prev Vnode，通过patch进行比较渲染到html 中
+- 生成的vnode和prev Vnode，**通过patch进行比较渲染到html 中**（虚拟dom中的patch函数(第二种用法) patch(preVnode, newVnode)）
 
 #### 参考链接
 <https://blog.csdn.net/weixin_33709364/article/details/88010302>{:target="_blank"}  
@@ -2326,3 +2333,52 @@ getContext("2d") 对象是内建的 HTML5 对象，拥有多种绘制路径、�
 #### 参考链接
 <https://www.w3cschool.cn/html5/html5-new-element.html>{:target="_blank"}  
 <https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/HTML5>{:target="_blank"}
+
+## 2020/8/3
+### Babel转码器
+ECMAScript 6(ES6)的发展速度非常之快，但现代浏览器对ES6新特性支持度不高，所以要想在浏览器中直接使用ES6的新特性就得借助别的工具来实现  
+Babel是一个广泛使用的ES6转码器，可以将ES6代码转为ES5代码，从而在现有环境执行
+```JS
+// 转码前
+input.map(item => item + 1);
+
+// 转码后
+input.map(function (item) {
+  return item + 1;
+});
+```
+上面的原始代码用了箭头函数，这个特性还没有得到广泛支持，Babel将其转为普通函数，就能在现有的JavaScript环境执行了
+
+#### babel-polyfill
+Babel默认只转换新的JavaScript句法（syntax），而不转换新的API，比如Iterator、Generator、Set、Maps、Proxy、Reflect、Symbol、Promise等全局对象，以及一些定义在全局对象上的方法（比如Object.assign）都不会转码。  
+举例来说，ES6在Array对象上新增了Array.from方法。Babel就不会转码这个方法。如果想让这个方法运行，必须使用babel-polyfill，为当前环境提供一个垫片
+
+## 2020/8/12
+### JS事件的浏览器兼容处理
+
+* event事件问题
+```JS
+document.onclick=function(e){//兼容写法；
+    var e = e || window.event;
+    //火狐只支持传值方法，不支持window.event
+    //ie9以上两者兼容，ie9以下只支持window.event
+}
+```
+* 监听事件
+```JS
+function addEvent(obj,type,fn){//添加事件监听，三个参数分别为 对象、事件类型、事件处理函数，默认为false
+    if (obj.addEventListener) {
+      obj.addEventListener(type,fn,false);//非IE
+    } else{
+      obj.attachEvent('on'+type,fn);//ie,这里已经加上on，传参的时候注意不要重复加了
+    };
+}
+function removeEvent(obj,type,fn){//删除事件监听
+    if (obj.removeEventListener) {
+      obj.removeEventListener(type,fn,false);//非IE
+    } else{
+      obj.detachEvent('on'+type,fn);//ie，这里已经加上on，传参的时候注意不要重复加了
+    };
+}
+```
+* 
