@@ -2381,4 +2381,25 @@ function removeEvent(obj,type,fn){//删除事件监听
     };
 }
 ```
-* 
+* 阻止默认事件
+```JS
+document.onclick=function(e){
+    var e=e||window.event;
+    if (e.preventDefault) {
+      e.preventDefault();//W3C标准
+    }else{
+      e.returnValue='false';//IE..
+    }
+}
+```
+* 鼠标滚轮滚动事件
+```JS
+//火狐中的滚轮事件
+document.addEventListener("DOMMouseScroll",function(event){
+    alert(event.detail);//若前滚的话为 -3，后滚的话为 3
+},false)
+//非火狐中的滚轮事件
+document.onmousewheel=function(event){
+    alert(event.detail);//前滚：120，后滚：-120
+}
+```
