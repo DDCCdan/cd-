@@ -98,6 +98,7 @@ JSON.parse：可实现深拷贝，缺点
 * 缺点： 
     - 首屏时间稍慢：首屏时需要请求一次html，同时还要发送一次js请求
     - SEO差：搜索引擎只认识html里的内容，不认识js渲染生成的内容，搜索引擎不识别，也就不会给一个好排名  
+
 使用vue：服务端渲染技术（SSR）可解决缺点
 
 #### MPA
@@ -459,7 +460,7 @@ DOG的构造函数，表示狗对象的原型,对这个构造函数使用new，�
 **用构造函数生成实例对象，无法共享属性和方法**  
 每一个实例对象，都有自己的属性和方法的副本。这不仅无法做到数据共享，也是极大的资源浪费
 #### protoType属性
-protoType属性包含一个对象（以下简称"prototype对象"），所有实例对象需要共享的属性和方法，都放在这个对象里面；那些不需要共享的属性和方法，就放在构造函数里面  
+（构造函数的）protoType属性包含一个对象（以下简称"prototype对象"），所有实例对象需要共享的属性和方法，都放在这个对象里面；那些不需要共享的属性和方法，就放在构造函数里面  
 实例对象一旦创建，将自动引用prototype对象的属性和方法。也就是说，实例对象的属性和方法，分成两种，一种是本地的，另一种是引用的  
 由于所有的实例对象共享同一个prototype对象，那么从外界看起来，prototype对象就好像是实例对象的原型，而实例对象则好像"继承"了prototype对象一样
 #### 原型链
@@ -1878,7 +1879,7 @@ fn("a")("b", "c") // ["a", "b", "c"]
     }
     </template>
     ```
-    或
+    或(简化上面代码)
 ```HTML
 //父组件
 <comp :myMessage.sync="bar"></comp> 
@@ -2403,3 +2404,19 @@ document.onmousewheel=function(event){
     alert(event.detail);//前滚：120，后滚：-120
 }
 ```
+
+## 2021/1/129
+### 后台返回 image/jpeg（content-type: image/gif）类型数据，怎么展示图片
+
++ 请求加上配置 （必须）
+```responseType: 'arraybuffer',```
++ 得到的后台数据resData转base64
+```HTML
+ var base64 = btoa( new Uint8Array(resData) .reduce((data, byte) => data + String.fromCharCode(byte), ''));
+ this.ImgSrc='data:image/png;base64,' + base64 ;
+```
++ 小程序中，需要用小程序的方法转：  
+```HTML
+var base64 = wx.arrayBufferToBase64(resData);
+this.ImgSrc = 'data:image/png;base64,' + base64 
+ ```
