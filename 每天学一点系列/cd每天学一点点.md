@@ -2419,4 +2419,7 @@ document.onmousewheel=function(event){
 ```HTML
 var base64 = wx.arrayBufferToBase64(resData);
 this.ImgSrc = 'data:image/png;base64,' + base64 
- ```
+```
+
+#### 参考链接
+<https://blog.csdn.net/github_38928905/article/details/107554306>{:target="_blank"}  
