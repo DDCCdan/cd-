@@ -2277,6 +2277,7 @@ getContext("2d") 对象是内建的 HTML5 对象，拥有多种绘制路径、�
 您的浏览器不支持Video标签。
 </video>
 ```
+    
     - audio
 ```HTML
 <!-- control 属性供添加播放、暂停和音量控件 -->
@@ -2405,7 +2406,7 @@ document.onmousewheel=function(event){
 }
 ```
 
-## 2021/1/129
+## 2021/1/29
 ### 后台返回 image/jpeg（content-type: image/gif）类型数据，怎么展示图片
 
 + 请求加上配置 （必须）
@@ -2423,3 +2424,174 @@ this.ImgSrc = 'data:image/png;base64,' + base64
 
 #### 参考链接
 <https://blog.csdn.net/github_38928905/article/details/107554306>{:target="_blank"}  
+
+## 2021/2/4  
+### call,applay,bind  
+#### call & applay  
+当函数通过Function对象的原型中继承的方法 call() 和 apply() 方法调用时， 其函数内部的this值可绑定到 call() & apply() 方法指定的第一个对象上， 如果第一个参数不是对象，JavaScript内部会尝试将其转换成对象然后指向它  
+事实上apply 和 call 的用法几乎相同, 唯一的差别在于：当函数需要传递多个变量时, apply 可以接受一个数组作为参数输入, call 则是接受一系列的单独变量
+```JS
+function add(c, d){
+  return this.a + this.b + c + d;
+}
+
+var o = {a:1, b:3};
+add.call(o, 5, 7); // 1 + 3 + 5 + 7 = 16
+add.apply(o, [10, 20]); // 1 + 3 + 10 + 20 = 34
+
+function tt() {
+  console.log(this);
+}
+// 返回对象见下图（图1）
+tt.call(5);  // Number {[[PrimitiveValue]]: 5} 
+tt.call('asd'); // String {0: "a", 1: "s", 2: "d", length: 3, [[PrimitiveValue]]: "asd"}
+```
+#### bind  
+和call很相似，第一个参数是this的指向，从第二个参数开始是接收的参数列表。区别在于bind方法返回值是函数以及bind接收的参数列表的使用  
+有时候可用bind实现函数珂里化（？）
+```JS
+var obj = {
+    name: 'Dot'
+}
+
+function printName() {
+    console.log(this.name)
+}
+
+var dot = printName.bind(obj)
+console.log(dot) // function () { … }
+dot()  // Dot
+```
+
+```JS
+//参数的使用
+function fn(a, b, c) {
+    console.log(a, b, c);
+}
+var fn1 = fn.bind(null, 'Dot');
+
+fn('A', 'B', 'C');            // A B C
+fn1('A', 'B', 'C');           // Dot A B
+fn1('B', 'C');                // Dot B C
+fn.call(null, 'Dot');      // Dot undefined undefined
+```
+
+#### 参考链接
+<https://www.jianshu.com/p/bc541afad6ee>{:target="_blank"}  
+<https://www.cnblogs.com/dongcanliang/p/7054176.html>{:target="_blank"}  
+
+
+## 2021/2/23  
+### flex布局
+#### flex布局是什么
+Flex 是 Flexible Box 的缩写，意为"弹性布局"，用来为盒状模型提供最大的灵活性。  
+设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效。  
+
+#### 容器属性
+
+* flex-direction：决定主轴的方向（即项目的排列方向：横轴/纵轴排列）  
+    + row（默认值）：主轴为水平方向，起点在左端。
+    + row-reverse：主轴为水平方向，起点在右端。
+    + column：主轴为垂直方向，起点在上沿。
+    + column-reverse：主轴为垂直方向，起点在下沿。
+* flex-wrap：属性定义，如果一条轴线排不下，如何换行
+    + nowrap | wrap | wrap-reverse： 不换行|换行（第一行在上面）|换行（第一行在下面）;
+* flex-flow：是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap
+* justify-content：定义了项目在主轴上的对齐方式
+    + flex-start（默认值）：左对齐
+    + flex-end：右对齐
+    + center： 居中
+    + space-between：两端对齐，项目之间的间隔都相等。
+    + space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍
+* align-items： 定义项目在交叉轴上如何对齐
+    + flex-start：交叉轴的起点对齐。
+    + flex-end：交叉轴的终点对齐。
+    + center：交叉轴的中点对齐。
+    + baseline: 项目的第一行文字的基线对齐。
+    + stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。
+* align-content：多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用
+    + flex-start：与交叉轴的起点对齐。
+    + flex-end：与交叉轴的终点对齐。
+    + center：与交叉轴的中点对齐。
+    + space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。
+    + space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。
+    + stretch（默认值）：轴线占满整个交叉轴
+
+#### 项目属性
+
+* order：定义项目的排列顺序。数值越小，排列越靠前，默认为0  
+* flex-grow：定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大
+* flex-shrink：定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小
+* flex-basis：定义了在分配多余空间之前，项目占据的主轴空间
+* flex：是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。
+* align-self：允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。
+
+#### 参考链接
+<http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html>{:target="_blank"}  
+
+### BFC(块级格式化上下文)
+BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。包括浮动，和外边距合并等等.  
+display 属性为 block, list-item, table 的元素，会产生BFC  
+给这些元素添加如下属性就可以触发BFC。
+
+* float属性不为none
+* position为absolute或fixed
+* display为inline-block, table-cell, table-caption, flex, inline-flex
+* overflow不为visible。
+
+#### BFC布局规则特性
+* 在BFC中，盒子从顶端开始垂直地一个接一个地排列
+* 盒子垂直方向的距离由margin决定。属于同一个BFC的两个相邻盒子的margin会发生重叠
+* 在BFC中，每一个盒子的左外边缘（margin-left）会触碰到容器的左边缘(border-left)（对于从右到左的格式来说，则触碰到右边缘）
+
+#### BFC的主要用途
+1. 清除元素内部浮动:只要把父元素设为BFC就可以清理子元素的浮动了，最常见的用法就是在父元素上设置overflow: hidden样式，对于IE6加上zoom:1就可以了
+2. 解决外边距合并问题
+
+
+#### 参考链接
+<https://www.jianshu.com/p/498145565e4f>{:target="_blank"}  
+
+### 前端鉴权
+#### 常见的几种鉴权方式：
+##### HTTP Basic Authentication
+是HTTP中最为简单的认证方式，因为简单，所以不是很安全。  
+这种授权方式是浏览器遵守http协议实现的基本授权方式,HTTP协议进行通信的过程中，HTTP协议定义了基本认证认证允许HTTP服务器对客户端进行用户身份证的方法。  
+当一个客户端向一个需要认证的HTTP服务器进行数据请求时，如果之前没有认证过，HTTP服务器会返回401状态码，要求客户端输入用户名和密码，用户输入用户名和密码后，用户名和密码会经过BASE64加密附加到请求信息中再次请求HTTP服务器，HTTP服务器会根据请求头携带的认证信息，决定是否认证成功及做出相应的响应。
+
+##### session-cookie
+(这种方式在老的系统较为常见，只适用于web系统，以前用 java servlet 写服务端时候，都会自动维护session，会在cookie写一个JSESSIONID的值)  
+这种方式是利用服务器端的session（会话）和浏览器端的cookie来实现前后端的认证，即session和cookie配合使用，由于http请求时是无状态的，服务器正常情况下是不知道当前请求之前有没有来过，这个时候我们如果要记录状态，就需要在服务器端创建一个会话，将同一个客户端的请求都维护在各自的会话中，每当请求到达服务器端的时候，先检查改客户端有没有在服务端创建session,如果有则已经认证成功了，否则就认证失败
+
+##### Token 验证
+(具体可见上文  **cookie、session、token（令牌）** )  
+Token验证的特点：  
+
+* 无状态，可扩展
+* 支持多设备
+* 跨程序调用
+* 安全
+
+##### OAuth(开放授权)
+是一个开放标准，允许用户授权第三方网站访问他们存储在另外的服务提供者上的信息，而不需要将用户名和密码提供给第三方网站或分享他们数据的所有内容，为了保护用户数据的安全和隐私，第三方网站访问用户数据前都需要显式的向用户征求授权。我们常见的提供OAuth认证服务的厂商有支付宝，QQ,微信
+
+#### vue项目前端鉴权方式常用的有以下三种：  
+1. 渲染菜单时控制模块按钮的显示隐藏（不足：直接输入链接仍然可以访问模块）
+2. 在路由导航守卫中拦截，针对没有权限的模块进行重定向（不足：每次访问模块都需要鉴定权限，模块数量过多时会影响系统性能）
+3. 借助vue-router 2.x版本新加的API addRouters动态添加路由信息（不足：首次加载需要解析和添加，多跳转一次路由）
+4. 优化的方案：addRoutes动态添加，首屏加载时间可能会多出0.5s左右，加载一次之后后续就不需要再进行处理，可以提升系统的可靠性与稳定性  
+
+    - 定义固定路由，用于路由初始化，如：登录页、404页面等
+    - 路由导航守卫前置拦截。为了方便，将路由权限信息保存到vuex中，在路由跳转时，判断state中是否存在menu信息，如果不存在，则向后端请求权限信息，此部分需要阻塞页面的跳转，改为同步执行
+    - 注意事项：
+    
+        * 由于路由时动态添加的，存储在内存中，页面刷新之后内存中变量也会消失，动态添加的路由也会随之消失，所以每次刷新页面需要重新走一遍添加路由的流程。
+        * 由于路由是动态添加的，在路由跳转时，添加的路由并没有生效，所以还需要多跳转一次页面
+
+#### 按钮鉴权
+可以通过自定义指令，动态传入条件参数来实现按钮的显示隐藏
+
+#### 参考链接
+<https://blog.csdn.net/ywl570717586/article/details/88241445>{:target="_blank"}  
+<https://juejin.cn/post/6844903688994029582>{:target="_blank"}  
+<https://www.cnblogs.com/gerry2019/p/11045555.html>{:target="_blank"}  
