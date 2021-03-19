@@ -118,23 +118,28 @@ body .markdown-body
   padding: 0;
 }
 
-.markdown-body .codehilitetable {
+.markdown-body .codehilitetable,
+.markdown-body .highlighttable {
   border: 0;
   border-spacing: 0;
 }
 
-.markdown-body .codehilitetable tr {
+.markdown-body .codehilitetable tr,
+.markdown-body .highlighttable {
   border: 0;
 }
 
 .markdown-body .codehilitetable pre,
-.markdown-body .codehilitetable div.codehilite {
+.markdown-body .codehilitetable div.codehilite,
+.markdown-body .highlighttable pre,
+.markdown-body .highlighttable div.highlight {
   margin: 0;
 }
 
 .markdown-body .linenos,
 .markdown-body .code,
-.markdown-body .codehilitetable td {
+.markdown-body .codehilitetable td,
+.markdown-body .highlighttable td {
   border: 0;
   padding: 0;
 }
@@ -517,11 +522,13 @@ body .markdown-body
   border: 0;
 }
 
-.markdown-body .codehilite {
+.markdown-body .codehilite,
+.markdown-body .highlight {
   margin-bottom: 16px;
 }
 
 .markdown-body .codehilite pre,
+.markdown-body .highlight pre,
 .markdown-body pre {
   padding: 16px;
   overflow: auto;
@@ -531,7 +538,8 @@ body .markdown-body
   border-radius: 3px;
 }
 
-.markdown-body .codehilite pre {
+.markdown-body .codehilite pre,
+.markdown-body .highlight pre {
   margin-bottom: 0;
   word-break: normal;
 }
@@ -993,68 +1001,68 @@ body .markdown-body
   }
 }
 </style><style>/*GitHub*/
-.codehilite {background-color:#fff;color:#333333;}
-.codehilite .hll {background-color:#ffffcc;}
-.codehilite .c{color:#999988;font-style:italic}
-.codehilite .err{color:#a61717;background-color:#e3d2d2}
-.codehilite .k{font-weight:bold}
-.codehilite .o{font-weight:bold}
-.codehilite .cm{color:#999988;font-style:italic}
-.codehilite .cp{color:#999999;font-weight:bold}
-.codehilite .c1{color:#999988;font-style:italic}
-.codehilite .cs{color:#999999;font-weight:bold;font-style:italic}
-.codehilite .gd{color:#000000;background-color:#ffdddd}
-.codehilite .ge{font-style:italic}
-.codehilite .gr{color:#aa0000}
-.codehilite .gh{color:#999999}
-.codehilite .gi{color:#000000;background-color:#ddffdd}
-.codehilite .go{color:#888888}
-.codehilite .gp{color:#555555}
-.codehilite .gs{font-weight:bold}
-.codehilite .gu{color:#800080;font-weight:bold}
-.codehilite .gt{color:#aa0000}
-.codehilite .kc{font-weight:bold}
-.codehilite .kd{font-weight:bold}
-.codehilite .kn{font-weight:bold}
-.codehilite .kp{font-weight:bold}
-.codehilite .kr{font-weight:bold}
-.codehilite .kt{color:#445588;font-weight:bold}
-.codehilite .m{color:#009999}
-.codehilite .s{color:#dd1144}
-.codehilite .n{color:#333333}
-.codehilite .na{color:teal}
-.codehilite .nb{color:#0086b3}
-.codehilite .nc{color:#445588;font-weight:bold}
-.codehilite .no{color:teal}
-.codehilite .ni{color:purple}
-.codehilite .ne{color:#990000;font-weight:bold}
-.codehilite .nf{color:#990000;font-weight:bold}
-.codehilite .nn{color:#555555}
-.codehilite .nt{color:navy}
-.codehilite .nv{color:teal}
-.codehilite .ow{font-weight:bold}
-.codehilite .w{color:#bbbbbb}
-.codehilite .mf{color:#009999}
-.codehilite .mh{color:#009999}
-.codehilite .mi{color:#009999}
-.codehilite .mo{color:#009999}
-.codehilite .sb{color:#dd1144}
-.codehilite .sc{color:#dd1144}
-.codehilite .sd{color:#dd1144}
-.codehilite .s2{color:#dd1144}
-.codehilite .se{color:#dd1144}
-.codehilite .sh{color:#dd1144}
-.codehilite .si{color:#dd1144}
-.codehilite .sx{color:#dd1144}
-.codehilite .sr{color:#009926}
-.codehilite .s1{color:#dd1144}
-.codehilite .ss{color:#990073}
-.codehilite .bp{color:#999999}
-.codehilite .vc{color:teal}
-.codehilite .vg{color:teal}
-.codehilite .vi{color:teal}
-.codehilite .il{color:#009999}
-.codehilite .gc{color:#999;background-color:#EAF2F5}
+.highlight {background-color:#fff;color:#333333;}
+.highlight .hll {background-color:#ffffcc;}
+.highlight .c{color:#999988;font-style:italic}
+.highlight .err{color:#a61717;background-color:#e3d2d2}
+.highlight .k{font-weight:bold}
+.highlight .o{font-weight:bold}
+.highlight .cm{color:#999988;font-style:italic}
+.highlight .cp{color:#999999;font-weight:bold}
+.highlight .c1{color:#999988;font-style:italic}
+.highlight .cs{color:#999999;font-weight:bold;font-style:italic}
+.highlight .gd{color:#000000;background-color:#ffdddd}
+.highlight .ge{font-style:italic}
+.highlight .gr{color:#aa0000}
+.highlight .gh{color:#999999}
+.highlight .gi{color:#000000;background-color:#ddffdd}
+.highlight .go{color:#888888}
+.highlight .gp{color:#555555}
+.highlight .gs{font-weight:bold}
+.highlight .gu{color:#800080;font-weight:bold}
+.highlight .gt{color:#aa0000}
+.highlight .kc{font-weight:bold}
+.highlight .kd{font-weight:bold}
+.highlight .kn{font-weight:bold}
+.highlight .kp{font-weight:bold}
+.highlight .kr{font-weight:bold}
+.highlight .kt{color:#445588;font-weight:bold}
+.highlight .m{color:#009999}
+.highlight .s{color:#dd1144}
+.highlight .n{color:#333333}
+.highlight .na{color:teal}
+.highlight .nb{color:#0086b3}
+.highlight .nc{color:#445588;font-weight:bold}
+.highlight .no{color:teal}
+.highlight .ni{color:purple}
+.highlight .ne{color:#990000;font-weight:bold}
+.highlight .nf{color:#990000;font-weight:bold}
+.highlight .nn{color:#555555}
+.highlight .nt{color:navy}
+.highlight .nv{color:teal}
+.highlight .ow{font-weight:bold}
+.highlight .w{color:#bbbbbb}
+.highlight .mf{color:#009999}
+.highlight .mh{color:#009999}
+.highlight .mi{color:#009999}
+.highlight .mo{color:#009999}
+.highlight .sb{color:#dd1144}
+.highlight .sc{color:#dd1144}
+.highlight .sd{color:#dd1144}
+.highlight .s2{color:#dd1144}
+.highlight .se{color:#dd1144}
+.highlight .sh{color:#dd1144}
+.highlight .si{color:#dd1144}
+.highlight .sx{color:#dd1144}
+.highlight .sr{color:#009926}
+.highlight .s1{color:#dd1144}
+.highlight .ss{color:#990073}
+.highlight .bp{color:#999999}
+.highlight .vc{color:teal}
+.highlight .vg{color:teal}
+.highlight .vi{color:teal}
+.highlight .il{color:#009999}
+.highlight .gc{color:#999;background-color:#EAF2F5}
 </style><title>cd每天学一点点</title></head><body><article class="markdown-body"><blockquote>
 <p>修改目录为左边框方法<a href="https://blog.csdn.net/zjiang1994/article/details/52250363" target="_blank">https://blog.csdn.net/zjiang1994/article/details/52250363</a></p>
 </blockquote>
@@ -1415,8 +1423,110 @@ body .markdown-body
 <li><a href="#js">JS事件的浏览器兼容处理</a></li>
 </ul>
 </li>
-<li><a href="#20211129">2021/1/129</a><ul>
-<li><a href="#imagejpegcontent-type-imagegif">后台返回 image/jpeg（content-type: image/gif）类型数据，怎么展示图片</a></li>
+<li><a href="#2021129">2021/1/29</a><ul>
+<li><a href="#imagejpegcontent-type-imagegif">后台返回 image/jpeg（content-type: image/gif）类型数据，怎么展示图片</a><ul>
+<li><a href="#_94">参考链接</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#202124">2021/2/4</a><ul>
+<li><a href="#callapplaybind">call,applay,bind</a><ul>
+<li><a href="#call-applay">call &amp; applay</a></li>
+<li><a href="#bind">bind</a></li>
+<li><a href="#_95">参考链接</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2021223">2021/2/23</a><ul>
+<li><a href="#flex">flex布局</a><ul>
+<li><a href="#flex_1">flex布局是什么</a></li>
+<li><a href="#_96">容器属性</a></li>
+<li><a href="#_97">项目属性</a></li>
+<li><a href="#_98">参考链接</a></li>
+</ul>
+</li>
+<li><a href="#bfc">BFC(块级格式化上下文)</a><ul>
+<li><a href="#bfc_1">BFC布局规则特性</a></li>
+<li><a href="#bfc_2">BFC的主要用途</a></li>
+<li><a href="#_99">参考链接</a></li>
+</ul>
+</li>
+<li><a href="#_100">前端鉴权</a><ul>
+<li><a href="#_101">常见的几种鉴权方式：</a><ul>
+<li><a href="#http-basic-authentication">HTTP Basic Authentication</a></li>
+<li><a href="#session-cookie">session-cookie</a></li>
+<li><a href="#token_1">Token 验证</a></li>
+<li><a href="#oauth">OAuth(开放授权)</a></li>
+</ul>
+</li>
+<li><a href="#vue_4">vue项目前端鉴权方式常用的有以下三种：</a></li>
+<li><a href="#_102">按钮鉴权</a></li>
+<li><a href="#_103">参考链接</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2021224">2021/2/24</a><ul>
+<li><a href="#domcontentloaded-load">DOMContentLoaded 与 load事件</a><ul>
+<li><a href="#domcontentloaded">DOMContentLoaded</a></li>
+<li><a href="#load">load</a></li>
+<li><a href="#cssjs">为什么一再强调将css放在头部，将js文件放在尾部？</a></li>
+<li><a href="#_104">参考链接</a></li>
+</ul>
+</li>
+<li><a href="#vuevue-lazyload">vue图片懒加载（vue-lazyload）</a><ul>
+<li><a href="#_105">可优化内容</a></li>
+<li><a href="#_106">参考链接</a></li>
+</ul>
+</li>
+<li><a href="#vue3">vue项目实现路由按需加载(路由懒加载)的3种方式</a><ul>
+<li><a href="#_107">异步加载</a></li>
+<li><a href="#import">路由懒加载(使用import)</a></li>
+<li><a href="#webpackrequireensure">webpack提供的require.ensure()</a></li>
+<li><a href="#_108">参考链接</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2021225">2021/2/25</a><ul>
+<li><a href="#event-loop">event loop(事件循环)</a><ul>
+<li><a href="#_109">执行栈与事件队列</a></li>
+<li><a href="#micro-taskmacro-task">微任务（micro task）和宏任务（macro task）</a></li>
+<li><a href="#node-event-loop">Node与浏览器的 Event Loop 差异</a></li>
+<li><a href="#_110">参考链接</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2021311">2021/3/11(中联重科)</a><ul>
+<li><a href="#promise">promise</a></li>
+<li><a href="#keep-alive">keep-alive</a><ul>
+<li><a href="#props">Props</a></li>
+<li><a href="#activateddeactivated">钩子函数（activated，deactivated）</a></li>
+</ul>
+</li>
+<li><a href="#ononceoffemit">$on,$once,$off,$emit</a><ul>
+<li><a href="#onoffemit">$on,$off,$emit</a></li>
+<li><a href="#once">$once</a></li>
+</ul>
+</li>
+<li><a href="#vue2vue3">vue2,vue3的区别</a></li>
+</ul>
+</li>
+<li><a href="#2020316">2020/3/16</a><ul>
+<li><a href="#js_1">js数据类型判断</a><ul>
+<li><a href="#typeof">typeof</a></li>
+<li><a href="#instanceof">instanceof</a></li>
+<li><a href="#objectprototypetostringcall">Object.prototype.toString.call()</a></li>
+<li><a href="#_111">参考链接</a></li>
+</ul>
+</li>
+<li><a href="#_112">日常问题（长期更新）</a><ul>
+<li><a href="#_113">常见</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1651,7 +1761,7 @@ Vuex和单纯的全局对象的不同：  </p>
 <h4 id="_20">路由分类<a class="headerlink" href="#_20" title="Permanent link"></a></h4>
 <ul>
 <li>动态路由:使用 path 属性过程中，使用动态路径参数，以冒号开头,如：<br />
-<div class="codehilite"><pre><span class="p">{</span>
+<div class="highlight"><pre><span class="p">{</span>
     <span class="nx">path</span><span class="o">:</span> <span class="sr">/user/</span><span class="o">:</span><span class="nx">id</span>     <span class="c1">//id为1，路径为 /user/1  </span>
     <span class="nx">component</span><span class="o">:</span> <span class="nx">User</span>  
 <span class="p">}</span>
@@ -1727,7 +1837,7 @@ Vuex和单纯的全局对象的不同：  </p>
 两种解决方案都不够完美：如果拆分成两个组件，你就不得不冒着一旦功能变动就要在两个文件中更新代码的风险，这违背了DRY原则（Don’t Repeat Yourself）。反之，太多的props传值会很快变得混乱不堪，从而迫使维护者在使用组件的时候必须理解一大段的上下文，拖慢写码速度。<br />
 Mixin允许你封装一块在应用的其他组件中都可以使用的<strong>函数</strong>。如果使用姿势得当，他们不会改变函数作用域外部的任何东西，因此哪怕执行多次，只要是同样的输入你总是能得到一样的值<br />
 即页面的风格不用，但是执行的方法和需要的数据类似可以使用mixin
-<div class="codehilite"><pre><span class="kd">var</span> <span class="nx">mixin</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">mixin</span> <span class="o">=</span> <span class="p">{</span>
   <span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
     <span class="nx">foo</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
@@ -1759,7 +1869,7 @@ Mixin允许你封装一块在应用的其他组件中都可以使用的<strong>�
 <h4 id="_27">使用方式<a class="headerlink" href="#_27" title="Permanent link"></a></h4>
 <ul>
 <li>注册全局指令&ndash;用 <strong>directive</strong>
-<div class="codehilite"><pre><span class="c1">// 注册一个全局自定义指令 `v-focus`</span>
+<div class="highlight"><pre><span class="c1">// 注册一个全局自定义指令 `v-focus`</span>
 <span class="nx">Vue</span><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;focus&#39;</span><span class="p">,</span> <span class="p">{</span>
   <span class="c1">// 当被绑定的元素插入到 DOM 中时……</span>
   <span class="nx">inserted</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
@@ -1769,7 +1879,7 @@ Mixin允许你封装一块在应用的其他组件中都可以使用的<strong>�
 <span class="p">})</span>
 </pre></div></li>
 <li>注册局部指令&ndash;用 <strong>directives</strong>
-<div class="codehilite"><pre><span class="c1">// 注册一个注册局部指令 `v-focus`</span>
+<div class="highlight"><pre><span class="c1">// 注册一个注册局部指令 `v-focus`</span>
 <span class="nx">data</span><span class="p">(){</span>
 <span class="p">},</span>
 <span class="nx">directives</span><span class="o">:</span> <span class="p">{</span>
@@ -1782,7 +1892,7 @@ Mixin允许你封装一块在应用的其他组件中都可以使用的<strong>�
 <span class="p">}</span>
 </pre></div>
 或者
-<div class="codehilite"><pre><span class="kr">const</span> <span class="nx">focus</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight"><pre><span class="kr">const</span> <span class="nx">focus</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">//钩子函数等</span>
 <span class="p">}</span>
 </pre></div>
@@ -1816,7 +1926,7 @@ Mixin允许你封装一块在应用的其他组件中都可以使用的<strong>�
 <h4 id="_30">使用实例代码<a class="headerlink" href="#_30" title="Permanent link"></a></h4>
 <ul>
 <li>实例一 点击除div之外的地方隐藏div的实现（局部）
-<div class="codehilite"><pre><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
 <span class="c">&lt;!-- 绑定具体关闭div方法 --&gt;</span>
   <span class="p">&lt;</span><span class="nt">div</span> <span class="na">v-clickoutside</span><span class="o">=</span><span class="s">&quot;handleClose&quot;</span> <span class="na">v-show</span><span class="o">=</span><span class="s">&quot;show&quot;</span><span class="p">&gt;</span>
   显示
@@ -1865,7 +1975,7 @@ Mixin允许你封装一块在应用的其他组件中都可以使用的<strong>�
 <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </pre></div></li>
 <li>实例二 防重复点击(全局)
-<div class="codehilite"><pre><span class="nx">Vue</span><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;noMoreClick&#39;</span><span class="p">,</span> <span class="p">{</span>
+<div class="highlight"><pre><span class="nx">Vue</span><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;noMoreClick&#39;</span><span class="p">,</span> <span class="p">{</span>
   <span class="nx">inserted</span> <span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="nx">binding</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
       <span class="c1">//el.classList.add(&#39;is-loading&#39;)  //添加类名</span>
@@ -1885,7 +1995,7 @@ Mixin允许你封装一块在应用的其他组件中都可以使用的<strong>�
 <h3 id="_32">原型、原型链<a class="headerlink" href="#_32" title="Permanent link"></a></h3>
 <p>JavaScript没有&rdquo;子类&rdquo;和&rdquo;父类&rdquo;的概念，也没有&rdquo;类&rdquo;（class）和&rdquo;实例&rdquo;（instance）的区分，全靠一种很奇特的&rdquo;原型链&rdquo;（prototype chain）模式，来实现继承<br />
 <strong>在Javascript语言中，new命令后面跟的不是类，而是构造函数</strong>
-<div class="codehilite"><pre><span class="kd">function</span> <span class="nx">DOG</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span>
+<div class="highlight"><pre><span class="kd">function</span> <span class="nx">DOG</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="kd">var</span> <span class="nx">dogA</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DOG</span><span class="p">(</span><span class="s1">&#39;大毛&#39;</span><span class="p">);</span>
@@ -1907,14 +2017,14 @@ DOG的构造函数，表示狗对象的原型,对这个构造函数使用new，�
 <li>constructor：每一个原型对象都包含一个指向 <strong>构造函数</strong> 的指针，就是constructor</li>
 </ul>
 <p>构造函数的 prototype 指向调用该构造函数而创建的实例对象的原型<br />
-<div class="codehilite"><pre><span class="kd">function</span> <span class="nx">Cat</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span class="kd">function</span> <span class="nx">Cat</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="s1">&#39;orange&#39;</span>
 <span class="p">}</span>
 <span class="kd">var</span> <span class="nx">cat</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Cat</span><span class="p">()</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cat</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>   <span class="c1">// true</span>
 </pre></div>
 构造函数和构造函数的 prototype 可以相互指向<br />
-<div class="codehilite"><pre><span class="kd">function</span> <span class="nx">Cat</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span class="kd">function</span> <span class="nx">Cat</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="s1">&#39;orange&#39;</span>
 <span class="p">}</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nx">Cat</span><span class="p">)</span>    <span class="c1">// true</span>
@@ -1932,7 +2042,7 @@ Object.prototype 的原型是null  (Object.prototype 没有原型)<br />
 <h3 id="vue-filter">vue 自定义过滤器（filter）<a class="headerlink" href="#vue-filter" title="Permanent link"></a></h3>
 <p><strong>注：可联系上文的（自定义指令）</strong><br />
 过滤器可以用在两个地方：<strong>双花括号插值</strong>和 <strong>v-bind表达式</strong> <br />
-<div class="codehilite"><pre><span class="c">&lt;!-- 在双花括号中 --&gt;</span>
+<div class="highlight"><pre><span class="c">&lt;!-- 在双花括号中 --&gt;</span>
 {{ message | capitalize }}
 
 <span class="c">&lt;!-- 在 `v-bind` 中 --&gt;</span>
@@ -1944,7 +2054,7 @@ capitalize 过滤器函数将会收到 message 的值作为第一个参数<br />
 <p>当全局过滤器和局部过滤器重名时，会采用局部过滤器</p>
 <ul>
 <li>组件过滤器————<strong>filters</strong>
-<div class="codehilite"><pre><span class="nx">filters</span><span class="o">:</span> <span class="p">{</span>
+<div class="highlight"><pre><span class="nx">filters</span><span class="o">:</span> <span class="p">{</span>
   <span class="nx">capitalize</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="p">)</span> <span class="k">return</span> <span class="s1">&#39;&#39;</span>
     <span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
@@ -1953,7 +2063,7 @@ capitalize 过滤器函数将会收到 message 的值作为第一个参数<br />
 <span class="p">}</span>
 </pre></div></li>
 <li>全局过滤器————<strong>filter</strong>
-<div class="codehilite"><pre>Vue.filter(&#39;capitalize&#39;, function (value) {
+<div class="highlight"><pre>Vue.filter(&#39;capitalize&#39;, function (value) {
   if (!value) return &#39;&#39;
   value = value.toString()
   return value.charAt(0).toUpperCase() + value.slice(1)
@@ -2171,7 +2281,7 @@ CORS需要浏览器和服务器同时支持。目前，所有浏览器都支持�
 整个 CORS 通信过程，都是浏览器自动完成，不需要用户参与。浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求<br />
 <strong>实现 CORS 通信的关键是服务器。只要服务器实现了 CORS 接口，就可以跨源通信</strong><br />
 CORS请求分类：<strong>简单请求</strong>和 <strong>非简单请求</strong>  </p>
-<div class="codehilite"><pre>1、请求方法是以下三种方法之一：HEAD、POST、GET  
+<div class="highlight"><pre>1、请求方法是以下三种方法之一：HEAD、POST、GET  
 2、HTTP头部信息不超出以下几种字段：Accept、Accept-Language、Content-Language、Last-Event-ID、
 Content-Type：只限于三个值 application/x-www-form-urlencoded、multipart/form-data、text/plain 
 </pre></div>
@@ -2199,7 +2309,7 @@ Content-Type：只限于三个值 application/x-www-form-urlencoded、multipart/
 </li>
 </ul>
 <p>如：<br />
-<div class="codehilite"><pre><span class="nx">Origin</span><span class="o">:</span> <span class="nx">http</span><span class="o">:</span><span class="c1">//www.laixiangran.cn</span>
+<div class="highlight"><pre><span class="nx">Origin</span><span class="o">:</span> <span class="nx">http</span><span class="o">:</span><span class="c1">//www.laixiangran.cn</span>
 <span class="nx">Access</span><span class="o">-</span><span class="nx">Control</span><span class="o">-</span><span class="nx">Request</span><span class="o">-</span><span class="nx">Method</span><span class="o">:</span> <span class="nx">POST</span>
 <span class="nx">Access</span><span class="o">-</span><span class="nx">Control</span><span class="o">-</span><span class="nx">Request</span><span class="o">-</span><span class="nx">Headers</span><span class="o">:</span> <span class="nx">NCZ</span>
 </pre></div>
@@ -2211,7 +2321,7 @@ Content-Type：只限于三个值 application/x-www-form-urlencoded、multipart/
 <li>Access-Control-Max-Age: 应该将这个 Preflight 请求缓存多长时间（以秒表示）。  </li>
 </ul>
 <p>例如：
-<div class="codehilite"><pre><span class="nx">Access</span><span class="o">-</span><span class="nx">Control</span><span class="o">-</span><span class="nx">Allow</span><span class="o">-</span><span class="nx">Origin</span><span class="o">:</span> <span class="nx">http</span><span class="o">:</span><span class="c1">//www.laixiangran.cn</span>
+<div class="highlight"><pre><span class="nx">Access</span><span class="o">-</span><span class="nx">Control</span><span class="o">-</span><span class="nx">Allow</span><span class="o">-</span><span class="nx">Origin</span><span class="o">:</span> <span class="nx">http</span><span class="o">:</span><span class="c1">//www.laixiangran.cn</span>
 <span class="nx">Access</span><span class="o">-</span><span class="nx">Control</span><span class="o">-</span><span class="nx">Allow</span><span class="o">-</span><span class="nx">Methods</span><span class="o">:</span> <span class="nx">GET</span><span class="p">,</span> <span class="nx">POST</span>
 <span class="nx">Access</span><span class="o">-</span><span class="nx">Control</span><span class="o">-</span><span class="nx">Allow</span><span class="o">-</span><span class="nx">Headers</span><span class="o">:</span> <span class="nx">NCZ</span>
 <span class="nx">Access</span><span class="o">-</span><span class="nx">Control</span><span class="o">-</span><span class="nx">Max</span><span class="o">-</span><span class="nx">Age</span><span class="o">:</span> <span class="mi">1728000</span>
@@ -2235,7 +2345,7 @@ Content-Type：只限于三个值 application/x-www-form-urlencoded、multipart/
 (<strong>注：form表单提交没有跨域问题</strong> :因为原页面用form提交到另一个域名之后，原页面的脚本无法获取新页面中的内容。所以浏览器认为这是安全的)<br />
 <strong>JSONP跨域流程</strong><br />
 例1：
-<div class="codehilite"><pre><span class="c1">// 1. 定义一个 回调函数 handleResponse 用来接收返回的数据</span>
+<div class="highlight"><pre><span class="c1">// 1. 定义一个 回调函数 handleResponse 用来接收返回的数据</span>
 <span class="kd">function</span> <span class="nx">handleResponse</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
 <span class="p">};</span>
@@ -2252,7 +2362,7 @@ Content-Type：只限于三个值 application/x-www-form-urlencoded、multipart/
 <span class="c1">//获得后端返回的数据，这样就完成一次跨域请求了。</span>
 </pre></div>
 例2：
-<div class="codehilite"><pre><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span><span class="p">&gt;</span>
     <span class="kd">function</span> <span class="nx">dosomething</span><span class="p">(</span><span class="nx">jsondata</span><span class="p">){</span>
         <span class="c1">//处理获得的json数据</span>
     <span class="p">}</span>
@@ -2281,7 +2391,7 @@ Content-Type：只限于三个值 application/x-www-form-urlencoded、multipart/
 <h5 id="ping">图像 Ping 跨域<a class="headerlink" href="#ping" title="Permanent link"></a></h5>
 <p>由于 img 标签不受浏览器同源策略的影响，允许跨域引用资源。因此可以通过 img 标签的 src 属性进行跨域，这也就是图像 Ping 跨域的基本原理<br />
 实例：
-<div class="codehilite"><pre><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
 
 <span class="c1">// 通过 onload 及 onerror 事件可以知道响应是什么时候接收到的，但是不能获取响应文本</span>
 <span class="nx">img</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="nx">img</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -2327,7 +2437,7 @@ location.hash 方式跨域，是子框架修改父框架 src 的 hash 值，通�
 </ul>
 <p>用法：<br />
 a页面
-<div class="codehilite"><pre><span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;http://laixiangran.cn/b.html&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;myIframe&quot;</span> <span class="na">onload</span><span class="o">=</span><span class="s">&quot;test()&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;display: none;&quot;</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;http://laixiangran.cn/b.html&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;myIframe&quot;</span> <span class="na">onload</span><span class="o">=</span><span class="s">&quot;test()&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;display: none;&quot;</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
     <span class="c1">// 1. iframe载入 &quot;http://laixiangran.cn/b.html 页面后会执行该函数</span>
     <span class="kd">function</span> <span class="nx">test</span><span class="p">()</span> <span class="p">{</span>
@@ -2340,7 +2450,7 @@ a页面
 <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </pre></div>
 b页面
-<div class="codehilite"><pre><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span><span class="p">&gt;</span>
     <span class="c1">// 注册 message 事件用来接收消息</span>
     <span class="nb">window</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">e</span> <span class="o">=</span> <span class="nx">e</span> <span class="o">||</span> <span class="nx">event</span><span class="p">;</span> <span class="c1">// 获取事件对象</span>
@@ -2434,7 +2544,7 @@ Expires和Cache-Control  </p>
 <h4 id="debounce">防抖（debounce）<a class="headerlink" href="#debounce" title="Permanent link"></a></h4>
 <p>当持续触发事件时，一定时间段内没有再触发事件，事件处理函数才会执行一次，如果设定的时间到来之前，又一次触发了事件，就重新开始延时。<br />
 应用场景：当执行用户输入搜索时。设置只有只用当用户停止输入1s后才自动执行搜索事件。否则不执行，在1s内如果用户重新输入，则清空计时，重新等到用户输入停止1s后执行搜索事件。
-<div class="codehilite"><pre><span class="c1">//代码为监听滚动事件</span>
+<div class="highlight"><pre><span class="c1">//代码为监听滚动事件</span>
 <span class="kd">function</span> <span class="nx">debounce</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">wait</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">timeout</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span><span class="c1">//涉及闭包知识，见节流定时器版代码处说明</span>
     <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -2453,7 +2563,7 @@ Expires和Cache-Control  </p>
 <h4 id="throttle">节流（throttle）<a class="headerlink" href="#throttle" title="Permanent link"></a></h4>
 <p>当持续触发事件时，保证一定时间段内只调用一次事件处理函数。<br />
 对于节流，一般有两种方式可以实现，分别是时间戳版和定时器版。<br />
-<div class="codehilite"><pre><span class="c1">//时间戳版</span>
+<div class="highlight"><pre><span class="c1">//时间戳版</span>
 <span class="kd">var</span> <span class="nx">throttle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">func</span><span class="p">,</span> <span class="nx">delay</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">prev</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
     <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -2471,7 +2581,7 @@ Expires和Cache-Control  </p>
 <span class="p">}</span>
 <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;scroll&#39;</span><span class="p">,</span> <span class="nx">throttle</span><span class="p">(</span><span class="nx">handle</span><span class="p">,</span> <span class="mi">1000</span><span class="p">));</span>
 </pre></div></p>
-<div class="codehilite"><pre><span class="c1">//定时器版</span>
+<div class="highlight"><pre><span class="c1">//定时器版</span>
 <span class="kd">var</span> <span class="nx">throttle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">func</span><span class="p">,</span> <span class="nx">delay</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span><span class="c1">//涉及闭包知识</span>
     <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -2494,7 +2604,7 @@ Expires和Cache-Control  </p>
 <blockquote>
 <p>注：防抖和节流可结合异步队列。有人有时候会疑惑为什么要把timer定在那个位置，原因要说清楚，因为闭包，可以让所有每一次触发的事件处理函数跟上一次的事件处理函数做到一个类似于人类交流之间的通信，因为有了这个共享的工具，这一次的事件处理函数就可以根据这个共享的工具去知道它的上一次是不是已经有处理逻辑被放到异步队列里头等待执行了。这就是timer的通俗解释，而为什么里头要判断一次timer是否为空，那是因为，这一次的事件处理函数如果不判断它的上一次有没有已经被放到异步队列当中了的话，直接执行下面的延时操作，结果是又有一个同样的处理逻辑被放入异步队列当中，因此触发的时候就要去根据timer判断任务队列中它有没有任务已经在里头等待了，有我们就clear它，让它滚蛋，因为我们要的结果是最后只能执行一次处理逻辑。 </p>
 </blockquote>
-<div class="codehilite"><pre><span class="c1">//为帮助理解，可执行下列代码，闭包概念见下文  闭包  相关</span>
+<div class="highlight"><pre><span class="c1">//为帮助理解，可执行下列代码，闭包概念见下文  闭包  相关</span>
 <span class="kd">function</span> <span class="nx">fn2</span><span class="p">(){</span>
     <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;1:&quot;</span> <span class="o">+</span> <span class="nx">a</span><span class="p">)</span>
@@ -2901,7 +3011,7 @@ HTTP2 采用二进制数据帧传输，取代了 HTTP1.x 的文本格式，二�
 localStorage用于持久化的本地存储，除非主动删除数据，否则数据是永远不会过期的<br />
 localStorage 和 sessionStorage 属性允许在浏览器中存储 key/value 对的数据<br />
 localStorage 只支持 string 类型的存储
-<div class="codehilite"><pre><span class="c1">//localStorage有三种写法</span>
+<div class="highlight"><pre><span class="c1">//localStorage有三种写法</span>
 <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nb">window</span><span class="p">.</span><span class="nx">localStorage</span><span class="p">){</span>
     <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;浏览器不支持localstorage&quot;</span><span class="p">);</span>
     <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
@@ -2934,7 +3044,7 @@ localStorage 只支持 string 类型的存储
 使用webpack做构建工具的项目中使用proxyTable代理实现跨域是一种比较方便的选择<br />
 使用的插件<a href="https://github.com/chimurai/http-proxy-middleware" target="_blank">http-proxy-middleware</a><br />
 <em>注：此方法仅限用于开发环境，不适合生产环境，生产环境可以用nginx进行代理</em>
-<div class="codehilite"><pre><span class="c1">//根目录下config文件夹下的index.js文件</span>
+<div class="highlight"><pre><span class="c1">//根目录下config文件夹下的index.js文件</span>
 <span class="c1">//由于在开发环境下使用，所以配置在dev里面</span>
 <span class="nx">dev</span><span class="o">:</span> <span class="p">{</span>
     <span class="nx">assetsRoot</span><span class="o">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s2">&quot;../dist&quot;</span><span class="p">),</span>
@@ -3004,14 +3114,14 @@ dist:和_dirname无关，直接 CD dist的目录</p>
 <li>__dirname变量
 在任何模块文件内部，可以使用__dirname变量获取当前模块文件所在目录的完整绝对路径  </li>
 </ol>
-<p><div class="codehilite"><pre><span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
+<p><div class="highlight"><pre><span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">);</span> 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span><span class="s1">&#39;./src&#39;</span><span class="p">))</span>
 <span class="c1">// /Users/frank/Desktop/sfs-blog</span>
 <span class="c1">// /Users/frank/Desktop/sfs-blog/src</span>
 </pre></div>
 <strong>使用场景：</strong>
-<div class="codehilite"><pre><span class="c1">//webpack配置build/webpack.dev.conf.js：</span>
+<div class="highlight"><pre><span class="c1">//webpack配置build/webpack.dev.conf.js：</span>
   <span class="nx">resolve</span><span class="o">:</span><span class="p">{</span>
     <span class="c1">//解析扩展名</span>
     <span class="nx">extensions</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;.js&#39;</span><span class="p">,</span><span class="s1">&#39;vue&#39;</span><span class="p">],</span>
@@ -3033,7 +3143,7 @@ dist:和_dirname无关，直接 CD dist的目录</p>
 <h4 id="ajax">ajax<a class="headerlink" href="#ajax" title="Permanent link"></a></h4>
 <p>最早出现的发送后端请求技术，隶属于原始js中，核心使用XMLHttpRequest对象。  </p>
 <p><img alt="" src="/D:/study/upload/cd-knowledge-base/%E6%AF%8F%E5%A4%A9%E5%AD%A6%E4%B8%80%E7%82%B9%E7%B3%BB%E5%88%97/image/ajax.png" /></p>
-<p><div class="codehilite"><pre><span class="kd">function</span> <span class="nx">reqListener</span> <span class="p">()</span> <span class="p">{</span>
+<p><div class="highlight"><pre><span class="kd">function</span> <span class="nx">reqListener</span> <span class="p">()</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
 <span class="p">}</span>
 
@@ -3044,7 +3154,7 @@ dist:和_dirname无关，直接 CD dist的目录</p>
 </pre></div>
 通过XMLHttpRequest生成的请求可以有两种方式来获取数据，异步模式或同步模式。请求的类型是由这个XMLHttpRequest对象的open()方法的第三个参数async的值决定的。如果该参数的值为 false，则该XMLHttpRequest请求以同步模式进行，否则该过程将以异步模式完成。<br />
 XMLHttpRequest一般用来发送和接收文本数据，但其实也可以发送和接受二进制内容，处理二进制数据的方法：<code>XMLHttpRequest.overrideMimeType()</code> 和 <code>responseType 属性</code>
-<div class="codehilite"><pre><span class="kd">var</span> <span class="nx">oReq</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">oReq</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
 
 <span class="nx">oReq</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">arraybuffer</span> <span class="o">=</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">response</span><span class="p">;</span> <span class="c1">// not responseText</span>
@@ -3059,7 +3169,7 @@ XMLHttpRequest一般用来发送和接收文本数据，但其实也可以发送
 <li>使用 FormData API ：最简单最快捷的，但是缺点是被收集的数据无法使用 JSON.stringify() 转换为一个 JSON 字符串</li>
 </ul>
 <h4 id="jquery-ajax">Jquery Ajax<a class="headerlink" href="#jquery-ajax" title="Permanent link"></a></h4>
-<p><div class="codehilite"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+<p><div class="highlight"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="nx">url</span><span class="o">:</span> <span class="s2">&quot;/api/getWeather&quot;</span><span class="p">,</span>
   <span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
     <span class="nx">zipcode</span><span class="o">:</span> <span class="mi">97201</span>
@@ -3079,7 +3189,7 @@ Jquery Ajax的出现是对原生XHR的封装，除此以外还增添了对JSONP�
 <li>配置和调用方式非常混乱，而且基于事件的异步模型不友好</li>
 </ol>
 <h4 id="axios">axios<a class="headerlink" href="#axios" title="Permanent link"></a></h4>
-<p><div class="codehilite"><pre><span class="c1">//执行多个并发请求</span>
+<p><div class="highlight"><pre><span class="c1">//执行多个并发请求</span>
 <span class="kd">function</span> <span class="nx">getUserAccount</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/user/12345&#39;</span><span class="p">);</span>
 <span class="p">}</span>
@@ -3116,7 +3226,7 @@ Fetch 是一个现代的概念, 等同于 XMLHttpRequest。它提供了许多与
 <li>当接收到一个代表错误的 HTTP 状态码时，从 fetch()返回的 Promise 不会被标记为 reject， 即使该 HTTP 响应的状态码是 404 或 500。相反，它会将 Promise 状态标记为 resolve （但是会将 resolve 的返回值的 ok 属性设置为 false ），仅当网络故障时或请求被阻止时，才会标记为 reject。</li>
 <li>默认情况下，fetch 不会从服务端发送或接收任何 cookies, 如果站点依赖于用户 session，则会导致未经认证的请求（要发送 cookies，必须设置 credentials 选项）。自从2017年8月25日后，默认的credentials政策变更为same-originFirefox也在61.0b13中改变默认值</li>
 </ul>
-<p><div class="codehilite"><pre><span class="c1">// Example POST method implementation:</span>
+<p><div class="highlight"><pre><span class="c1">// Example POST method implementation:</span>
 
 <span class="nx">postData</span><span class="p">(</span><span class="s1">&#39;http://example.com/answer&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">answer</span><span class="o">:</span> <span class="mi">42</span><span class="p">})</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">data</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span> <span class="c1">// JSON from `response.json()` call</span>
@@ -3165,7 +3275,7 @@ fetch中可以设置mode为&rdquo;no-cors&rdquo;（不跨域）。这样之后�
 <li>定义一：闭包是指有权访问另一个函数作用域中的变量的函数；</li>
 <li>定义二：当函数可以记住并访问所在的词法作用域时，就产生了闭包，即使函数是在当前词法作用域之外执行。  </li>
 </ul>
-<p><div class="codehilite"><pre><span class="kd">function</span> <span class="nx">fn1</span><span class="p">()</span> <span class="p">{</span>
+<p><div class="highlight"><pre><span class="kd">function</span> <span class="nx">fn1</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;iceman&#39;</span><span class="p">;</span>
     <span class="kd">function</span> <span class="nx">fn2</span><span class="p">()</span> <span class="p">{</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
@@ -3179,14 +3289,14 @@ fn3就是fn2函数本身。执行fn3能正常输出name，这不就是fn2能记�
 正常来说，当fn1函数执行完毕之后，其作用域是会被销毁的，然后垃圾回收器会释放那段内存空间。而闭包却很神奇的将fn1的作用域存活了下来，fn2依然持有该作用域的引用，这个引用就是闭包。<br />
 （<em>闭包应用可参考上文  <strong>防抖与节流</strong> 处</em>）<br />
 典型闭包实例：
-<div class="codehilite"><pre><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
     <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 解决办法：
-<div class="codehilite"><pre><span class="c1">//方法1</span>
+<div class="highlight"><pre><span class="c1">//方法1</span>
 <span class="c1">//让i在每次迭代的时候，都产生一个私有的作用域，在这个私有的作用域中保存当前i的值</span>
 <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
@@ -3221,7 +3331,7 @@ fn3就是fn2函数本身。执行fn3能正常输出name，这不就是fn2能记�
 柯里化，可以理解为提前接收部分参数，延迟执行，不立即输出结果，而是返回一个接受剩余参数的函数。因为这样的特性，也被称为部分计算函数。柯里化，是一个逐步接收参数的过程。<br />
 柯里化(Currying)具有：延迟计算（采用 <strong>闭包</strong>的方式）、参数复用、动态生成函数的作用
 实例代码：<br />
-<div class="codehilite"><pre><span class="kd">function</span> <span class="nx">curry</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><span class="kd">function</span> <span class="nx">curry</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">length</span> <span class="o">=</span> <span class="nx">fn</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
     <span class="nx">args</span> <span class="o">=</span> <span class="nx">args</span> <span class="o">||</span> <span class="p">[];</span>
     <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -3264,25 +3374,25 @@ fn3就是fn2函数本身。执行fn3能正常输出name，这不就是fn2能记�
 <h4 id="_79">事件修饰符<a class="headerlink" href="#_79" title="Permanent link"></a></h4>
 <ul>
 <li>.stop: 阻止单击事件冒泡。由于事件冒泡的机制，我们给元素绑定点击事件的时候，也会触发父级的点击事件。
-<div class="codehilite"><pre>//只执行  fun2  函数
+<div class="highlight"><pre>//只执行  fun2  函数
 <span class="p">&lt;</span><span class="nt">div</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&quot;fun1()&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">click</span><span class="err">.</span><span class="na">stop</span><span class="o">=</span><span class="s">&quot;fun2()&quot;</span><span class="p">&gt;</span>ok<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </pre></div></li>
 <li>.prevent: 用于阻止事件的默认行为,可以使提交事件不再重载页面
-<div class="codehilite"><pre><span class="c">&lt;!--</span> <span class="nx">提交事件不再重载页面</span> <span class="o">--&gt;</span>
+<div class="highlight"><pre><span class="c">&lt;!--</span> <span class="nx">提交事件不再重载页面</span> <span class="o">--&gt;</span>
 <span class="o">&lt;</span><span class="nx">form</span> <span class="nx">v</span><span class="o">-</span><span class="nx">on</span><span class="o">:</span><span class="nx">submit</span><span class="p">.</span><span class="nx">prevent</span><span class="o">=</span><span class="s2">&quot;onSubmit&quot;</span><span class="o">&gt;&lt;</span><span class="err">/form&gt;</span>
 </pre></div></li>
 <li>.self: 只当事件是从事件绑定的元素本身触发时才触发回调
 级的点击事件。
-<div class="codehilite"><pre>//只有点击button以外的div部分才会触发 fun1 函数
+<div class="highlight"><pre>//只有点击button以外的div部分才会触发 fun1 函数
 <span class="p">&lt;</span><span class="nt">div</span> <span class="err">@</span><span class="na">click</span><span class="err">.</span><span class="na">self</span><span class="o">=</span><span class="s">&quot;fun1()&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&quot;fun2()&quot;</span><span class="p">&gt;</span>ok<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </pre></div></li>
 <li>.once: 绑定事件只能触发一次</li>
 <li>.capture: 事件的冒泡，其实完整的事件机制是：捕获阶段&ndash;目标阶段&ndash;冒泡阶段。.capture使事件触发从包含这个元素的顶层开始往下触发。
-<div class="codehilite"><pre>//执行顺序为： fun1-&gt;fun2-&gt;fun4-&gt;fun3
+<div class="highlight"><pre>//执行顺序为： fun1-&gt;fun2-&gt;fun4-&gt;fun3
 //不加capture执行顺序为：fun4-&gt;fun3-&gt;fun2-&gt;fun1
 <span class="p">&lt;</span><span class="nt">div</span> <span class="err">@</span><span class="na">click</span><span class="err">.</span><span class="na">capture</span><span class="o">=</span><span class="s">&quot;fun1()&quot;</span><span class="p">&gt;</span>
   obj1
@@ -3312,7 +3422,7 @@ fn3就是fn2函数本身。执行fn3能正常输出name，这不就是fn2能记�
 <ul>
 <li>.sync: 父子组件数据双向绑定（简化代码）<a href="https://cn.vuejs.org/v2/guide/components-custom-events.html#sync-%E4%BF%AE%E9%A5%B0%E7%AC%A6" target="_blank">官方说明</a> <ul>
 <li>子组件传递的事件名必须为update:value
-<div class="codehilite"><pre><span class="c1">//父组件</span>
+<div class="highlight"><pre><span class="c1">//父组件</span>
 <span class="o">&lt;</span><span class="nx">child</span>
   <span class="o">:</span><span class="nx">visible</span><span class="o">=</span><span class="s1">&#39;dialogShow&#39;</span>
   <span class="err">@</span><span class="nx">update</span><span class="o">:</span><span class="nx">visible</span><span class="o">=</span><span class="s2">&quot;val =&gt; dialogShow = val&quot;</span>
@@ -3333,7 +3443,7 @@ fn3就是fn2函数本身。执行fn3能正常输出name，这不就是fn2能记�
 <span class="o">&lt;</span><span class="err">/template&gt;</span>
 </pre></div>
 或(简化上面代码)
-<div class="codehilite"><pre>//父组件
+<div class="highlight"><pre>//父组件
 <span class="p">&lt;</span><span class="nt">comp</span> <span class="na">:myMessage</span><span class="err">.</span><span class="na">sync</span><span class="o">=</span><span class="s">&quot;bar&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">comp</span><span class="p">&gt;</span> 
 //子组件
 this.$emit(&#39;update:myMessage&#39;,params);
@@ -3358,7 +3468,7 @@ Property是这个DOM元素作为对象，其附加的内容，例如childNodes�
 常用的Attribute，例如id、class、title等，已经被作为Property附加到DOM对象上，可以和Property一样取值和赋值。但是自定义的Attribute，不是property </p>
 <ul>
 <li>attribute取值、赋值：getAttribute()可以取得任何特性，不管是标准的还是自定义的。但是这个方法的浏览器兼容性有问题，有些浏览器可能会获取属性Property的值。因此jQuery要做一个测试，看getAttribute()是否是绝对获取特性Attribute的值
-<div class="codehilite"><pre><span class="nx">div1</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span class="nx">div1</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">judge</span> <span class="o">=</span> <span class="nx">div1</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s2">&quot;className&quot;</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;a&#39;</span><span class="p">;</span>
 </pre></div>
 赋值：<code>div1.setAttribute('class', 'a')</code>; 取值：<code>var id = div1.getAttribute("id");</code></li>
@@ -3387,13 +3497,13 @@ Property是这个DOM元素作为对象，其附加的内容，例如childNodes�
 </ul>
 <h4 id="css_1">CSS伪类<a class="headerlink" href="#css_1" title="Permanent link"></a></h4>
 <p>写法： <code>:</code> 如：
-<div class="codehilite"><pre>a.red:visited {color: #FF0000}
+<div class="highlight"><pre>a.red:visited {color: #FF0000}
 <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;red&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;css_syntax.asp&quot;</span><span class="p">&gt;</span>CSS Syntax<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
 </pre></div></p>
 <ul>
 <li>:first-child 伪类:选择元素的第一个子元素,如<code>p:first-child {font-weight: bold;}</code>会匹配第一个出现的p元素</li>
 <li>:lang 伪类：向带有指定 lang 属性的元素添加样式。如
-<div class="codehilite"><pre>q:lang(no) {
+<div class="highlight"><pre>q:lang(no) {
    quotes: &quot;~&quot; &quot;~&quot;
 }
 <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>文字<span class="p">&lt;</span><span class="nt">q</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;no&quot;</span><span class="p">&gt;</span>段落中的引用的文字<span class="p">&lt;/</span><span class="nt">q</span><span class="p">&gt;</span>文字<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
@@ -3408,13 +3518,13 @@ Property是这个DOM元素作为对象，其附加的内容，例如childNodes�
 <h4 id="css_2">CSS伪元素<a class="headerlink" href="#css_2" title="Permanent link"></a></h4>
 <ul>
 <li>:first-line 伪元素：用文本的首行(<strong>第一行文本</strong>)设置特殊样式
-<div class="codehilite"><pre><span class="nt">p</span><span class="nd">:first-line</span> <span class="p">{</span>
+<div class="highlight"><pre><span class="nt">p</span><span class="nd">:first-line</span> <span class="p">{</span>
     <span class="k">color</span><span class="o">:</span><span class="m">#ff0000</span><span class="p">;</span>
     <span class="k">font-variant</span><span class="o">:</span><span class="k">small-caps</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div></li>
 <li>:first-letter 伪元素：向文本的首字母设置特殊样式
-<div class="codehilite"><pre><span class="nt">p</span><span class="nd">:first-letter</span> <span class="p">{</span>
+<div class="highlight"><pre><span class="nt">p</span><span class="nd">:first-letter</span> <span class="p">{</span>
     <span class="k">color</span><span class="o">:</span><span class="m">#ff0000</span><span class="p">;</span>
     <span class="k">font-size</span><span class="o">:</span><span class="k">xx-large</span><span class="p">;</span>
 <span class="p">}</span>
@@ -3422,14 +3532,14 @@ Property是这个DOM元素作为对象，其附加的内容，例如childNodes�
 &ldquo;first-letter&rdquo; 伪元素只能用于块级元素</li>
 <li>CSS2-:before 伪元素：在元素的内容前面插入新内容<br />
 如：在每个 <code>&lt;h1&gt;</code> 元素前面插入一幅图片
-<div class="codehilite"><pre><span class="nt">h1</span><span class="nd">:before</span> <span class="p">{</span>
+<div class="highlight"><pre><span class="nt">h1</span><span class="nd">:before</span> <span class="p">{</span>
     <span class="k">content</span><span class="o">:</span><span class="sx">url(logo.gif)</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div></li>
 <li>CSS2 - :after 伪元素：在元素的内容之后插入新内容。使用同before</li>
 </ul>
 <p>伪元素可以与 CSS 类配合使用:<br />
-<div class="codehilite"><pre><span class="nt">p</span><span class="nc">.article</span><span class="nd">:first-letter</span>
+<div class="highlight"><pre><span class="nt">p</span><span class="nc">.article</span><span class="nd">:first-letter</span>
   <span class="p">{</span>
   <span class="k">color</span><span class="o">:</span> <span class="m">#FF0000</span><span class="p">;</span>
   <span class="p">}</span>
@@ -3442,7 +3552,7 @@ Property是这个DOM元素作为对象，其附加的内容，例如childNodes�
 <p>ES5中包含5种原始类型：字符串、数字、布尔值、null和undefined。ES6引入了第6种原始类型——Symbol<br />
 ES5的对象属性名都是字符串，很容易造成属性名冲突。比如，使用了一个他人提供的对象，想为这个对象添加新的方法，新方法的名字就有可能与现有方法产生冲突。如果有一种机制，保证每个属性的名字都是独一无二的，这样就从根本上 <strong>防止了对象属性名冲突</strong>。 这就是ES6引入Symbol的原因<br />
 <em>注：Symbol函数前不能使用new命令，否则会报错。因为生成的 Symbol 是一个原始类型的值，不是对象</em>
-<div class="codehilite"><pre><span class="kd">let</span> <span class="nx">firstName</span> <span class="o">=</span> <span class="nx">Symbol</span><span class="p">(</span><span class="s2">&quot;first name&quot;</span><span class="p">);</span>
+<div class="highlight"><pre><span class="kd">let</span> <span class="nx">firstName</span> <span class="o">=</span> <span class="nx">Symbol</span><span class="p">(</span><span class="s2">&quot;first name&quot;</span><span class="p">);</span>
 <span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{};</span>
 <span class="nx">person</span><span class="p">[</span><span class="nx">firstName</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;huochai&quot;</span><span class="p">;</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;first name&quot;</span> <span class="k">in</span> <span class="nx">person</span><span class="p">);</span> <span class="c1">// false</span>
@@ -3452,7 +3562,7 @@ ES5的对象属性名都是字符串，很容易造成属性名冲突。比如�
 <em>注：Symbol 值作为对象属性名时，不能用点运算符</em></p>
 <h4 id="symbol">共享Symbol<a class="headerlink" href="#symbol" title="Permanent link"></a></h4>
 <p>ES6提供了一个可以随时访问的全局Symbol注册表：Symbol.for()
-<div class="codehilite"><pre><span class="kd">let</span> <span class="nx">uid</span> <span class="o">=</span> <span class="nx">Symbol</span><span class="p">.</span><span class="k">for</span><span class="p">(</span><span class="s2">&quot;uid&quot;</span><span class="p">);</span>
+<div class="highlight"><pre><span class="kd">let</span> <span class="nx">uid</span> <span class="o">=</span> <span class="nx">Symbol</span><span class="p">.</span><span class="k">for</span><span class="p">(</span><span class="s2">&quot;uid&quot;</span><span class="p">);</span>
 <span class="kd">let</span> <span class="nx">object</span> <span class="o">=</span> <span class="p">{</span>
     <span class="p">[</span><span class="nx">uid</span><span class="p">]</span><span class="o">:</span> <span class="s2">&quot;12345&quot;</span>
 <span class="p">};</span>
@@ -3502,7 +3612,7 @@ Proxy： vue3.0, es6新特性  </p>
 <li>实现一个订阅者(Watcher)</li>
 </ol>
 <p>简陋版实现双向绑定（升级版还看不懂，是我太菜。。。）
-<div class="codehilite"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
@@ -3553,7 +3663,7 @@ Proxy： vue3.0, es6新特性  </p>
 </ul>
 <h4 id="proxy">Proxy实现双向绑定<a class="headerlink" href="#proxy" title="Permanent link"></a></h4>
 <p>Proxy可以直接监听对象而非属性;可以直接监听数组的变化
-<div class="codehilite"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
@@ -3616,12 +3726,12 @@ Proxy： vue3.0, es6新特性  </p>
 <ol>
 <li>ie9 以下浏览器对 html5 新增标签不识别。<br />
 解决：html5shiv.js
-<div class="codehilite"><pre><span class="c">&lt;!--[if lt IE 9]&gt;</span>
+<div class="highlight"><pre><span class="c">&lt;!--[if lt IE 9]&gt;</span>
 <span class="c">  &lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js&quot;&gt;&lt;/script&gt;</span>
 <span class="c">&lt;![endif]--&gt;</span>
 </pre></div></li>
 <li>IE9 以下浏览器不能使用 opacity（透明度） 
-<div class="codehilite"><pre><span class="nt">div</span>
+<div class="highlight"><pre><span class="nt">div</span>
 <span class="p">{</span>
 <span class="k">background-color</span><span class="o">:</span><span class="nb">red</span><span class="p">;</span>
 <span class="k">opacity</span><span class="o">:</span><span class="m">0</span><span class="o">.</span><span class="m">5</span><span class="p">;</span>
@@ -3644,7 +3754,7 @@ CSS Hack 大致有3种表现形式  </p>
 <li>属性前缀法（CSS类内部 Hack）<ul>
 <li>比如IE6能识别下划线&rdquo;_&rdquo;和星号&rdquo;<em>&rdquo; ，IE7能识别星号&rdquo;</em>&ldquo;，但不能识别下划线,IE6-IE10都认识&rdquo;\9&rdquo;（<code>color:red\9</code>）,而Firefox这三个都不能认识。</li>
 <li>对于书写顺序的关系，一般是将识别能力强的浏览器的CSS写在后边
-<div class="codehilite"><pre><span class="nt">div</span><span class="p">{</span>  
+<div class="highlight"><pre><span class="nt">div</span><span class="p">{</span>  
     <span class="k">background</span><span class="o">:</span><span class="nb">green</span><span class="p">;</span><span class="c">/*forfirefox*/</span>  
     <span class="o">*</span><span class="k">background</span><span class="o">:</span><span class="nb">red</span><span class="p">;</span><span class="c">/*forIE6 IE7*/</span>  
 <span class="p">}</span>  
@@ -3653,7 +3763,7 @@ CSS Hack 大致有3种表现形式  </p>
 </li>
 <li>选择器前缀法（选择器 Hack）<ul>
 <li>IE6能识别*html .class{} , IE7能识别 +html .class{}或:first-child+html .class{},IE9能识别：root .class{}
-<div class="codehilite"><pre><span class="o">&lt;!</span><span class="nt">--</span> <span class="nt">针对ie9的hack</span> <span class="nt">--</span><span class="o">&gt;</span>
+<div class="highlight"><pre><span class="o">&lt;!</span><span class="nt">--</span> <span class="nt">针对ie9的hack</span> <span class="nt">--</span><span class="o">&gt;</span>
 <span class="nd">:root</span> <span class="nc">.test</span>
 <span class="p">{</span>
     <span class="k">background-color</span><span class="o">:</span><span class="nb">green</span><span class="p">;</span>
@@ -3664,7 +3774,7 @@ CSS Hack 大致有3种表现形式  </p>
 <li>IE条件注释法（HTML 头部引用 Hack), 针对所有IE（注：IE10+已经不再支持条件注释）<ul>
 <li>HTML头部引用就比较特殊了，类似于程序语句，只能使用在HTML文件里，而不能在CSS文件中使用，并且 <strong>只有在IE浏览器下才能执行</strong>，在其他浏览器下面会被当做注释视而不见<br />
 示例代码默认先调用css.css样式表
-<div class="codehilite"><pre><span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;css.css&quot;</span> <span class="p">/&gt;</span>
+<div class="highlight"><pre><span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;css.css&quot;</span> <span class="p">/&gt;</span>
 <span class="cp">&lt;!–[if IE 7]&gt;</span>
 <span class="cp">&lt;!– 如果IE浏览器版是7,调用ie7.css样式表 –&gt;</span>
 <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;ie7.css&quot;</span> <span class="p">/&gt;</span>
@@ -3695,33 +3805,35 @@ gt ：就是Greater than的简写，也就是大于的意思。
 <h4 id="_91">新特性<a class="headerlink" href="#_91" title="Permanent link"></a></h4>
 <ul>
 <li>用于绘画的 canvas 元素
-<div class="codehilite"><pre><span class="kd">var</span> <span class="nx">c</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;myCanvas&quot;</span><span class="p">);</span><span class="c1">//找到 &lt;canvas&gt; 元素:</span>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">c</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;myCanvas&quot;</span><span class="p">);</span><span class="c1">//找到 &lt;canvas&gt; 元素:</span>
 <span class="kd">var</span> <span class="nx">ctx</span><span class="o">=</span><span class="nx">c</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s2">&quot;2d&quot;</span><span class="p">);</span><span class="c1">//创建 context 对象</span>
 </pre></div>
 getContext(&ldquo;2d&rdquo;) 对象是内建的 HTML5 对象，拥有多种绘制路径、矩形、圆形、字符以及添加图像的方法。</li>
-<li>用于媒介回放的 video 和 audio 元素<ul>
-<li>video
-<div class="codehilite"><pre><span class="p">&lt;</span><span class="nt">video</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;320&quot;</span> <span class="na">height</span><span class="o">=</span><span class="s">&quot;240&quot;</span> <span class="na">controls</span><span class="p">&gt;</span>
+<li>
+<p>用于媒介回放的 video 和 audio 元素</p>
+<ul>
+<li>
+<p>video
+<div class="highlight"><pre><span class="p">&lt;</span><span class="nt">video</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;320&quot;</span> <span class="na">height</span><span class="o">=</span><span class="s">&quot;240&quot;</span> <span class="na">controls</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">source</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;movie.mp4&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;video/mp4&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">source</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;movie.ogg&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;video/ogg&quot;</span><span class="p">&gt;</span>
 您的浏览器不支持Video标签。
 <span class="p">&lt;/</span><span class="nt">video</span><span class="p">&gt;</span>
-</pre></div></li>
-<li>audio
-<div class="codehilite"><pre><span class="c">&lt;!-- control 属性供添加播放、暂停和音量控件 --&gt;</span>
+</pre></div></p>
+</li>
+<li>
+<p>audio
+<div class="highlight"><pre><span class="c">&lt;!-- control 属性供添加播放、暂停和音量控件 --&gt;</span>
 <span class="p">&lt;</span><span class="nt">audio</span> <span class="na">controls</span><span class="p">&gt;</span>
 <span class="c">&lt;!-- 使用第一个支持的source --&gt;</span>
   <span class="p">&lt;</span><span class="nt">source</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;horse.ogg&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;audio/ogg&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">source</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;horse.mp3&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;audio/mpeg&quot;</span><span class="p">&gt;</span>
 您的浏览器不支持 audio 元素。
 <span class="p">&lt;/</span><span class="nt">audio</span><span class="p">&gt;</span>
-</pre></div></li>
-</ul>
+</pre></div></p>
 </li>
 <li>对本地离线存储的更好的支持</li>
-<li>
-<p>新的特殊内容元素，比如 article、footer、header、nav、section</p>
-<ul>
+<li>新的特殊内容元素，比如 article、footer、header、nav、section</li>
 <li>新语义元素： <code>&lt;section&gt;, &lt;article&gt;, &lt;nav&gt;, &lt;header&gt;, &lt;footer&gt;, &lt;aside&gt; 和 &lt;hgroup&gt;</code>  来创建更好的页面结构</li>
 </ul>
 <table>
@@ -3790,7 +3902,7 @@ getContext(&ldquo;2d&rdquo;) 对象是内建的 HTML5 对象，拥有多种绘�
 </table>
 </li>
 </ul>
-<div class="codehilite"><pre>//detalist 使用实例
+<div class="highlight"><pre>//detalist 使用实例
 <span class="p">&lt;</span><span class="nt">input</span> <span class="na">list</span><span class="o">=</span><span class="s">&quot;browsers&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;browser&quot;</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">datalist</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;browsers&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Internet Explorer&quot;</span><span class="p">&gt;</span>
@@ -3817,7 +3929,7 @@ getContext(&ldquo;2d&rdquo;) 对象是内建的 HTML5 对象，拥有多种绘�
 <h3 id="babel">Babel转码器<a class="headerlink" href="#babel" title="Permanent link"></a></h3>
 <p>ECMAScript 6(ES6)的发展速度非常之快，但现代浏览器对ES6新特性支持度不高，所以要想在浏览器中直接使用ES6的新特性就得借助别的工具来实现<br />
 Babel是一个广泛使用的ES6转码器，可以将ES6代码转为ES5代码，从而在现有环境执行
-<div class="codehilite"><pre><span class="c1">// 转码前</span>
+<div class="highlight"><pre><span class="c1">// 转码前</span>
 <span class="nx">input</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="nx">item</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
 
 <span class="c1">// 转码后</span>
@@ -3833,14 +3945,14 @@ Babel是一个广泛使用的ES6转码器，可以将ES6代码转为ES5代码，
 <h3 id="js">JS事件的浏览器兼容处理<a class="headerlink" href="#js" title="Permanent link"></a></h3>
 <ul>
 <li>event事件问题
-<div class="codehilite"><pre><span class="nb">document</span><span class="p">.</span><span class="nx">onclick</span><span class="o">=</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span><span class="c1">//兼容写法；</span>
+<div class="highlight"><pre><span class="nb">document</span><span class="p">.</span><span class="nx">onclick</span><span class="o">=</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span><span class="c1">//兼容写法；</span>
     <span class="kd">var</span> <span class="nx">e</span> <span class="o">=</span> <span class="nx">e</span> <span class="o">||</span> <span class="nb">window</span><span class="p">.</span><span class="nx">event</span><span class="p">;</span>
     <span class="c1">//火狐只支持传值方法，不支持window.event</span>
     <span class="c1">//ie9以上两者兼容，ie9以下只支持window.event</span>
 <span class="p">}</span>
 </pre></div></li>
 <li>监听事件
-<div class="codehilite"><pre><span class="kd">function</span> <span class="nx">addEvent</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span><span class="nx">type</span><span class="p">,</span><span class="nx">fn</span><span class="p">){</span><span class="c1">//添加事件监听，三个参数分别为 对象、事件类型、事件处理函数，默认为false</span>
+<div class="highlight"><pre><span class="kd">function</span> <span class="nx">addEvent</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span><span class="nx">type</span><span class="p">,</span><span class="nx">fn</span><span class="p">){</span><span class="c1">//添加事件监听，三个参数分别为 对象、事件类型、事件处理函数，默认为false</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">)</span> <span class="p">{</span>
       <span class="nx">obj</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span><span class="nx">fn</span><span class="p">,</span><span class="kc">false</span><span class="p">);</span><span class="c1">//非IE</span>
     <span class="p">}</span> <span class="k">else</span><span class="p">{</span>
@@ -3856,7 +3968,7 @@ Babel是一个广泛使用的ES6转码器，可以将ES6代码转为ES5代码，
 <span class="p">}</span>
 </pre></div></li>
 <li>阻止默认事件
-<div class="codehilite"><pre><span class="nb">document</span><span class="p">.</span><span class="nx">onclick</span><span class="o">=</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+<div class="highlight"><pre><span class="nb">document</span><span class="p">.</span><span class="nx">onclick</span><span class="o">=</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
     <span class="kd">var</span> <span class="nx">e</span><span class="o">=</span><span class="nx">e</span><span class="o">||</span><span class="nb">window</span><span class="p">.</span><span class="nx">event</span><span class="p">;</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">)</span> <span class="p">{</span>
       <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span><span class="c1">//W3C标准</span>
@@ -3866,7 +3978,7 @@ Babel是一个广泛使用的ES6转码器，可以将ES6代码转为ES5代码，
 <span class="p">}</span>
 </pre></div></li>
 <li>鼠标滚轮滚动事件
-<div class="codehilite"><pre><span class="c1">//火狐中的滚轮事件</span>
+<div class="highlight"><pre><span class="c1">//火狐中的滚轮事件</span>
 <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;DOMMouseScroll&quot;</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">){</span>
     <span class="nx">alert</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">detail</span><span class="p">);</span><span class="c1">//若前滚的话为 -3，后滚的话为 3</span>
 <span class="p">},</span><span class="kc">false</span><span class="p">)</span>
@@ -3876,17 +3988,448 @@ Babel是一个广泛使用的ES6转码器，可以将ES6代码转为ES5代码，
 <span class="p">}</span>
 </pre></div></li>
 </ul>
-<h2 id="20211129">2021/1/129<a class="headerlink" href="#20211129" title="Permanent link"></a></h2>
+<h2 id="2021129">2021/1/29<a class="headerlink" href="#2021129" title="Permanent link"></a></h2>
 <h3 id="imagejpegcontent-type-imagegif">后台返回 image/jpeg（content-type: image/gif）类型数据，怎么展示图片<a class="headerlink" href="#imagejpegcontent-type-imagegif" title="Permanent link"></a></h3>
 <ul>
 <li>请求加上配置 （必须）
 <code>responseType: 'arraybuffer',</code></li>
 <li>得到的后台数据resData转base64
-<div class="codehilite"><pre> var base64 = btoa( new Uint8Array(resData) .reduce((data, byte) =&gt; data + String.fromCharCode(byte), &#39;&#39;));
+<div class="highlight"><pre> var base64 = btoa( new Uint8Array(resData) .reduce((data, byte) =&gt; data + String.fromCharCode(byte), &#39;&#39;));
  this.ImgSrc=&#39;data:image/png;base64,&#39; + base64 ;
 </pre></div></li>
 <li>小程序中，需要用小程序的方法转：<br />
-<code>HTML
-var base64 = wx.arrayBufferToBase64(resData);
-this.ImgSrc = 'data:image/png;base64,' + base64</code></li>
-</ul></article></body></html>
+<div class="highlight"><pre>var base64 = wx.arrayBufferToBase64(resData);
+this.ImgSrc = &#39;data:image/png;base64,&#39; + base64 
+</pre></div></li>
+</ul>
+<h4 id="_94">参考链接<a class="headerlink" href="#_94" title="Permanent link"></a></h4>
+<p><a href="https://blog.csdn.net/github_38928905/article/details/107554306" target="_blank">https://blog.csdn.net/github_38928905/article/details/107554306</a>  </p>
+<h2 id="202124">2021/2/4<a class="headerlink" href="#202124" title="Permanent link"></a></h2>
+<h3 id="callapplaybind">call,applay,bind<a class="headerlink" href="#callapplaybind" title="Permanent link"></a></h3>
+<h4 id="call-applay">call &amp; applay<a class="headerlink" href="#call-applay" title="Permanent link"></a></h4>
+<p>当函数通过Function对象的原型中继承的方法 call() 和 apply() 方法调用时， 其函数内部的this值可绑定到 call() &amp; apply() 方法指定的第一个对象上， 如果第一个参数不是对象，JavaScript内部会尝试将其转换成对象然后指向它<br />
+事实上apply 和 call 的用法几乎相同, 唯一的差别在于：当函数需要传递多个变量时, apply 可以接受一个数组作为参数输入, call 则是接受一系列的单独变量
+<div class="highlight"><pre><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="nx">d</span><span class="p">){</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">b</span> <span class="o">+</span> <span class="nx">c</span> <span class="o">+</span> <span class="nx">d</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span><span class="nx">a</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span><span class="mi">3</span><span class="p">};</span>
+<span class="nx">add</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">o</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">);</span> <span class="c1">// 1 + 3 + 5 + 7 = 16</span>
+<span class="nx">add</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">o</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]);</span> <span class="c1">// 1 + 3 + 10 + 20 = 34</span>
+
+<span class="kd">function</span> <span class="nx">tt</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// 返回对象见下图（图1）</span>
+<span class="nx">tt</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>  <span class="c1">// Number {[[PrimitiveValue]]: 5} </span>
+<span class="nx">tt</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s1">&#39;asd&#39;</span><span class="p">);</span> <span class="c1">// String {0: &quot;a&quot;, 1: &quot;s&quot;, 2: &quot;d&quot;, length: 3, [[PrimitiveValue]]: &quot;asd&quot;}</span>
+</pre></div></p>
+<h4 id="bind">bind<a class="headerlink" href="#bind" title="Permanent link"></a></h4>
+<p>和call很相似，第一个参数是this的指向，从第二个参数开始是接收的参数列表。区别在于bind方法返回值是函数以及bind接收的参数列表的使用<br />
+有时候可用bind实现函数珂里化（？）
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Dot&#39;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">printName</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">dot</span> <span class="o">=</span> <span class="nx">printName</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dot</span><span class="p">)</span> <span class="c1">// function () { … }</span>
+<span class="nx">dot</span><span class="p">()</span>  <span class="c1">// Dot</span>
+</pre></div></p>
+<div class="highlight"><pre><span class="c1">//参数的使用</span>
+<span class="kd">function</span> <span class="nx">fn</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">fn1</span> <span class="o">=</span> <span class="nx">fn</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="s1">&#39;Dot&#39;</span><span class="p">);</span>
+
+<span class="nx">fn</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">);</span>            <span class="c1">// A B C</span>
+<span class="nx">fn1</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">);</span>           <span class="c1">// Dot A B</span>
+<span class="nx">fn1</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">);</span>                <span class="c1">// Dot B C</span>
+<span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="s1">&#39;Dot&#39;</span><span class="p">);</span>      <span class="c1">// Dot undefined undefined</span>
+</pre></div>
+
+<h4 id="_95">参考链接<a class="headerlink" href="#_95" title="Permanent link"></a></h4>
+<p><a href="https://www.jianshu.com/p/bc541afad6ee" target="_blank">https://www.jianshu.com/p/bc541afad6ee</a><br />
+<a href="https://www.cnblogs.com/dongcanliang/p/7054176.html" target="_blank">https://www.cnblogs.com/dongcanliang/p/7054176.html</a>  </p>
+<h2 id="2021223">2021/2/23<a class="headerlink" href="#2021223" title="Permanent link"></a></h2>
+<h3 id="flex">flex布局<a class="headerlink" href="#flex" title="Permanent link"></a></h3>
+<h4 id="flex_1">flex布局是什么<a class="headerlink" href="#flex_1" title="Permanent link"></a></h4>
+<p>Flex 是 Flexible Box 的缩写，意为&rdquo;弹性布局&rdquo;，用来为盒状模型提供最大的灵活性。<br />
+设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效。  </p>
+<h4 id="_96">容器属性<a class="headerlink" href="#_96" title="Permanent link"></a></h4>
+<ul>
+<li>flex-direction：决定主轴的方向（即项目的排列方向：横轴/纵轴排列）  <ul>
+<li>row（默认值）：主轴为水平方向，起点在左端。</li>
+<li>row-reverse：主轴为水平方向，起点在右端。</li>
+<li>column：主轴为垂直方向，起点在上沿。</li>
+<li>column-reverse：主轴为垂直方向，起点在下沿。</li>
+</ul>
+</li>
+<li>flex-wrap：属性定义，如果一条轴线排不下，如何换行<ul>
+<li>nowrap | wrap | wrap-reverse： 不换行|换行（第一行在上面）|换行（第一行在下面）;</li>
+</ul>
+</li>
+<li>flex-flow：是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap</li>
+<li>justify-content：定义了项目在主轴上的对齐方式<ul>
+<li>flex-start（默认值）：左对齐</li>
+<li>flex-end：右对齐</li>
+<li>center： 居中</li>
+<li>space-between：两端对齐，项目之间的间隔都相等。</li>
+<li>space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍</li>
+</ul>
+</li>
+<li>align-items： 定义项目在交叉轴上如何对齐<ul>
+<li>flex-start：交叉轴的起点对齐。</li>
+<li>flex-end：交叉轴的终点对齐。</li>
+<li>center：交叉轴的中点对齐。</li>
+<li>baseline: 项目的第一行文字的基线对齐。</li>
+<li>stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。</li>
+</ul>
+</li>
+<li>align-content：多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用<ul>
+<li>flex-start：与交叉轴的起点对齐。</li>
+<li>flex-end：与交叉轴的终点对齐。</li>
+<li>center：与交叉轴的中点对齐。</li>
+<li>space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。</li>
+<li>space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。</li>
+<li>stretch（默认值）：轴线占满整个交叉轴</li>
+</ul>
+</li>
+</ul>
+<h4 id="_97">项目属性<a class="headerlink" href="#_97" title="Permanent link"></a></h4>
+<ul>
+<li>order：定义项目的排列顺序。数值越小，排列越靠前，默认为0  </li>
+<li>flex-grow：定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大</li>
+<li>flex-shrink：定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小</li>
+<li>flex-basis：定义了在分配多余空间之前，项目占据的主轴空间</li>
+<li>flex：是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。</li>
+<li>align-self：允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。</li>
+</ul>
+<h4 id="_98">参考链接<a class="headerlink" href="#_98" title="Permanent link"></a></h4>
+<p><a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank">http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html</a>  </p>
+<h3 id="bfc">BFC(块级格式化上下文)<a class="headerlink" href="#bfc" title="Permanent link"></a></h3>
+<p>BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。包括浮动，和外边距合并等等.<br />
+display 属性为 block, list-item, table 的元素，会产生BFC<br />
+给这些元素添加如下属性就可以触发BFC。</p>
+<ul>
+<li>float属性不为none</li>
+<li>position为absolute或fixed</li>
+<li>display为inline-block, table-cell, table-caption, flex, inline-flex</li>
+<li>overflow不为visible。</li>
+</ul>
+<h4 id="bfc_1">BFC布局规则特性<a class="headerlink" href="#bfc_1" title="Permanent link"></a></h4>
+<ul>
+<li>在BFC中，盒子从顶端开始垂直地一个接一个地排列</li>
+<li>盒子垂直方向的距离由margin决定。属于同一个BFC的两个相邻盒子的margin会发生重叠</li>
+<li>在BFC中，每一个盒子的左外边缘（margin-left）会触碰到容器的左边缘(border-left)（对于从右到左的格式来说，则触碰到右边缘）</li>
+</ul>
+<h4 id="bfc_2">BFC的主要用途<a class="headerlink" href="#bfc_2" title="Permanent link"></a></h4>
+<ol>
+<li>清除元素内部浮动:只要把父元素设为BFC就可以清理子元素的浮动了，最常见的用法就是在父元素上设置overflow: hidden样式，对于IE6加上zoom:1就可以了</li>
+<li>解决外边距合并问题</li>
+</ol>
+<h4 id="_99">参考链接<a class="headerlink" href="#_99" title="Permanent link"></a></h4>
+<p><a href="https://www.jianshu.com/p/498145565e4f" target="_blank">https://www.jianshu.com/p/498145565e4f</a>  </p>
+<h3 id="_100">前端鉴权<a class="headerlink" href="#_100" title="Permanent link"></a></h3>
+<h4 id="_101">常见的几种鉴权方式：<a class="headerlink" href="#_101" title="Permanent link"></a></h4>
+<h5 id="http-basic-authentication">HTTP Basic Authentication<a class="headerlink" href="#http-basic-authentication" title="Permanent link"></a></h5>
+<p>是HTTP中最为简单的认证方式，因为简单，所以不是很安全。<br />
+这种授权方式是浏览器遵守http协议实现的基本授权方式,HTTP协议进行通信的过程中，HTTP协议定义了基本认证认证允许HTTP服务器对客户端进行用户身份证的方法。<br />
+当一个客户端向一个需要认证的HTTP服务器进行数据请求时，如果之前没有认证过，HTTP服务器会返回401状态码，要求客户端输入用户名和密码，用户输入用户名和密码后，用户名和密码会经过BASE64加密附加到请求信息中再次请求HTTP服务器，HTTP服务器会根据请求头携带的认证信息，决定是否认证成功及做出相应的响应。</p>
+<h5 id="session-cookie">session-cookie<a class="headerlink" href="#session-cookie" title="Permanent link"></a></h5>
+<p>(这种方式在老的系统较为常见，只适用于web系统，以前用 java servlet 写服务端时候，都会自动维护session，会在cookie写一个JSESSIONID的值)<br />
+这种方式是利用服务器端的session（会话）和浏览器端的cookie来实现前后端的认证，即session和cookie配合使用，由于http请求时是无状态的，服务器正常情况下是不知道当前请求之前有没有来过，这个时候我们如果要记录状态，就需要在服务器端创建一个会话，将同一个客户端的请求都维护在各自的会话中，每当请求到达服务器端的时候，先检查改客户端有没有在服务端创建session,如果有则已经认证成功了，否则就认证失败</p>
+<h5 id="token_1">Token 验证<a class="headerlink" href="#token_1" title="Permanent link"></a></h5>
+<p>(具体可见上文  <strong>cookie、session、token（令牌）</strong> )<br />
+Token验证的特点：  </p>
+<ul>
+<li>无状态，可扩展</li>
+<li>支持多设备</li>
+<li>跨程序调用</li>
+<li>安全</li>
+</ul>
+<h5 id="oauth">OAuth(开放授权)<a class="headerlink" href="#oauth" title="Permanent link"></a></h5>
+<p>是一个开放标准，允许用户授权第三方网站访问他们存储在另外的服务提供者上的信息，而不需要将用户名和密码提供给第三方网站或分享他们数据的所有内容，为了保护用户数据的安全和隐私，第三方网站访问用户数据前都需要显式的向用户征求授权。我们常见的提供OAuth认证服务的厂商有支付宝，QQ,微信</p>
+<h4 id="vue_4">vue项目前端鉴权方式常用的有以下三种：<a class="headerlink" href="#vue_4" title="Permanent link"></a></h4>
+<ol>
+<li>渲染菜单时控制模块按钮的显示隐藏（不足：直接输入链接仍然可以访问模块）</li>
+<li>在路由导航守卫中拦截，针对没有权限的模块进行重定向（不足：每次访问模块都需要鉴定权限，模块数量过多时会影响系统性能）</li>
+<li>借助vue-router 2.x版本新加的API addRouters动态添加路由信息（不足：首次加载需要解析和添加，多跳转一次路由）</li>
+<li>
+<p>优化的方案：addRoutes动态添加，首屏加载时间可能会多出0.5s左右，加载一次之后后续就不需要再进行处理，可以提升系统的可靠性与稳定性  </p>
+<ul>
+<li>定义固定路由，用于路由初始化，如：登录页、404页面等</li>
+<li>路由导航守卫前置拦截。为了方便，将路由权限信息保存到vuex中，在路由跳转时，判断state中是否存在menu信息，如果不存在，则向后端请求权限信息，此部分需要阻塞页面的跳转，改为同步执行</li>
+<li>
+<p>注意事项：</p>
+<ul>
+<li>由于路由时动态添加的，存储在内存中，页面刷新之后内存中变量也会消失，动态添加的路由也会随之消失，所以每次刷新页面需要重新走一遍添加路由的流程。</li>
+<li>由于路由是动态添加的，在路由跳转时，添加的路由并没有生效，所以还需要多跳转一次页面</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="_102">按钮鉴权<a class="headerlink" href="#_102" title="Permanent link"></a></h4>
+<p>可以通过自定义指令，动态传入条件参数来实现按钮的显示隐藏</p>
+<h4 id="_103">参考链接<a class="headerlink" href="#_103" title="Permanent link"></a></h4>
+<p><a href="https://blog.csdn.net/ywl570717586/article/details/88241445" target="_blank">https://blog.csdn.net/ywl570717586/article/details/88241445</a><br />
+<a href="https://juejin.cn/post/6844903688994029582" target="_blank">https://juejin.cn/post/6844903688994029582</a><br />
+<a href="https://www.cnblogs.com/gerry2019/p/11045555.html" target="_blank">https://www.cnblogs.com/gerry2019/p/11045555.html</a>  </p>
+<h2 id="2021224">2021/2/24<a class="headerlink" href="#2021224" title="Permanent link"></a></h2>
+<h3 id="domcontentloaded-load">DOMContentLoaded 与 load事件<a class="headerlink" href="#domcontentloaded-load" title="Permanent link"></a></h3>
+<h4 id="domcontentloaded">DOMContentLoaded<a class="headerlink" href="#domcontentloaded" title="Permanent link"></a></h4>
+<blockquote>
+<p>当初始的 HTML 文档被完全加载和解析完成之后，DOMContentLoaded 事件被触发，而无需等待样式表、图像和子框架的完成加载</p>
+</blockquote>
+<p>当输入一个URL，页面的展示首先是空白的，然后过一会，页面会展示出内容，但是页面的有些资源比如说图片资源还无法看到，此时页面是可以正常的交互，过一段时间后，图片才完成显示在页面。从页面空白到展示出页面内容，会触发DOMContentLoaded事件。而这段时间就是HTML文档被加载和解析完成。<br />
+在解析html的过程中，html的解析会被中断，这是因为javascript会阻塞dom的解析。当解析过程中遇到 <code>&lt;script&gt;</code> 标签的时候，便会停止解析过程，转而去处理脚本，如果脚本是内联的,浏览器会先去执行这段内联的脚本，如果是外链的，那么先会去加载脚本，然后执行。在处理完脚本之后，浏览器便继续解析HTML文档。<br />
+在现代浏览器中，为了减缓渲染被阻塞的情况，现代的浏览器都使用了 <strong>猜测预加载</strong> 。当解析被阻塞的时候，浏览器会有一个轻量级的HTML（或CSS）扫描器（scanner）继续在文档中扫描，查找那些将来可能能够用到的资源文件的url，在渲染器使用它们之前将其下载下来。<br />
+当文档中没有脚本时，浏览器解析完文档便能触发 DOMContentLoaded 事件；如果文档中包含脚本，则脚本会阻塞文档的解析，而脚本需要等位于脚本前面的css加载完才能执行。<strong>在任何情况下，DOMContentLoaded 的触发不需要等待图片等其他资源加载完成。</strong></p>
+<h4 id="load">load<a class="headerlink" href="#load" title="Permanent link"></a></h4>
+<blockquote>
+<p>当一个资源及其依赖资源已完成加载时，将触发load事件</p>
+</blockquote>
+<p>页面上所有的资源（图片，音频，视频等）被加载以后才会触发load事件，简单来说，页面的load事件会在DOMContentLoaded被触发之后才触发。<br />
+在 jQuery 中经常使用的<code>$(document).ready(function() { // ...代码... })</code>; 其实监听的就是 DOMContentLoaded 事件，而 <code>$(document).load(function() { // ...代码... })</code>; 监听的是 load 事件。在用jquery的时候，我们一般都会将函数调用写在ready方法内，就是页面被解析后，我们就可以访问整个页面的所有dom元素，可以缩短页面的可交互时间，提高整个页面的体验。</p>
+<h4 id="cssjs">为什么一再强调将css放在头部，将js文件放在尾部？<a class="headerlink" href="#cssjs" title="Permanent link"></a></h4>
+<p>是因为浏览器生成Dom树的时候是一行一行读HTML代码的，script标签放在最后面就不会影响前面的页面的渲染。<br />
+那么问题来了，既然Dom树完全生成好后页面才能渲染出来，浏览器又必须读完全部HTML才能生成完整的Dom树，script标签不放在body底部是不是也一样，因为dom树的生成需要整个文档解析完毕。<br />
+其实现代浏览器为了更好的用户体验,渲染引擎将尝试尽快在屏幕上显示的内容。它不会等到所有HTML解析之前开始构建和布局渲染树。部分的内容将被解析并显示。也就是说浏览器能够渲染不完整的dom树和cssom，尽快的减少白屏的时间。假如我们将js放在header，js将阻塞解析dom，dom的内容会影响到First Paint，导致First Paint延后。所以说我们会将js放在后面，以减少First Paint的时间，但是不会减少DOMContentLoaded被触发的时间。</p>
+<h4 id="_104">参考链接<a class="headerlink" href="#_104" title="Permanent link"></a></h4>
+<p><a href="https://www.cnblogs.com/caizhenbo/p/6679478.html" target="_blank">https://www.cnblogs.com/caizhenbo/p/6679478.html</a><br />
+<a href="https://blog.csdn.net/liubangbo/article/details/86298859" target="_blank">https://blog.csdn.net/liubangbo/article/details/86298859</a>  </p>
+<h3 id="vuevue-lazyload">vue图片懒加载（vue-lazyload）<a class="headerlink" href="#vuevue-lazyload" title="Permanent link"></a></h3>
+<p>先将img标签中的src链接设为同一张图片（空白图片），将其真正的图片地址存储在img标签的自定义属性中（比如data-src）。当js监听到该图片元素进入可视窗口时，即将自定义属性中的地址存储到src属性中，达到懒加载的效果。<br />
+这样做能防止页面一次性向服务器响应大量请求导致服务器响应慢，页面卡顿或崩溃等问题</p>
+<h4 id="_105">可优化内容<a class="headerlink" href="#_105" title="Permanent link"></a></h4>
+<ul>
+<li><strong>滚动函数的节流</strong>：当用户在快速滚动页面时，不会加载图片资源，只有当用户停下或是逐渐放缓下滑速度时（即两次滚动的时间间隔超过阈值之后），才加载图片资源</li>
+<li><strong>预加载</strong>：预加载就是指预先加载一些未在当前视窗内，但是即将出现的一些图片。即：加载当前屏幕的上一屏和下一屏的图片资源</li>
+<li><strong>知乎网站的优化方案</strong>：先加载低质量的小图，再加载清晰的高质量原图</li>
+</ul>
+<h4 id="_106">参考链接<a class="headerlink" href="#_106" title="Permanent link"></a></h4>
+<p><a href="https://mp.weixin.qq.com/s/Syqoz_Hkh7JY4GYIu_TE3A" target="_blank">https://mp.weixin.qq.com/s/Syqoz_Hkh7JY4GYIu_TE3A</a><br />
+<a href="https://blog.csdn.net/Sunshine0508/article/details/97892311" target="_blank">https://blog.csdn.net/Sunshine0508/article/details/97892311</a></p>
+<h3 id="vue3">vue项目实现路由按需加载(路由懒加载)的3种方式<a class="headerlink" href="#vue3" title="Permanent link"></a></h3>
+<p>像vue这种单页面应用，如果没有应用懒加载，运用webpack打包后的文件将会异常的大，造成进入首页时，需要加载的内容过多，时间过长，会出现长时间的白屏，即使做了loading也是不利于用户体验，而运用懒加载则可以将页面进行划分，需要的时候加载页面，可以有效的分担首页所承担的加载压力，减少首页加载用时。</p>
+<h4 id="_107">异步加载<a class="headerlink" href="#_107" title="Permanent link"></a></h4>
+<div class="highlight"><pre><span class="p">{</span> <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/home&#39;</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;home&#39;</span><span class="p">,</span> <span class="nx">component</span><span class="o">:</span> <span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">require</span><span class="p">([</span><span class="s1">&#39;@/components/home&#39;</span><span class="p">],</span><span class="nx">resolve</span><span class="p">)</span> <span class="p">},</span>
+</pre></div>
+
+<h4 id="import">路由懒加载(使用import)<a class="headerlink" href="#import" title="Permanent link"></a></h4>
+<div class="highlight"><pre><span class="kr">const</span> <span class="nx">Home</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="kr">import</span><span class="p">(</span><span class="s1">&#39;@/components/home&#39;</span><span class="p">)</span>
+</pre></div>
+
+<h4 id="webpackrequireensure">webpack提供的require.ensure()<a class="headerlink" href="#webpackrequireensure" title="Permanent link"></a></h4>
+<div class="highlight"><pre><span class="kr">const</span> <span class="nx">list</span> <span class="o">=</span> <span class="nx">r</span> <span class="o">=&gt;</span> <span class="nx">require</span><span class="p">.</span><span class="nx">ensure</span><span class="p">([],</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">r</span><span class="p">(</span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../components/list/list&#39;</span><span class="p">)),</span> <span class="s1">&#39;list&#39;</span><span class="p">);</span>
+<span class="c1">// 路由也是正常的写法  这种是官方推荐的写的 按模块划分懒加载 </span>
+<span class="kr">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Router</span><span class="p">({</span>
+    <span class="nx">routes</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+           <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/list/blog&#39;</span><span class="p">,</span>
+           <span class="nx">component</span><span class="o">:</span> <span class="nx">list</span><span class="p">,</span>
+           <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;blog&#39;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">})</span>
+</pre></div>
+
+<h4 id="_108">参考链接<a class="headerlink" href="#_108" title="Permanent link"></a></h4>
+<p><a href="https://blog.csdn.net/xm1037782843/article/details/88225104?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control&amp;dist_request_id=05d4c1f7-07a7-40c3-a2d3-e91c97187e0e&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control" target="_blank">https://blog.csdn.net/xm1037782843/article/details/88225104?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control&amp;dist_request_id=05d4c1f7-07a7-40c3-a2d3-e91c97187e0e&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control</a></p>
+<h2 id="2021225">2021/2/25<a class="headerlink" href="#2021225" title="Permanent link"></a></h2>
+<h3 id="event-loop">event loop(事件循环)<a class="headerlink" href="#event-loop" title="Permanent link"></a></h3>
+<p>javascript从诞生之日起就是一门 <strong>单线程</strong> 的 <strong>非阻塞</strong> 的脚本语言。这是由其最初的用途来决定的：与浏览器交互。<br />
+javascript引擎 利用 event loop 实现了非阻塞</p>
+<h4 id="_109">执行栈与事件队列<a class="headerlink" href="#_109" title="Permanent link"></a></h4>
+<p>当javascript代码执行的时候会将不同的变量存于内存中的不同位置：堆（heap）和栈（stack）中来加以区分。其中，堆里存放着一些对象。而栈中则存放着一些基础类型变量以及对象的指针<br />
+当调用一个方法的时候，js会生成一个与这个方法对应的 <strong>执行环境（context）</strong>，又叫 <strong>执行上下文</strong>。这个执行环境中存在着这个方法的私有作用域，上层作用域的指向，方法的参数，这个作用域中定义的变量以及这个作用域的this对象。 而当一系列方法被依次调用的时候，因为js是单线程的，同一时间只能执行一个方法，于是这些方法被排队在一个单独的地方。这个地方被称为 <strong>执行栈</strong><br />
+当一个脚本第一次执行的时候，js引擎会解析这段代码，并将其中的同步代码按照执行顺序加入执行栈中，然后从头开始执行。如果当前执行的是一个方法，那么js会向执行栈中添加这个方法的执行环境，然后进入这个执行环境继续执行其中的代码。当这个执行环境中的代码 执行完毕并返回结果后，js会退出这个执行环境并把这个执行环境销毁，回到上一个方法的执行环境。。这个过程反复进行，直到执行栈中的代码全部执行完毕<br />
+js引擎遇到一个 <strong>异步事件</strong> 后并不会一直等待其返回结果，而是会将这个事件挂起，继续执行执行栈中的其他任务。当一个异步事件返回结果后，js会将这个事件加入与当前执行栈不同的另一个队列，我们称之为 <strong>事件队列</strong>。被放入事件队列不会立刻执行其回调，而是等待当前执行栈中的所有任务都执行完毕， 主线程处于闲置状态时，主线程会去查找事件队列是否有任务。如果有，那么主线程会从中取出排在第一位的事件，并把这个事件对应的回调放入执行栈中，然后执行其中的同步代码&hellip;，如此反复，这样就形成了一个无限的循环。这就是 <strong>事件循环（Event Loop）</strong> 。</p>
+<h4 id="micro-taskmacro-task">微任务（micro task）和宏任务（macro task）<a class="headerlink" href="#micro-taskmacro-task" title="Permanent link"></a></h4>
+<p>以下事件属于宏任务：</p>
+<ul>
+<li>setInterval()</li>
+<li>setTimeout()</li>
+</ul>
+<p>以下事件属于微任务：</p>
+<ul>
+<li>new Promise()</li>
+<li>new MutaionObserver()</li>
+</ul>
+<p>在一个事件循环中，异步事件返回结果后会被放到一个 <strong>事件队列</strong> 中。然后，根据这个异步事件的类型，这个事件实际上会被对应的宏任务队列或者微任务队列中去。并且在当前执行栈为空的时候，主线程会 查看微任务队列是否有事件存在。如果不存在，那么再去宏任务队列中取出一个事件并把对应的回到加入当前执行栈；如果存在，则会依次执行队列中事件对应的回调，直到微任务队列为空，然后去宏任务队列中取出最前面的一个事件，把对应的回调加入当前执行栈&hellip;如此反复，进入循环。</p>
+<p><strong>当当前执行栈执行完毕时会立刻先处理所有微任务队列中的事件，然后再去宏任务队列中取出一个事件。同一次事件循环中，微任务永远在宏任务之前执行</strong>  </p>
+<div class="highlight"><pre><span class="c1">//示例</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="k">new</span> <span class="nx">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="nx">reject</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="nx">resolve</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+<span class="p">})</span>
+<span class="c1">//输出结果为：</span>
+<span class="c1">//2</span>
+<span class="c1">//3</span>
+<span class="c1">//1</span>
+</pre></div>
+
+<div class="highlight"><pre><span class="nx">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span><span class="o">=&gt;</span><span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Promise1&#39;</span><span class="p">)</span>  
+  <span class="nx">setTimeout</span><span class="p">(()</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;setTimeout2&#39;</span><span class="p">)</span>
+  <span class="p">},</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="nx">setTimeout</span><span class="p">(()</span><span class="o">=&gt;</span><span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;setTimeout1&#39;</span><span class="p">)</span>
+  <span class="nx">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Promise2&#39;</span><span class="p">)</span>    
+  <span class="p">})</span>
+<span class="p">},</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1">//输出结果为</span>
+<span class="c1">//Promise1，setTimeout1，Promise2，setTimeout2</span>
+</pre></div>
+
+<h4 id="node-event-loop">Node与浏览器的 Event Loop 差异<a class="headerlink" href="#node-event-loop" title="Permanent link"></a></h4>
+<p>浏览器环境下，microtask的任务队列是每个macrotask执行完之后执行。而在Node.js中，microtask会在事件循环的各个阶段之间执行，也就是一个阶段执行完毕，就会去执行microtask队列的任务。
+<div class="highlight"><pre><span class="kd">function</span> <span class="nx">test</span> <span class="p">()</span> <span class="p">{</span>
+   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">)</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;children2&#39;</span><span class="p">)</span>
+        <span class="nx">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;children2-1&#39;</span><span class="p">)})</span>
+    <span class="p">},</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;children3&#39;</span><span class="p">)</span>
+        <span class="nx">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;children3-1&#39;</span><span class="p">)})</span>
+    <span class="p">},</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="nx">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;children1&#39;</span><span class="p">)})</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">)</span> 
+<span class="p">}</span>
+
+<span class="nx">test</span><span class="p">()</span>
+
+<span class="c1">// 以上代码在node11以下版本的执行结果(先执行所有的宏任务，再执行微任务)</span>
+<span class="c1">// start</span>
+<span class="c1">// end</span>
+<span class="c1">// children1</span>
+<span class="c1">// children2</span>
+<span class="c1">// children3</span>
+<span class="c1">// children2-1</span>
+<span class="c1">// children3-1</span>
+
+<span class="c1">// 以上代码在node11及浏览器的执行结果(顺序执行宏任务和微任务)</span>
+<span class="c1">// start</span>
+<span class="c1">// end</span>
+<span class="c1">// children1</span>
+<span class="c1">// children2</span>
+<span class="c1">// children2-1</span>
+<span class="c1">// children3</span>
+<span class="c1">// children3-1</span>
+</pre></div></p>
+<h4 id="_110">参考链接<a class="headerlink" href="#_110" title="Permanent link"></a></h4>
+<p><a href="https://juejin.cn/post/6844903761949753352" target="_blank">https://juejin.cn/post/6844903761949753352</a><br />
+<a href="https://www.cnblogs.com/cangqinglang/p/8967268.html" target="_blank">https://www.cnblogs.com/cangqinglang/p/8967268.html</a></p>
+<h2 id="2021311">2021/3/11(中联重科)<a class="headerlink" href="#2021311" title="Permanent link"></a></h2>
+<h3 id="promise">promise<a class="headerlink" href="#promise" title="Permanent link"></a></h3>
+<p>Promise的三种状态 <strong>pending、fulfilled、rejected(未决定，履行，拒绝)</strong><br />
+同一时间只能存在一种状态，且状态一旦改变就不能再变。promise是一个构造函数，promise对象代表一项有两种可能结果（成功或失败）的任务，它还持有多个回调，出现不同结果时分别发出相应回调。<br />
+1. 初始化，状态：pending
+2. 当调用resolve(成功)，状态：pengding=&gt;fulfilled
+3. 当调用reject(失败)，状态：pending=&gt;rejected</p>
+<h3 id="keep-alive">keep-alive<a class="headerlink" href="#keep-alive" title="Permanent link"></a></h3>
+<p>keep-alive作用：对组件进行缓存，提高性能<br />
+有两个组件A、B。我们在A组件上操作的数据，此时我们切换到组件B，再切换到A组件，A组件并不会重新渲染，而是保存之前的状态。<br />
+keep-alive是一个抽象标签，不会被渲染承具体的dom元素。这点与template类似。</p>
+<h4 id="props">Props<a class="headerlink" href="#props" title="Permanent link"></a></h4>
+<ul>
+<li>include - 字符串或正则表达式。只有名称匹配的组件会被缓存。</li>
+<li>exclude - 字符串或正则表达式。任何名称匹配的组件都不会被缓存。</li>
+<li>max - 数字。最多可以缓存多少组件实例。</li>
+</ul>
+<h4 id="activateddeactivated">钩子函数（activated，deactivated）<a class="headerlink" href="#activateddeactivated" title="Permanent link"></a></h4>
+<p>页面第一次进入，钩子的触发顺序created-&gt; mounted-&gt; activated，退出时触发deactivated。当再次进入（前进或者后退）时，只触发activated。<br />
+<strong>activated</strong>：包含了keep-alive的组件，created()、mounted()都只会触发一次。但是activated每一次进入组件，都会触发一次</p>
+<h3 id="ononceoffemit">$on,$once,$off,$emit<a class="headerlink" href="#ononceoffemit" title="Permanent link"></a></h3>
+<h4 id="onoffemit">$on,$off,$emit<a class="headerlink" href="#onoffemit" title="Permanent link"></a></h4>
+<ul>
+<li>$on:监听当前实例上的自定义事件。事件可以由 vm.$emit 触发。回调函数会接收所有传入事件触发函数的额外参数</li>
+<li>$off:移除自定义事件监听器.如果没有提供参数，则移除所有的事件监听器</li>
+<li>$emit :触发当前实例上的事件。附加参数都会传给监听器回调</li>
+</ul>
+<h4 id="once">$once<a class="headerlink" href="#once" title="Permanent link"></a></h4>
+<p>监听一个自定义事件，但是只触发一次。一旦触发之后，监听器就会被移除。<br />
+可以使用$once(‘hook:beforeDestory’,() =&gt; {})清理定时器<br />
+在vue项目清理定时器，通常有两种方法  </p>
+<ul>
+<li>生命周期函数（beforeDestroy()）中销毁定时器：<br />
+  缺点： <ol>
+<li>vue实例中需要有这个定时器的实例，感觉有点多余;</li>
+<li>创建的定时器代码和销毁定时器的代码没有放在一起，通常很容易忘记去清理这个定时器，不容易维护;</li>
+</ol>
+</li>
+<li>直接在需要定时器的方法或者生命周期函数中声明并销毁（$once）
+<div class="highlight"><pre><span class="kr">export</span> <span class="k">default</span><span class="p">{</span>
+  <span class="nx">methods</span><span class="o">:</span><span class="p">{</span>
+    <span class="nx">fun1</span><span class="p">(){</span>
+      <span class="kr">const</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(()</span><span class="o">=&gt;</span><span class="p">{</span>
+        <span class="c1">//具体执行代码</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">);</span>
+      <span class="p">},</span><span class="mi">1000</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">$once</span><span class="p">(</span><span class="s1">&#39;hook:beforeDestory&#39;</span><span class="p">,()</span><span class="o">=&gt;</span><span class="p">{</span>
+        <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">timer</span><span class="p">);</span>
+        <span class="nx">timer</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+      <span class="p">})</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div></li>
+</ul>
+<h3 id="vue2vue3">vue2,vue3的区别<a class="headerlink" href="#vue2vue3" title="Permanent link"></a></h3>
+<ul>
+<li>移除过滤器filters</li>
+<li>生命周期的变化  <ul>
+<li>移除了beforeCreate（）和Created（）</li>
+<li>新增了setup()（代替beforeCreate（）和Created（））.</li>
+<li>在剩余六个函数之前加入了on（onMounted,onBeforeMount&hellip;）  </li>
+</ul>
+</li>
+<li>key的变化:vue3 中 v-if/v-else/v-else-if ， key不再是必须填写的了，新版的vue会自动生成唯一的key，但是如果自己手动传入了key，这个值必须是唯一的，不能使用重复的值</li>
+<li>Vue 3 的 Template 支持多个根标签，Vue 2 不支持、</li>
+</ul>
+<h2 id="2020316">2020/3/16<a class="headerlink" href="#2020316" title="Permanent link"></a></h2>
+<h3 id="js_1">js数据类型判断<a class="headerlink" href="#js_1" title="Permanent link"></a></h3>
+<p>js数据分为两种类型：原始数据类型和引用数据类型。<br />
+原始数据类型有：string、number、boolean、undefined和null<br />
+引用数据类型有：Function、Object、Date、RegExp、Number、String、Boolean和自定义类等  </p>
+<p>其中原始数据类型也称基础数据类型，是不可拆分的数据类型，他存在于 <strong>栈</strong> 中；而引用数据类型也是通常意义上所说的类，存在于 <strong>堆</strong> 中。</p>
+<h4 id="typeof">typeof<a class="headerlink" href="#typeof" title="Permanent link"></a></h4>
+<p>对于原始数据类型，我们可以使用typeof()函数来判断他的数据类型</p>
+<h4 id="instanceof">instanceof<a class="headerlink" href="#instanceof" title="Permanent link"></a></h4>
+<p>typeof()函数不能用来判断引用数据类型。instanceof可以用来判断一个变量是否是某个对象的实例，可以用于引用数据类型判断</p>
+<h4 id="objectprototypetostringcall">Object.prototype.toString.call()<a class="headerlink" href="#objectprototypetostringcall" title="Permanent link"></a></h4>
+<p>可以通用的来判断原始数据类型和引用数据类型。但无法判断自定义类
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">num1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">num2</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Number</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">num1</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;[object Number]&quot;</span><span class="p">;</span>      <span class="c1">//true</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">num2</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;[object Number]&quot;</span><span class="p">;</span>      <span class="c1">//true</span>
+</pre></div></p>
+<h4 id="_111">参考链接<a class="headerlink" href="#_111" title="Permanent link"></a></h4>
+<p><a href="https://www.cnblogs.com/leejersey/p/5191924.html" target="_blank">https://www.cnblogs.com/leejersey/p/5191924.html</a></p>
+<h3 id="_112">日常问题（长期更新）<a class="headerlink" href="#_112" title="Permanent link"></a></h3>
+<h4 id="_113">常见<a class="headerlink" href="#_113" title="Permanent link"></a></h4>
+<ol>
+<li>map和forEach的区别：map可以改变数组项，forEach不可以，也不可以用return。二者都不可以跳蛛for循环。跳出for循环可以用 for···of <code>for(let item of list)</code> ，可以使用break。es5循环有 for···in 是遍历数组下标。</li>
+<li>v-for和v-if为什么不能一起使用：for的优先级比if高，每次都会遍历item再进行一次if判断</li>
+<li>promise回调地狱：多个promise依次顺序执行时会出现回调地狱，可用es7的sync/await解决</li>
+<li>mixins：  <ul>
+<li>data或方法与组件内有冲突时： data和methods会优先取组件内，钩子函数会先执行mixins内的，再执行组件内的。</li>
+<li>与普通公共方法的区别： 可以定义共用的变量，引入组建后，变量相互独立相互不影响</li>
+</ul>
+</li>
+<li>css选择器优先级： important &gt; 内联 &gt; id &gt; 类 &gt; 标签</li>
+</ol></article></body></html>

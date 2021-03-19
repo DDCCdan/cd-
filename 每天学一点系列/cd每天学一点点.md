@@ -2595,3 +2595,278 @@ Token验证的特点：
 <https://blog.csdn.net/ywl570717586/article/details/88241445>{:target="_blank"}  
 <https://juejin.cn/post/6844903688994029582>{:target="_blank"}  
 <https://www.cnblogs.com/gerry2019/p/11045555.html>{:target="_blank"}  
+
+
+## 2021/2/24
+### DOMContentLoaded 与 load事件
+#### DOMContentLoaded
+>当初始的 HTML 文档被完全加载和解析完成之后，DOMContentLoaded 事件被触发，而无需等待样式表、图像和子框架的完成加载
+
+当输入一个URL，页面的展示首先是空白的，然后过一会，页面会展示出内容，但是页面的有些资源比如说图片资源还无法看到，此时页面是可以正常的交互，过一段时间后，图片才完成显示在页面。从页面空白到展示出页面内容，会触发DOMContentLoaded事件。而这段时间就是HTML文档被加载和解析完成。  
+在解析html的过程中，html的解析会被中断，这是因为javascript会阻塞dom的解析。当解析过程中遇到 `<script>` 标签的时候，便会停止解析过程，转而去处理脚本，如果脚本是内联的,浏览器会先去执行这段内联的脚本，如果是外链的，那么先会去加载脚本，然后执行。在处理完脚本之后，浏览器便继续解析HTML文档。  
+在现代浏览器中，为了减缓渲染被阻塞的情况，现代的浏览器都使用了 **猜测预加载** 。当解析被阻塞的时候，浏览器会有一个轻量级的HTML（或CSS）扫描器（scanner）继续在文档中扫描，查找那些将来可能能够用到的资源文件的url，在渲染器使用它们之前将其下载下来。  
+当文档中没有脚本时，浏览器解析完文档便能触发 DOMContentLoaded 事件；如果文档中包含脚本，则脚本会阻塞文档的解析，而脚本需要等位于脚本前面的css加载完才能执行。**在任何情况下，DOMContentLoaded 的触发不需要等待图片等其他资源加载完成。**
+
+#### load
+>当一个资源及其依赖资源已完成加载时，将触发load事件
+
+页面上所有的资源（图片，音频，视频等）被加载以后才会触发load事件，简单来说，页面的load事件会在DOMContentLoaded被触发之后才触发。  
+在 jQuery 中经常使用的` $(document).ready(function() { // ...代码... })`; 其实监听的就是 DOMContentLoaded 事件，而 `$(document).load(function() { // ...代码... })`; 监听的是 load 事件。在用jquery的时候，我们一般都会将函数调用写在ready方法内，就是页面被解析后，我们就可以访问整个页面的所有dom元素，可以缩短页面的可交互时间，提高整个页面的体验。
+
+#### 为什么一再强调将css放在头部，将js文件放在尾部？
+是因为浏览器生成Dom树的时候是一行一行读HTML代码的，script标签放在最后面就不会影响前面的页面的渲染。  
+那么问题来了，既然Dom树完全生成好后页面才能渲染出来，浏览器又必须读完全部HTML才能生成完整的Dom树，script标签不放在body底部是不是也一样，因为dom树的生成需要整个文档解析完毕。  
+其实现代浏览器为了更好的用户体验,渲染引擎将尝试尽快在屏幕上显示的内容。它不会等到所有HTML解析之前开始构建和布局渲染树。部分的内容将被解析并显示。也就是说浏览器能够渲染不完整的dom树和cssom，尽快的减少白屏的时间。假如我们将js放在header，js将阻塞解析dom，dom的内容会影响到First Paint，导致First Paint延后。所以说我们会将js放在后面，以减少First Paint的时间，但是不会减少DOMContentLoaded被触发的时间。
+
+#### 参考链接
+<https://www.cnblogs.com/caizhenbo/p/6679478.html>{:target="_blank"}  
+<https://blog.csdn.net/liubangbo/article/details/86298859>{:target="_blank"}  
+
+### vue图片懒加载（vue-lazyload）
+先将img标签中的src链接设为同一张图片（空白图片），将其真正的图片地址存储在img标签的自定义属性中（比如data-src）。当js监听到该图片元素进入可视窗口时，即将自定义属性中的地址存储到src属性中，达到懒加载的效果。  
+这样做能防止页面一次性向服务器响应大量请求导致服务器响应慢，页面卡顿或崩溃等问题
+
+#### 可优化内容
+
+* **滚动函数的节流**：当用户在快速滚动页面时，不会加载图片资源，只有当用户停下或是逐渐放缓下滑速度时（即两次滚动的时间间隔超过阈值之后），才加载图片资源
+* **预加载**：预加载就是指预先加载一些未在当前视窗内，但是即将出现的一些图片。即：加载当前屏幕的上一屏和下一屏的图片资源
+* **知乎网站的优化方案**：先加载低质量的小图，再加载清晰的高质量原图
+
+#### 参考链接
+<https://mp.weixin.qq.com/s/Syqoz_Hkh7JY4GYIu_TE3A>{:target="_blank"}  
+<https://blog.csdn.net/Sunshine0508/article/details/97892311>{:target="_blank"}
+
+### vue项目实现路由按需加载(路由懒加载)的3种方式
+像vue这种单页面应用，如果没有应用懒加载，运用webpack打包后的文件将会异常的大，造成进入首页时，需要加载的内容过多，时间过长，会出现长时间的白屏，即使做了loading也是不利于用户体验，而运用懒加载则可以将页面进行划分，需要的时候加载页面，可以有效的分担首页所承担的加载压力，减少首页加载用时。
+
+#### 异步加载 
+```JS
+{ path: '/home', name: 'home', component: resolve => require(['@/components/home'],resolve) },
+```
+
+#### 路由懒加载(使用import)
+```JS
+const Home = () => import('@/components/home')
+```
+
+#### webpack提供的require.ensure() 
+```JS
+const list = r => require.ensure([], () => r(require('../components/list/list')), 'list');
+// 路由也是正常的写法  这种是官方推荐的写的 按模块划分懒加载 
+const router = new Router({
+    routes: [
+        {
+           path: '/list/blog',
+           component: list,
+           name: 'blog'
+        }
+    ]
+})
+```
+
+#### 参考链接
+<https://blog.csdn.net/xm1037782843/article/details/88225104?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control&dist_request_id=05d4c1f7-07a7-40c3-a2d3-e91c97187e0e&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control>{:target="_blank"}
+
+##2021/2/25
+### event loop(事件循环)
+javascript从诞生之日起就是一门 **单线程** 的 **非阻塞** 的脚本语言。这是由其最初的用途来决定的：与浏览器交互。  
+javascript引擎 利用 event loop 实现了非阻塞
+
+#### 执行栈与事件队列
+当javascript代码执行的时候会将不同的变量存于内存中的不同位置：堆（heap）和栈（stack）中来加以区分。其中，堆里存放着一些对象。而栈中则存放着一些基础类型变量以及对象的指针  
+当调用一个方法的时候，js会生成一个与这个方法对应的 **执行环境（context）**，又叫 **执行上下文**。这个执行环境中存在着这个方法的私有作用域，上层作用域的指向，方法的参数，这个作用域中定义的变量以及这个作用域的this对象。 而当一系列方法被依次调用的时候，因为js是单线程的，同一时间只能执行一个方法，于是这些方法被排队在一个单独的地方。这个地方被称为 **执行栈**  
+当一个脚本第一次执行的时候，js引擎会解析这段代码，并将其中的同步代码按照执行顺序加入执行栈中，然后从头开始执行。如果当前执行的是一个方法，那么js会向执行栈中添加这个方法的执行环境，然后进入这个执行环境继续执行其中的代码。当这个执行环境中的代码 执行完毕并返回结果后，js会退出这个执行环境并把这个执行环境销毁，回到上一个方法的执行环境。。这个过程反复进行，直到执行栈中的代码全部执行完毕  
+js引擎遇到一个 **异步事件** 后并不会一直等待其返回结果，而是会将这个事件挂起，继续执行执行栈中的其他任务。当一个异步事件返回结果后，js会将这个事件加入与当前执行栈不同的另一个队列，我们称之为 **事件队列**。被放入事件队列不会立刻执行其回调，而是等待当前执行栈中的所有任务都执行完毕， 主线程处于闲置状态时，主线程会去查找事件队列是否有任务。如果有，那么主线程会从中取出排在第一位的事件，并把这个事件对应的回调放入执行栈中，然后执行其中的同步代码...，如此反复，这样就形成了一个无限的循环。这就是 **事件循环（Event Loop）** 。
+
+#### 微任务（micro task）和宏任务（macro task）
+以下事件属于宏任务：
+
+* setInterval()
+* setTimeout()
+
+以下事件属于微任务：
+
+* new Promise()
+* new MutaionObserver()
+
+在一个事件循环中，异步事件返回结果后会被放到一个 **事件队列** 中。然后，根据这个异步事件的类型，这个事件实际上会被对应的宏任务队列或者微任务队列中去。并且在当前执行栈为空的时候，主线程会 查看微任务队列是否有事件存在。如果不存在，那么再去宏任务队列中取出一个事件并把对应的回到加入当前执行栈；如果存在，则会依次执行队列中事件对应的回调，直到微任务队列为空，然后去宏任务队列中取出最前面的一个事件，把对应的回调加入当前执行栈...如此反复，进入循环。
+
+**当当前执行栈执行完毕时会立刻先处理所有微任务队列中的事件，然后再去宏任务队列中取出一个事件。同一次事件循环中，微任务永远在宏任务之前执行**  
+
+```JS
+//示例
+setTimeout(function () {
+    console.log(1);
+});
+
+new Promise(function(resolve,reject){
+    console.log(2)
+    resolve(3)
+}).then(function(val){
+    console.log(val);
+})
+//输出结果为：
+//2
+//3
+//1
+```
+
+```JS
+Promise.resolve().then(()=>{
+  console.log('Promise1')  
+  setTimeout(()=>{
+    console.log('setTimeout2')
+  },0)
+})
+setTimeout(()=>{
+  console.log('setTimeout1')
+  Promise.resolve().then(()=>{
+    console.log('Promise2')    
+  })
+},0)
+//输出结果为
+//Promise1，setTimeout1，Promise2，setTimeout2
+```
+
+#### Node与浏览器的 Event Loop 差异
+浏览器环境下，microtask的任务队列是每个macrotask执行完之后执行。而在Node.js中，microtask会在事件循环的各个阶段之间执行，也就是一个阶段执行完毕，就会去执行microtask队列的任务。
+```JS
+function test () {
+   console.log('start')
+    setTimeout(() => {
+        console.log('children2')
+        Promise.resolve().then(() => {console.log('children2-1')})
+    }, 0)
+    setTimeout(() => {
+        console.log('children3')
+        Promise.resolve().then(() => {console.log('children3-1')})
+    }, 0)
+    Promise.resolve().then(() => {console.log('children1')})
+    console.log('end') 
+}
+
+test()
+
+// 以上代码在node11以下版本的执行结果(先执行所有的宏任务，再执行微任务)
+// start
+// end
+// children1
+// children2
+// children3
+// children2-1
+// children3-1
+
+// 以上代码在node11及浏览器的执行结果(顺序执行宏任务和微任务)
+// start
+// end
+// children1
+// children2
+// children2-1
+// children3
+// children3-1
+```
+
+#### 参考链接
+<https://juejin.cn/post/6844903761949753352>{:target="_blank"}  
+<https://www.cnblogs.com/cangqinglang/p/8967268.html>{:target="_blank"}
+
+## 2021/3/11(中联重科)
+### promise
+Promise的三种状态 **pending、fulfilled、rejected(未决定，履行，拒绝)**  
+同一时间只能存在一种状态，且状态一旦改变就不能再变。promise是一个构造函数，promise对象代表一项有两种可能结果（成功或失败）的任务，它还持有多个回调，出现不同结果时分别发出相应回调。  
+1. 初始化，状态：pending
+2. 当调用resolve(成功)，状态：pengding=>fulfilled
+3. 当调用reject(失败)，状态：pending=>rejected
+
+### keep-alive
+keep-alive作用：对组件进行缓存，提高性能  
+有两个组件A、B。我们在A组件上操作的数据，此时我们切换到组件B，再切换到A组件，A组件并不会重新渲染，而是保存之前的状态。  
+keep-alive是一个抽象标签，不会被渲染承具体的dom元素。这点与template类似。
+
+#### Props
+
+* include - 字符串或正则表达式。只有名称匹配的组件会被缓存。
+* exclude - 字符串或正则表达式。任何名称匹配的组件都不会被缓存。
+* max - 数字。最多可以缓存多少组件实例。
+
+#### 钩子函数（activated，deactivated）
+页面第一次进入，钩子的触发顺序created-> mounted-> activated，退出时触发deactivated。当再次进入（前进或者后退）时，只触发activated。  
+**activated**：包含了keep-alive的组件，created()、mounted()都只会触发一次。但是activated每一次进入组件，都会触发一次
+
+### $on,$once,$off,$emit
+#### $on,$off,$emit  
+* $on:监听当前实例上的自定义事件。事件可以由 vm.$emit 触发。回调函数会接收所有传入事件触发函数的额外参数
+* $off:移除自定义事件监听器.如果没有提供参数，则移除所有的事件监听器
+* $emit :触发当前实例上的事件。附加参数都会传给监听器回调
+#### $once
+监听一个自定义事件，但是只触发一次。一旦触发之后，监听器就会被移除。  
+可以使用$once(‘hook:beforeDestory’,() => {})清理定时器  
+在vue项目清理定时器，通常有两种方法  
+
+* 生命周期函数（beforeDestroy()）中销毁定时器：  
+  缺点： 
+    1. vue实例中需要有这个定时器的实例，感觉有点多余;
+    2. 创建的定时器代码和销毁定时器的代码没有放在一起，通常很容易忘记去清理这个定时器，不容易维护;
+* 直接在需要定时器的方法或者生命周期函数中声明并销毁（$once）
+```JS
+export default{
+  methods:{
+    fun1(){
+      const timer = setInterval(()=>{
+        //具体执行代码
+        console.log('1');
+      },1000);
+      this.$once('hook:beforeDestory',()=>{
+        clearInterval(timer);
+        timer = null;
+      })
+    }
+  }
+}
+```
+
+### vue2,vue3的区别  
+* 移除过滤器filters
+* 生命周期的变化  
+    + 移除了beforeCreate（）和Created（）
+    + 新增了setup()（代替beforeCreate（）和Created（））.
+    + 在剩余六个函数之前加入了on（onMounted,onBeforeMount...）  
+* key的变化:vue3 中 v-if/v-else/v-else-if ， key不再是必须填写的了，新版的vue会自动生成唯一的key，但是如果自己手动传入了key，这个值必须是唯一的，不能使用重复的值
+* Vue 3 的 Template 支持多个根标签，Vue 2 不支持、
+
+## 2020/3/16
+### js数据类型判断
+
+js数据分为两种类型：原始数据类型和引用数据类型。  
+原始数据类型有：string、number、boolean、undefined和null  
+引用数据类型有：Function、Object、Date、RegExp、Number、String、Boolean和自定义类等  
+
+其中原始数据类型也称基础数据类型，是不可拆分的数据类型，他存在于 **栈** 中；而引用数据类型也是通常意义上所说的类，存在于 **堆** 中。
+
+#### typeof
+对于原始数据类型，我们可以使用typeof()函数来判断他的数据类型
+
+#### instanceof
+typeof()函数不能用来判断引用数据类型。instanceof可以用来判断一个变量是否是某个对象的实例，可以用于引用数据类型判断
+
+#### Object.prototype.toString.call()
+可以通用的来判断原始数据类型和引用数据类型。但无法判断自定义类
+```JS
+var num1 = 1;
+var num2 = new Number(1);
+Object.prototype.toString.call(num1) == "[object Number]";      //true
+Object.prototype.toString.call(num2) == "[object Number]";      //true
+```
+
+#### 参考链接
+<https://www.cnblogs.com/leejersey/p/5191924.html>{:target="_blank"}
+
+### 日常问题（长期更新）
+#### 常见
+1. map和forEach的区别：map可以改变数组项，forEach不可以，也不可以用return。二者都不可以跳蛛for循环。跳出for循环可以用 for···of `for(let item of list)` ，可以使用break。es5循环有 for···in 是遍历数组下标。
+2. v-for和v-if为什么不能一起使用：for的优先级比if高，每次都会遍历item再进行一次if判断
+3. promise回调地狱：多个promise依次顺序执行时会出现回调地狱，可用es7的sync/await解决
+4. mixins：  
+    + data或方法与组件内有冲突时： data和methods会优先取组件内，钩子函数会先执行mixins内的，再执行组件内的。
+    + 与普通公共方法的区别： 可以定义共用的变量，引入组建后，变量相互独立相互不影响
+5. css选择器优先级： important > 内联 > id > 类 > 标签
