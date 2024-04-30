@@ -1,6 +1,7 @@
 >修改目录为左边框方法<https://blog.csdn.net/zjiang1994/article/details/52250363>{:target="_blank"}
 
 修改333
+修改test
 [TOC]
 ## 2020/6/1
 ### 前端路由
@@ -2833,7 +2834,41 @@ export default{
     + 新增了setup()（代替beforeCreate（）和Created（））.
     + 在剩余六个函数之前加入了on（onMounted,onBeforeMount...）  
 * key的变化:vue3 中 v-if/v-else/v-else-if ， key不再是必须填写的了，新版的vue会自动生成唯一的key，但是如果自己手动传入了key，这个值必须是唯一的，不能使用重复的值
-* Vue 3 的 Template 支持多个根标签，Vue 2 不支持、
+* Vue 3 的 Template 支持多个根标签，Vue 2 不支持：
+  >Vue 2 的 Virtual DOM 机制是基于 Snabbdom 实现的。而引入 Virtual DOM（的目的之一）是为了提升渲染性能，这要靠 diff & patch 来实现。模板的灵活性相对于渲染性能被放到了次要的位置，因此 Vue 2 决定每个组件实例只对应一个 VNode 以提高 diff 效率。  
+  >Vue 3 完全重写了 Virtual DOM 机制，引入了其他机制来保证模板渲染性能，此时组件对应的 VNode 数量已经不是重要的问题，便自然支持了 Fragment（也就是多根节点）。
+* 生命周期钩子函数：
+  * beforeCreate -> setup()
+  * created -> setup()
+  * beforeMount -> onBeforeMount
+  * mounted -> onMounted
+  * beforeUpdate -> onBeforeUpdate
+  * updated -> onUpdated
+  * beforeDestroy -> onBeforeUnmount
+  * destroyed -> onUnmounted
+  * activated -> onActivated
+  * deactivated -> onDeactivated
+  * errorCaptured -> onErrorCaptured
+* 
+
+#### vue3 的优势
+1. diff算法的优化
+   1. vue2 diff: 头尾交叉
+   2. vue3 快速diff：
+      1. 处理相同的前置、后置节点
+      2. 顺序遍历旧节点，得到新旧节点映射关系的数组，如旧节点[p1,p2,p3,p4,p5,p6],新节点[p1,p3,p4,p2,p7,p6]，得到映射关系数组为source=[2,3,1,-1],无对应值为-1
+      3. 找到source中的最大增长序列seq=[0, 1],及最大没有发生变化的节点序列，不需要进行移动
+      4. 倒叙遍历新节点，i--: 
+         1. 判断 source[i] = -1, 新增节点
+         2. 判断 source[i] = seq[j],不用移动，j--
+         3. 判断 source[i] != seq[j],移动节点
+2. 静态提升：vue3对于不参与更新的元素，会做静态提升，只会被创建一次，在渲染时直接复用即可
+3. 事件缓存：当在开发时，我们常常不经意间会写出内联的事件，比如：
+```html
+<div @click="() => {}"></div>
+```
+每当更新重新执行render函数时，这个内联的匿名函数都会被重新创建绑定，这样会造成内存的浪费。在Vue3中，会将这种内联事件进行缓存，避免二次创建。  
+4. composition API
 
 ## 2020/3/16
 ### js数据类型判断
@@ -2864,7 +2899,7 @@ Object.prototype.toString.call(num2) == "[object Number]";      //true
 
 ### 日常问题（长期更新）
 #### 常见
-1. map和forEach的区别：map可以改变数组项，forEach不可以，也不可以用return。二者都不可以跳蛛for循环。跳出for循环可以用 for···of `for(let item of list)` ，可以使用break。es5循环有 for···in 是遍历数组下标。
+1. map和forEach的区别：map可以改变数组项，forEach不可以，也不可以用return。二者都不可以跳出for循环。跳出for循环可以用 for···of `for(let item of list)` ，可以使用break。es5循环有 for···in 是遍历数组下标。
 2. v-for和v-if为什么不能一起使用：for的优先级比if高，每次都会遍历item再进行一次if判断
 3. promise回调地狱：多个promise依次顺序执行时会出现回调地狱，可用es7的sync/await解决
 4. mixins：  
